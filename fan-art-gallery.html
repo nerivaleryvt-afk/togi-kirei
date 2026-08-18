@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Fan Art - Togi</title>
+    <style>
+        /* Fondo general estilo espacio con estrellas sutiles */
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            background-color: #0c0b14;
+            background-image: radial-gradient(white 1px, transparent 0);
+            background-size: 40px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff;
+        }
+
+        /* Contenedor principal */
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        /* Botón de volver a la página principal */
+        .back-home-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(30, 25, 48, 0.8);
+            border: 1px solid #5d2568;
+            color: #d1cceb;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .back-home-button:hover {
+            background: #251e3a;
+            color: #ffffff;
+            border-color: #9b51e0;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(122, 45, 140, 0.4);
+        }
+
+        /* Contenedor principal de la galería con borde brillante */
+        .fanart-card {
+            position: relative;
+            background: #12101e;
+            border: 2px solid #5d2568;
+            border-radius: 25px;
+            padding: 45px 35px;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+            box-shadow: 0 0 30px rgba(122, 45, 140, 0.4);
+        }
+
+        .fanart-card h3 {
+            font-size: 26px;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .fanart-card p {
+            color: #b0aec4;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        /* --- ANIMACIÓN DE LAS MARIPOSITAS GIRANDO EN ÓRBITA --- */
+        @keyframes orbit {
+            0% {
+                transform: rotate(0deg) translate(220px) rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg) translate(220px) rotate(-360deg);
+            }
+        }
+
+        .butterfly {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            font-size: 22px;
+            margin-top: -11px;
+            margin-left: -11px;
+            pointer-events: none;
+            animation: orbit 10s linear infinite;
+        }
+
+        .b1 { animation-duration: 9s; }
+        .b2 { animation-duration: 12s; animation-delay: -4s; font-size: 18px; }
+        .b3 { animation-duration: 7s; animation-delay: -2s; font-size: 20px; }
+
+        /* --- CUADRÍCULA DE FAN ARTS (GRID) --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .gallery-item {
+            background: #1a172b;
+            border: 1px solid #4a1f54;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(155, 81, 224, 0.4);
+            border-color: #9b51e0;
+        }
+
+        /* Enlace que envuelve la imagen para permitir abrirla en grande */
+        .gallery-item a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.03);
+        }
+
+        .footer-actions {
+            margin-top: 20px;
+        }
+
+        .fanart-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #9b51e0, #ff758c);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(155, 81, 224, 0.4);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .fanart-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 117, 140, 0.6);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <a href="index.html" class="back-home-button">
+            ⬅️ Volver a la página principal
+        </a>
+
+        <div class="fanart-card">
+            <div class="butterfly b1">🦋</div>
+            <div class="butterfly b2">🦋</div>
+            <div class="butterfly b3">🦋</div>
+
+            <h3>GALERÍA DE FAN ART 🎨</h3>
+            <p>¡Todo el amor y arte que la comunidad ha creado para Togi! (Haz clic en cualquier dibujo para verlo en grande)</p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <a href="img/17_sin_titulo_20260122160007.png" target="_blank">
+                        <img src="img/17_sin_titulo_20260122160007.png" alt="Fan Art Togi" referrerpolicy="no-referrer">
+                    </a>
+                </div>
+                <div class="gallery-item">
+                    <a href="img/31_sin_titulo.png" target="_blank">
+                        <img src="img/31_sin_titulo.png" alt="Fan Art Togi" referrerpolicy="no-referrer">
+                    </a>
+                </div>
+                <div class="gallery-item">
+                    <a href="img/image.png" target="_blank">
+                        <img src="img/image.png" alt="Fan Art Togi" referrerpolicy="no-referrer">
+                    </a>
+                </div>
+                <div class="gallery-item">
+                    <a href="img/Screenshot_20250325_211815_TikTok.jpg" target="_blank">
+                        <img src="img/Screenshot_20250325_211815_TikTok.jpg" alt="Fan Art Togi" referrerpolicy="no-referrer">
+                    </a>
+                </div>
+                <div class="gallery-item">
+                    <a href="img/SPOILER_COMISION_INICIAL_TOGI_Y_AMIGA.jpg" target="_blank">
+                        <img src="img/SPOILER_COMISION_INICIAL_TOGI_Y_AMIGA.jpg" alt="Fan Art Togi" referrerpolicy="no-referrer">
+                    </a>
+                </div>
+                <div class="gallery-item">
+                    <a href="img/TOGI.jpg" target="_blank">
+                        <img src="img/TOGI.jpg" alt="Fan Art Togi" referrerpolicy="no-referrer">
+                    </a>
+                </div>
+                <div class="gallery-item">
+                    <a href="img/togi_.png" target="_blank">
+                        <img src="img/togi_.png" alt="Fan Art Togi" referrerpolicy="no-referrer">
+                    </a>
+                </div>
+                <div class="gallery-item">
+                    <a href="img/TOGI_COMISION_2.jpg" target="_blank">
+                        <img src="img/TOGI

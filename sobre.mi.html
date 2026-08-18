@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sobre Mí ★ Togi Kirei</title>
+
+  <!-- Icono de pestaña -->
+  <link rel="icon" type="image/png" href="me/togi.png">
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- FontAwesome para iconos de redes sociales -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Readex+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Readex Pro', 'sans-serif'],
+            cyber: ['Orbitron', 'sans-serif'],
+          },
+          colors: {
+            starlight: {
+              black: '#0a0814',
+              card: '#131024',
+              pink: '#ff69b4',
+              cyan: '#00f0ff',
+              star: '#ffd700',
+              purple: '#8a2be2',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    #starfield {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      background-color: #0a0814;
+    }
+  </style>
+</head>
+
+<body class="text-slate-200 font-sans min-h-screen selection:bg-starlight-pink selection:text-white relative p-6 md:p-12">
+
+  <!-- CANVAS FONDO DE ESTRELLAS MOVIÉNDOSE -->
+  <canvas id="starfield"></canvas>
+
+  <div class="max-w-6xl mx-auto space-y-12">
+    
+    <!-- BOTÓN VOLVER AL INICIO -->
+    <div>
+      <a href="index.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-pink-900/50 bg-starlight-card/60 backdrop-blur-md text-xs font-cyber font-bold tracking-widest text-starlight-pink hover:bg-starlight-pink hover:text-black transition shadow-lg">
+        ← VOLVER AL INICIO
+      </a>
+    </div>
+
+    <!-- CONTENEDOR PRINCIPAL: AVATAR Y SOBRE MÍ -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- COLUMNA IZQUIERDA: TARJETA DE AVATAR -->
+      <div class="lg:col-span-5 bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-6 shadow-2xl flex flex-col items-center justify-center text-center relative overflow-hidden">
+        <div class="w-full aspect-square rounded-2xl overflow-hidden flex items-center justify-center relative mb-4 bg-slate-900/50">
+          <img src="me/togi.png" alt="Togi Kirei VTuber" class="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(255,105,180,0.4)]">
+        </div>
+        <div class="font-cyber text-xs md:text-sm font-bold tracking-widest text-starlight-star uppercase">
+          ★ TOGI KIREI · VTUBER ★
+        </div>
+      </div>
+
+      <!-- COLUMNA DERECHA: SOBRE MÍ Y VALORANT STATS -->
+      <div class="lg:col-span-7 bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-8 shadow-2xl space-y-6 relative overflow-hidden">
+        
+        <div class="space-y-3">
+          <div class="inline-block px-4 py-1.5 rounded-full bg-purple-950/60 border border-purple-500/30 text-starlight-purple font-cyber text-xs tracking-wider font-semibold">
+            🦋 INMORTAL CON ACTITUD
+          </div>
+          <h1 class="font-cyber text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-starlight-pink via-purple-300 to-starlight-cyan tracking-wide">
+            SOBRE MÍ
+          </h1>
+        </div>
+
+        <div class="space-y-4 text-slate-300 text-sm md:text-base leading-relaxed">
+          <p>
+            ¡Hola! Soy <strong class="text-white font-cyber">Togi Kirei</strong> sv, VTuber y creadora de contenido.
+          </p>
+          <p>
+            Me gusta hacer un poco de todo: streams, TikToks, gameplays y proyectos random que probablemente empezaron como una buena idea y terminaron en caos.
+          </p>
+          <p>
+            Si te gusta el contenido tranquilo, los momentos random y de vez en cuando un poco de caos, quédate. 🖱️✨
+          </p>
+        </div>
+
+        <!-- VALORANT STATS -->
+        <div class="bg-starlight-black/80 border border-slate-800 rounded-2xl p-4 flex items-center justify-between gap-4 shadow-inner mt-6">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-pink-950/40 border border-pink-500/30 flex items-center justify-center text-xl shrink-0">
+              🎯
+            </div>
+            <div>
+              <div class="font-cyber text-xs md:text-sm font-bold text-white tracking-wider">VALORANT STATS</div>
+              <div class="text-xs text-slate-400 mt-0.5">
+                Main: <span class="text-starlight-pink font-semibold">Clove 🦋</span> | Rango: <span class="text-slate-200 font-semibold">Plata 2 🥈</span>
+              </div>
+            </div>
+          </div>
+          <span class="px-3 py-1 rounded-full bg-purple-950/60 border border-purple-500/40 text-purple-300 font-cyber text-xs font-bold tracking-widest uppercase">
+            RANKED
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- SECCIÓN: FICHA TÉCNICA -->
+    <div class="space-y-6 pt-6">
+      <div class="text-center space-y-2">
+        <div class="inline-block px-4 py-1.5 rounded-full border border-pink-900/50 bg-starlight-card/60 backdrop-blur-md text-xs font-cyber font-bold tracking-widest text-starlight-pink shadow-md">
+          💫 FICHA TÉCNICA
+        </div>
+        <h2 class="font-cyber text-3xl md:text-4xl font-black text-white tracking-wide">
+          CONOCE A <span class="text-transparent bg-clip-text bg-gradient-to-r from-starlight-pink to-starlight-cyan">TOGI KIREI</span>
+        </h2>
+        <p class="text-sm text-slate-400">Un vistazo a mi identidad, gustos y el ambiente de la comunidad 💫</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+        
+        <!-- PERFIL & IDENTIDAD -->
+        <div class="bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-6 shadow-2xl flex flex-col justify-between space-y-6">
+          <div class="space-y-4">
+            <div class="flex items-center gap-2 font-cyber text-starlight-pink text-sm font-bold tracking-widest uppercase border-b border-pink-900/30 pb-3">
+              <span>🎯</span> PERFIL & IDENTIDAD
+            </div>
+            <ul class="space-y-3 text-sm text-slate-300">
+              <li class="flex justify-between items-center bg-starlight-black/40 px-3 py-2 rounded-xl border border-slate-800/60">
+                <span class="text-slate-400 font-medium">Nombre:</span>
+                <span class="text-white font-semibold">Togi Kirei</span>
+              </li>
+              <li class="flex justify-between items-center bg-starlight-black/40 px-3 py-2 rounded-xl border border-slate-800/60">
+                <span class="text-slate-400 font-medium">Género:</span>
+                <span class="px-2.5 py-1 rounded-full bg-pink-950/60 border border-pink-500/40 text-starlight-pink text-xs font-semibold flex items-center gap-1.5">Chica Trans 🏳️‍⚧️</span>
+              </li>
+              <li class="flex justify-between items-center bg-starlight-black/40 px-3 py-2 rounded-xl border border-slate-800/60">
+                <span class="text-slate-400 font-medium">Ubicación:</span>
+                <span class="text-white font-semibold">El Salvador sv</span>
+              </li>
+              <li class="flex justify-between items-center bg-starlight-black/40 px-3 py-2 rounded-xl border border-slate-800/60">
+                <span class="text-slate-400 font-medium">Rol:</span>
+                <span class="text-starlight-cyan font-semibold text-xs font-cyber">VTuber & Creator</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- MIS INTERESES -->
+        <div class="bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-6 shadow-2xl flex flex-col justify-between space-y-6">
+           <div class="space-y-4">
+            <div class="flex items-center gap-2 font-cyber text-starlight-cyan text-sm font-bold tracking-widest uppercase border-b border-cyan-900/30 pb-3">
+              <span>✨</span> MIS INTERESES
+            </div>
+            <div class="flex flex-wrap gap-2 pt-1">
+              <span class="px-3 py-2 bg-starlight-black/60 border border-slate-800 rounded-xl text-xs text-slate-200">Valorant 🎯</span>
+              <span class="px-3 py-2 bg-starlight-black/60 border border-slate-800 rounded-xl text-xs text-slate-200">Hytale & Mods ⚔️</span>
+              <span class="px-3 py-2 bg-starlight-black/60 border border-slate-800 rounded-xl text-xs text-slate-200">R.E.P.O. & Co-Op 📦</span>
+              <span class="px-3 py-2 bg-starlight-black/60 border border-slate-800 rounded-xl text-xs text-slate-200">Anime & Manga 📖</span>
+              <span class="px-3 py-2 bg-starlight-black/60 border border-slate-800 rounded-xl text-xs text-slate-200">Música (Enjambre) 🎶</span>
+              <span class="px-3 py-2 bg-starlight-black/60 border border-slate-800 rounded-xl text-xs text-slate-200">Café de Moka ☕</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- VIBRA DEL CANAL -->
+        <div class="bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-6 shadow-2xl flex flex-col justify-between space-y-6">
+          <div class="space-y-4">
+            <div class="flex items-center gap-2 font-cyber text-starlight-star text-sm font-bold tracking-widest uppercase border-b border-yellow-900/30 pb-3">
+              <span>🌟</span> VIBRA DEL CANAL
+            </div>
+            <p class="text-sm text-slate-300 italic leading-relaxed pt-1">
+              "Un espacio amigable, auténtico y de alta energía. Nos apasionan la edición técnica de video, la personalización gráfica, los gameplays interactivos y pasar un rato lleno de risas junto a la comunidad. 💫"
+            </p>
+          </div>
+          <div class="pt-2">
+            <div class="w-full py-2.5 px-4 rounded-xl bg-starlight-black/60 border border-purple-500/30 text-center font-cyber text-xs font-bold text-purple-300 tracking-wider shadow-inner">
+              COMUNIDAD ACTIVA<br><span class="text-starlight-pink">★ LIVE STREAMING ★</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SECCIÓN: SETUP -->
+    <div class="space-y-6 pt-6">
+      <div class="text-center space-y-2">
+        <div class="inline-block px-4 py-1.5 rounded-full border border-purple-900/50 bg-starlight-card/60 backdrop-blur-md text-xs font-cyber font-bold tracking-widest text-starlight-purple shadow-md">
+          🖥️ SETUP
+        </div>
+        <h2 class="font-cyber text-2xl font-bold text-white">Especificaciones de mi equipo</h2>
+      </div>
+
+      <div class="max-w-xl mx-auto bg-starlight-card/80 backdrop-blur-xl border border-purple-900/40 rounded-3xl p-8 shadow-2xl hover:border-purple-500/50 transition duration-500">
+        <div class="text-starlight-purple font-cyber text-lg font-bold mb-4 flex items-center gap-2">🖥️ PC Rig</div>
+        <ul class="text-sm text-slate-300 space-y-3">
+          <li>• <b>CPU:</b> AMD Ryzen™ 7 5800XT</li>
+          <li>• <b>Motherboard:</b> MSI MAG B550 TOMAHAWK</li>
+          <li>• <b>Almacenamiento:</b> M.2 NVMe SSD High-Speed</li>
+          <li>• Optimización para Streaming & Render 4K</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: REDES SOCIALES -->
+    <div class="space-y-6 pt-6">
+      <div class="text-center space-y-2">
+        <div class="inline-block px-4 py-1.5 rounded-full border border-pink-900/50 bg-starlight-card/60 backdrop-blur-md text-xs font-cyber font-bold tracking-widest text-starlight-cyan shadow-md">
+          🌐 CONECTEMOS
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <a href="https://www.tiktok.com/@_togivt_" target="_blank" rel="noopener noreferrer" class="bg-starlight-card/80 backdrop-blur-xl border border-cyan-900/40 hover:border-starlight-cyan rounded-3xl p-6 shadow-2xl flex items-center gap-4 transition group">
+          <div class="w-12 h-12 rounded-2xl bg-cyan-950/60 border border-cyan-500/30 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition">
+            <i class="fa-brands fa-tiktok text-cyan-400"></i>
+          </div>
+          <div>
+            <div class="text-[10px] font-cyber text-slate-400 tracking-widest uppercase">TIKTOK</div>
+            <div class="font-cyber text-sm font-bold text-starlight-cyan">@_togivt_</div>
+          </div>
+        </a>
+        <a href="https://www.youtube.com/channel/UCVksKxlWndm3k-MufaVns9A" target="_blank" rel="noopener noreferrer" class="bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 hover:border-starlight-pink rounded-3xl p-6 shadow-2xl flex items-center gap-4 transition group">
+          <div class="w-12 h-12 rounded-2xl bg-pink-950/60 border border-pink-500/30 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition">
+            <i class="fa-brands fa-youtube text-pink-400"></i>
+          </div>
+          <div>
+            <div class="text-[10px] font-cyber text-slate-400 tracking-widest uppercase">YOUTUBE</div>
+            <div class="font-cyber text-sm font-bold text-starlight-pink">Togi Kirei</div>
+          </div>
+        </a>
+        <a href="https://www.twitch.tv" target="_blank" rel="noopener noreferrer" class="bg-starlight-card/80 backdrop-blur-xl border border-purple-900/40 hover:border-purple-500 rounded-3xl p-6 shadow-2xl flex items-center gap-4 transition group">
+          <div class="w-12 h-12 rounded-2xl bg-purple-950/60 border border-purple-500/30 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition">
+            <i class="fa-brands fa-twitch text-purple-400"></i>
+          </div>
+          <div>
+            <div class="text-[10px] font-cyber text-slate-400 tracking-widest uppercase">STREAMS</div>
+            <div class="font-cyber text-sm font-bold text-purple-300">Twitch</div>
+          </div>
+        </a>
+        <a href="https://discord.com" target="_blank" rel="noopener noreferrer" class="bg-starlight-card/80 backdrop-blur-xl border border-indigo-900/40 hover:border-indigo-500 rounded-3xl p-6 shadow-2xl flex items-center gap-4 transition group">
+          <div class="w-12 h-12 rounded-2xl bg-indigo-950/60 border border-indigo-500/30 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition">
+            <i class="fa-brands fa-discord text-indigo-400"></i>
+          </div>
+          <div>
+            <div class="text-[10px] font-cyber text-slate-400 tracking-widest uppercase">SERVIDOR</div>
+            <div class="font-cyber text-sm font-bold text-indigo-300">Discord</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="mt-16 py-8 border-t border-slate-800/80 text-center text-xs text-slate-500 space-y-2">
+    <div class="flex justify-center space-x-6 text-slate-300 font-cyber">
+      <a href="index.html" class="hover:text-starlight-cyan transition">Inicio</a>
+      <a href="https://www.tiktok.com/@_togivt_" target="_blank" rel="noopener noreferrer" class="hover:text-starlight-cyan transition">TikTok</a>
+    </div>
+    <p>© 2026 TOGI KIREI 💫. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    const canvas = document.getElementById('starfield');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    const numStars = 180;
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    for (let i = 0; i < numStars; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2 + 0.5,
+        speed: Math.random() * 0.4 + 0.1,
+        color: ['#ffffff', '#ff69b4', '#00f0ff', '#ffd700'][Math.floor(Math.random() * 4)],
+        alpha: Math.random()
+      });
+    }
+    function animateStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      stars.forEach(star => {
+        ctx.fillStyle = star.color;
+        ctx.globalAlpha = star.alpha;
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.fill();
+        star.y += star.speed;
+        if (star.y > canvas.height) {
+          star.y = 0;
+          star.x = Math.random() * canvas.width;
+        }
+      });
+      requestAnimationFrame(animateStars);
+    }
+    animateStars();
+  </script>
+</body>
+</html>
