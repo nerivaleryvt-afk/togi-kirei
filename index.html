@@ -74,7 +74,7 @@
         TOGI KIREI <span class="text-starlight-star">💫</span>
       </a>
 
-      <!-- ENLACES DE NAVEGACIÓN -->
+      <!-- ENLACES DE NAVEGACIÓN ESCRITORIO -->
       <nav class="hidden lg:flex flex-1 justify-center space-x-6 xl:space-x-10 text-sm font-semibold uppercase tracking-wider text-slate-300">
         <a href="sobre.mi.html" class="hover:text-starlight-pink transition whitespace-nowrap">Sobre Mí</a>
         <a href="#favorites" class="hover:text-starlight-pink transition whitespace-nowrap">Mis Gustos</a>
@@ -83,17 +83,35 @@
         <a href="#mediakit" class="hover:text-starlight-pink transition whitespace-nowrap">Marcas</a>
       </nav>
 
-      <!-- BOTÓN DIRECTO A TIKTOK -->
-      <a href="https://www.tiktok.com/@_togivt_" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 text-xs md:text-sm font-cyber font-bold uppercase tracking-wider rounded-full border border-starlight-cyan text-starlight-cyan hover:bg-starlight-cyan hover:text-black transition flex items-center gap-2 whitespace-nowrap shrink-0">
-        TikTok Oficial 🎵
-      </a>
+      <div class="flex items-center gap-3">
+        <!-- BOTÓN DIRECTO A TIKTOK -->
+        <a href="https://www.tiktok.com/@_togivt_" target="_blank" rel="noopener noreferrer" class="px-3 py-2 md:px-5 md:py-2.5 text-xs md:text-sm font-cyber font-bold uppercase tracking-wider rounded-full border border-starlight-cyan text-starlight-cyan hover:bg-starlight-cyan hover:text-black transition flex items-center gap-2 whitespace-nowrap shrink-0">
+          <span class="hidden sm:inline">TikTok Oficial</span> 🎵
+        </a>
+
+        <!-- BOTÓN MENÚ MÓVIL (Hamburguesa) -->
+        <button id="mobile-menu-btn" class="lg:hidden text-white hover:text-starlight-pink p-2 focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
+      </div>
       
     </div>
+
+    <!-- MENÚ MÓVIL DESPLEGABLE -->
+    <nav id="mobile-menu" class="hidden lg:hidden flex-col bg-starlight-black/95 backdrop-blur-md border-b border-pink-900/30 absolute top-20 left-0 w-full py-4 px-6 space-y-4 shadow-xl">
+      <a href="sobre.mi.html" class="block text-sm font-semibold uppercase tracking-wider text-slate-300 hover:text-starlight-pink mobile-link">Sobre Mí</a>
+      <a href="#favorites" class="block text-sm font-semibold uppercase tracking-wider text-slate-300 hover:text-starlight-pink mobile-link">Mis Gustos</a>
+      <a href="fan-art-gallery.html" class="block text-sm font-semibold uppercase tracking-wider text-slate-300 hover:text-starlight-pink mobile-link">Fan Art ✨</a>
+      <a href="#content" class="block text-sm font-semibold uppercase tracking-wider text-slate-300 hover:text-starlight-pink mobile-link">Contenido</a>
+      <a href="#mediakit" class="block text-sm font-semibold uppercase tracking-wider text-slate-300 hover:text-starlight-pink mobile-link">Marcas</a>
+    </nav>
   </header>
 
   <main>
     <!-- HERO SECTION -->
-    <section id="about" class="relative max-w-6xl mx-auto px-6 py-20 md:py-28 flex flex-col md:flex-row items-center justify-between gap-12">
+    <section id="about" class="relative max-w-6xl mx-auto px-6 py-12 md:py-28 flex flex-col md:flex-row items-center justify-between gap-12">
       <div class="flex-1 space-y-6 text-center md:text-left">
         <div class="inline-block px-4 py-1 text-xs font-cyber font-bold uppercase tracking-widest rounded-full bg-pink-950/60 border border-pink-500/30 text-starlight-pink">
           💫 Chica Trans • VTuber • El Salvador 🇸🇻
@@ -103,7 +121,7 @@
           <span class="text-transparent bg-clip-text bg-gradient-to-r from-starlight-pink via-purple-300 to-starlight-cyan">TOGI KIREI</span>
         </h1>
 
-        <div class="flex flex-wrap justify-center md:justify-start gap-4 pt-4">
+        <div class="flex flex-col sm:flex-row justify-center md:justify-start gap-4 pt-4">
           <a href="https://www.tiktok.com/@_togivt_" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-full bg-gradient-to-r from-starlight-cyan to-starlight-purple text-white font-cyber font-bold text-sm hover:opacity-90 transition glow-starlight">
             Seguir en TikTok
           </a>
@@ -113,10 +131,11 @@
         </div>
       </div>
 
-      <div class="flex-1 relative flex justify-center">
-        <div class="absolute w-72 h-72 rounded-full bg-gradient-to-tr from-starlight-pink to-starlight-cyan blur-3xl opacity-30 -z-10"></div>
+      <div class="flex-1 relative flex justify-center w-full">
+        <div class="absolute w-60 h-60 md:w-72 md:h-72 rounded-full bg-gradient-to-tr from-starlight-pink to-starlight-cyan blur-3xl opacity-30 -z-10"></div>
         
-        <div class="relative w-80 h-96 md:w-96 md:h-[460px] rounded-3xl bg-starlight-card/80 backdrop-blur-sm border border-pink-500/30 overflow-hidden flex items-center justify-center group glow-starlight">
+        <!-- Ajuste responsivo aquí (w-full max-w-[20rem]) -->
+        <div class="relative w-full max-w-[20rem] h-96 md:max-w-none md:w-96 md:h-[460px] rounded-3xl bg-starlight-card/80 backdrop-blur-sm border border-pink-500/30 overflow-hidden flex items-center justify-center group glow-starlight">
           <img 
             src="https://cdn.discordapp.com/attachments/1310427646252945509/1348467277745356862/YpLF8Lr.png?ex=6a845dc4&is=6a830c44&hm=5c03fb51d35cd6478c3d911ddedca1389584395b57f8ae1eea19098817575291&" 
             alt="Togi Kirei Modelo" 
@@ -124,7 +143,7 @@
           />
           <div class="absolute inset-0 bg-gradient-to-t from-starlight-black via-transparent to-transparent"></div>
           <div class="absolute bottom-4 left-4 right-4 text-center">
-            <span class="font-cyber text-xs uppercase tracking-widest text-starlight-star">★ Starlight Avatar Active ★</span>
+            <span class="font-cyber text-[10px] md:text-xs uppercase tracking-widest text-starlight-star">★ Starlight Avatar Active ★</span>
           </div>
         </div>
       </div>
@@ -251,8 +270,28 @@
     <p>© 2026 TOGI KIREI 💫. Todos los derechos reservados.</p>
   </footer>
 
-  <!-- SCRIPT DE FONDO DE ESTRELLAS -->
+  <!-- SCRIPT DE FONDO DE ESTRELLAS Y MENÚ MÓVIL -->
   <script>
+    // --- Lógica del Menú Móvil ---
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      mobileMenu.classList.toggle('flex');
+    });
+
+    // Ocultar menú al hacer clic en un enlace
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        mobileMenu.classList.remove('flex');
+      });
+    });
+
+
+    // --- Lógica del Fondo de Estrellas ---
     const canvas = document.getElementById('starfield');
     const ctx = canvas.getContext('2d');
 
