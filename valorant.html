@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="es" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tracker Profile ★ Togi Kirei</title>
+
+  <link rel="icon" type="image/png" href="me/togi.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Readex+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Readex Pro', 'sans-serif'],
+            cyber: ['Orbitron', 'sans-serif'],
+          },
+          colors: {
+            starlight: {
+              black: '#0a0814',
+              card: '#131024',
+              pink: '#ff69b4',
+              cyan: '#00f0ff',
+              star: '#ffd700',
+              purple: '#8a2be2',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    #starfield {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      background-color: #0a0814;
+    }
+  </style>
+</head>
+
+<body class="text-slate-200 font-sans min-h-screen selection:bg-starlight-pink selection:text-white relative p-4 md:p-8">
+
+  <!-- Fondo de Estrellas Animado -->
+  <canvas id="starfield"></canvas>
+
+  <div class="max-w-6xl mx-auto space-y-6">
+    
+    <!-- Botón Volver -->
+    <div>
+      <a href="index.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-pink-900/50 bg-starlight-card/60 backdrop-blur-md text-xs font-cyber font-bold tracking-widest text-starlight-pink hover:bg-starlight-pink hover:text-black transition shadow-lg">
+        ← VOLVER AL INICIO
+      </a>
+    </div>
+
+    <!-- TARJETA DE PERFIL / HERO BANNER -->
+    <div class="bg-starlight-card/90 backdrop-blur-xl border border-pink-900/40 rounded-3xl overflow-hidden shadow-2xl">
+      <div class="h-44 md:h-56 w-full relative overflow-hidden flex items-end justify-start p-6 bg-starlight-black">
+        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1600&auto=format&fit=crop" alt="Banner Cyberpunk" class="absolute inset-0 w-full h-full object-cover opacity-50 mix-blend-luminosity hover:mix-blend-normal transition duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-starlight-card via-transparent to-black/40"></div>
+        
+        <div class="relative z-10 flex items-center gap-3 ml-28 md:ml-36 mb-1">
+          <span class="px-3.5 py-1.5 rounded-full bg-starlight-black/80 backdrop-blur-md border border-pink-500/40 text-starlight-pink font-cyber text-xs font-bold tracking-widest shadow-md">
+            VALORANT TRACKER
+          </span>
+          <span class="px-3.5 py-1.5 rounded-full bg-cyan-950/80 backdrop-blur-md border border-cyan-500/40 text-starlight-cyan font-cyber text-xs font-bold tracking-widest shadow-md">
+            MAIN CLOVE 🦋
+          </span>
+        </div>
+      </div>
+
+      <div class="px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4 border-t border-slate-800/80 bg-starlight-card/95">
+        <div class="flex items-center gap-4 -mt-14 md:-mt-16 relative z-20">
+          <div class="w-24 h-24 md:w-28 md:h-28 rounded-2xl bg-starlight-black border-2 border-starlight-pink overflow-hidden shadow-xl flex items-center justify-center p-1 bg-gradient-to-b from-starlight-pink/20 to-starlight-black">
+            <img src="me/Neri.jpg" alt="Togi Kirei" class="w-full h-full object-contain" onerror="this.src='me/togi.png'">
+          </div>
+          <div class="pt-8 md:pt-4">
+            <div class="flex items-center gap-2">
+              <h1 class="font-cyber text-2xl md:text-3xl font-black text-white tracking-wide">NeriAiko</h1>
+              <span class="text-xs text-slate-400 font-cyber">#1230</span>
+            </div>
+            <div class="text-xs text-starlight-pink font-cyber mt-0.5">Togi Kirei · VTuber & Creator</div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 w-full md:w-auto justify-end">
+          <div class="bg-starlight-black/60 border border-slate-800 px-4 py-2 rounded-xl text-center">
+            <div class="text-[10px] text-slate-400 uppercase font-cyber">Región</div>
+            <div class="text-sm font-cyber font-bold text-white uppercase">NA</div>
+          </div>
+          <div class="bg-starlight-black/60 border border-slate-800 px-4 py-2 rounded-xl text-center">
+            <div class="text-[10px] text-slate-400 uppercase font-cyber">Nivel</div>
+            <div id="val-level" class="text-sm font-cyber font-bold text-starlight-cyan">37</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN PRINCIPAL: RANGO Y ESTADÍSTICAS -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      
+      <!-- CURRENT RATING -->
+      <div class="lg:col-span-4 bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-6 shadow-xl flex flex-col justify-between space-y-6">
+        <div>
+          <div class="font-cyber text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-800 pb-3 mb-4">
+            CURRENT RATING
+          </div>
+          <div class="flex items-center gap-4 bg-starlight-black/60 border border-slate-800/80 rounded-2xl p-4">
+            <div class="w-14 h-14 rounded-xl bg-slate-900/60 border border-slate-700/50 flex items-center justify-center p-1.5 shadow-inner shrink-0">
+              <img src="valorant/Der_Rang_„Silber_II“.webp" 
+                   alt="Silver 2" 
+                   class="w-full h-full object-contain drop-shadow-[0_0_8px_rgba(192,192,192,0.4)]"
+                   onerror="this.onerror=null; this.src='https://media.valorant-api.com/competitivetiers/03291d29-457e-cf16-bf10-85888a753690/5/smallicon.png';">
+            </div>
+            <div>
+              <div id="val-rank" class="font-cyber text-lg font-black text-white">Cargando...</div>
+              <div id="val-rr" class="text-xs text-slate-300 font-cyber font-semibold mt-0.5">-- RR</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-starlight-black/40 border border-slate-800/60 rounded-2xl p-4 space-y-2">
+          <div class="text-[10px] font-cyber text-slate-400 uppercase tracking-wider">Resumen de Cuenta</div>
+          <div class="flex justify-between text-xs">
+            <span class="text-slate-400">Estado de API:</span>
+            <span id="api-status" class="text-starlight-cyan font-medium">Conectando...</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RENDIMIENTO GENERAL -->
+      <div class="lg:col-span-8 bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-6 shadow-xl space-y-6">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+          <div class="font-cyber text-xs font-bold text-slate-400 uppercase tracking-widest">
+            RENDIMIENTO GENERAL
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="bg-starlight-black/60 border border-slate-800/80 p-4 rounded-2xl">
+            <div class="text-[10px] text-slate-400 font-cyber uppercase">K/D Ratio</div>
+            <div class="text-xl font-cyber font-bold text-white mt-1">1.05</div>
+            <div class="text-[10px] text-starlight-cyan mt-1">Top 37.0%</div>
+          </div>
+          <div class="bg-starlight-black/60 border border-slate-800/80 p-4 rounded-2xl">
+            <div class="text-[10px] text-slate-400 font-cyber uppercase">Headshot %</div>
+            <div class="text-xl font-cyber font-bold text-starlight-pink mt-1">18.4%</div>
+            <div class="text-[10px] text-starlight-pink mt-1">Top 25.0%</div>
+          </div>
+          <div class="bg-starlight-black/60 border border-slate-800/80 p-4 rounded-2xl">
+            <div class="text-[10px] text-slate-400 font-cyber uppercase">Win %</div>
+            <div class="text-xl font-cyber font-bold text-white mt-1">50.8%</div>
+            <div class="text-[10px] text-starlight-cyan mt-1">Top 42.0%</div>
+          </div>
+          <div class="bg-starlight-black/60 border border-slate-800/80 p-4 rounded-2xl">
+            <div class="text-[10px] text-slate-400 font-cyber uppercase">ACS</div>
+            <div class="text-xl font-cyber font-bold text-starlight-star mt-1">215.3</div>
+            <div class="text-[10px] text-starlight-star mt-1">Top 20.0%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN TOP WEAPONS & TOP MAPS -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      
+      <!-- TOP WEAPONS CON IMÁGENES LOCALES (.png) -->
+      <div class="bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-6 shadow-xl flex flex-col justify-between">
+        <div>
+          <h2 class="font-cyber text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-800 pb-3 mb-4">
+            TOP WEAPONS
+          </h2>
+          
+          <div class="space-y-3">
+            <!-- Vandal -->
+            <div class="flex items-center justify-between p-3.5 bg-starlight-black/60 border border-slate-800/80 rounded-2xl">
+              <div class="flex items-center gap-3">
+                <div class="w-16 h-10 bg-slate-900/80 border border-slate-700/50 rounded-xl flex items-center justify-center p-1.5 shadow-inner shrink-0">
+                  <img src="armas/Prime_Vandal.png" alt="Vandal" class="w-full h-full object-contain filter drop-shadow" onerror="this.src='https://media.valorant-api.com/weapons/9ad7bda4-4bad-a0d2-132b-22bc81413a26/displayicon.png'">
+                </div>
+                <div>
+                  <div class="font-cyber text-xs font-bold text-white">Vandal</div>
+                  <div class="text-[10px] text-slate-400">Assault Rifles</div>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <div class="text-[10px] font-mono text-slate-300 leading-tight text-right">
+                  <span class="text-starlight-pink">15%</span><br>
+                  <span>75%</span><br>
+                  <span class="text-starlight-cyan">10%</span>
+                </div>
+                <div class="text-right">
+                  <div class="text-[10px] text-slate-400 uppercase font-cyber">Kills</div>
+                  <div class="font-cyber text-sm font-bold text-white">381</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bulldog -->
+            <div class="flex items-center justify-between p-3.5 bg-starlight-black/60 border border-slate-800/80 rounded-2xl">
+              <div class="flex items-center gap-3">
+                <div class="w-16 h-10 bg-slate-900/80 border border-slate-700/50 rounded-xl flex items-center justify-center p-1.5 shadow-inner shrink-0">
+                  <img src="armas/Retrowave_Bulldog.png" alt="Bulldog" class="w-full h-full object-contain filter drop-shadow" onerror="this.src='https://media.valorant-api.com/weapons/ae3de142-4d85-2587-dd27-cc86948acd27/displayicon.png'">
+                </div>
+                <div>
+                  <div class="font-cyber text-xs font-bold text-white">Bulldog</div>
+                  <div class="text-[10px] text-slate-400">Assault Rifles</div>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <div class="text-[10px] font-mono text-slate-300 leading-tight text-right">
+                  <span class="text-starlight-pink">15%</span><br>
+                  <span>73%</span><br>
+                  <span class="text-starlight-cyan">13%</span>
+                </div>
+                <div class="text-right">
+                  <div class="text-[10px] text-slate-400 uppercase font-cyber">Kills</div>
+                  <div class="font-cyber text-sm font-bold text-white">373</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ghost -->
+            <div class="flex items-center justify-between p-3.5 bg-starlight-black/60 border border-slate-800/80 rounded-2xl">
+              <div class="flex items-center gap-3">
+                <div class="w-16 h-10 bg-slate-900/80 border border-slate-700/50 rounded-xl flex items-center justify-center p-1.5 shadow-inner shrink-0">
+                  <img src="armas/Radiant_Entertainment_System_Ghost.png" alt="Ghost" class="w-full h-full object-contain filter drop-shadow" onerror="this.src='https://media.valorant-api.com/weapons/1abd4824-4133-e071-08d4-bafc03616843/displayicon.png'">
+                </div>
+                <div>
+                  <div class="font-cyber text-xs font-bold text-white">Ghost</div>
+                  <div class="text-[10px] text-slate-400">Sidearms</div>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <div class="text-[10px] font-mono text-slate-300 leading-tight text-right">
+                  <span class="text-starlight-pink">19%</span><br>
+                  <span>73%</span><br>
+                  <span class="text-starlight-cyan">8%</span>
+                </div>
+                <div class="text-right">
+                  <div class="text-[10px] text-slate-400 uppercase font-cyber">Kills</div>
+                  <div class="font-cyber text-sm font-bold text-white">125</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="w-full mt-5 py-2.5 text-xs font-cyber font-bold border border-slate-700 rounded-xl hover:bg-slate-800 hover:border-starlight-pink transition text-slate-300">
+          View All Weapons
+        </button>
+      </div>
+
+      <!-- TOP MAPS CON FONDO DE IMAGEN Y OPACIDAD -->
+      <div class="bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-6 shadow-xl flex flex-col justify-between">
+        <div>
+          <h2 class="font-cyber text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-800 pb-3 mb-4">
+            TOP MAPS
+          </h2>
+          
+          <div class="space-y-2.5">
+            <!-- Lotus -->
+            <div class="relative overflow-hidden bg-starlight-black/60 border border-slate-800/80 px-4 py-2.5 rounded-xl flex justify-between items-center">
+              <div class="absolute inset-0 bg-cover bg-center opacity-25" style="background-image: url('https://media.valorant-api.com/maps/2bee0dc9-4ffe-519b-1cbd-7fbe763a6047/splash.png');"></div>
+              <div class="absolute inset-0 bg-gradient-to-r from-starlight-black via-starlight-black/70 to-transparent"></div>
+              <span class="font-cyber text-xs font-bold text-white relative z-10">Lotus</span>
+              <div class="text-right relative z-10">
+                <div class="font-cyber text-xs font-bold text-starlight-star">72.7%</div>
+                <div class="text-[10px] text-slate-400 font-mono">8W - 3L</div>
+              </div>
+            </div>
+
+            <!-- Ascent -->
+            <div class="relative overflow-hidden bg-starlight-black/60 border border-slate-800/80 px-4 py-2.5 rounded-xl flex justify-between items-center">
+              <div class="absolute inset-0 bg-cover bg-center opacity-25" style="background-image: url('https://media.valorant-api.com/maps/7eaecc1b-4337-bbf6-6ab9-04b8f06b3319/splash.png');"></div>
+              <div class="absolute inset-0 bg-gradient-to-r from-starlight-black via-starlight-black/70 to-transparent"></div>
+              <span class="font-cyber text-xs font-bold text-white relative z-10">Ascent</span>
+              <div class="text-right relative z-10">
+                <div class="font-cyber text-xs font-bold text-starlight-cyan">57.1%</div>
+                <div class="text-[10px] text-slate-400 font-mono">4W - 3L</div>
+              </div>
+            </div>
+
+            <!-- Haven -->
+            <div class="relative overflow-hidden bg-starlight-black/60 border border-slate-800/80 px-4 py-2.5 rounded-xl flex justify-between items-center">
+              <div class="absolute inset-0 bg-cover bg-center opacity-25" style="background-image: url('https://media.valorant-api.com/maps/2bee0dc9-4ffe-519b-1cbd-7fbe763a6047/splash.png');"></div>
+              <div class="absolute inset-0 bg-gradient-to-r from-starlight-black via-starlight-black/70 to-transparent"></div>
+              <span class="font-cyber text-xs font-bold text-white relative z-10">Haven</span>
+              <div class="text-right relative z-10">
+                <div class="font-cyber text-xs font-bold text-slate-300">55.6%</div>
+                <div class="text-[10px] text-slate-400 font-mono">5W - 4L</div>
+              </div>
+            </div>
+
+            <!-- Split -->
+            <div class="relative overflow-hidden bg-starlight-black/60 border border-slate-800/80 px-4 py-2.5 rounded-xl flex justify-between items-center">
+              <div class="absolute inset-0 bg-cover bg-center opacity-25" style="background-image: url('https://media.valorant-api.com/maps/d960549e-485c-e861-8d71-aa9d1aed12a2/splash.png');"></div>
+              <div class="absolute inset-0 bg-gradient-to-r from-starlight-black via-starlight-black/70 to-transparent"></div>
+              <span class="font-cyber text-xs font-bold text-white relative z-10">Split</span>
+              <div class="text-right relative z-10">
+                <div class="font-cyber text-xs font-bold text-slate-300">50.0%</div>
+                <div class="text-[10px] text-slate-400 font-mono">5W - 5L</div>
+              </div>
+            </div>
+
+            <!-- Sunset -->
+            <div class="relative overflow-hidden bg-starlight-black/60 border border-slate-800/80 px-4 py-2.5 rounded-xl flex justify-between items-center">
+              <div class="absolute inset-0 bg-cover bg-center opacity-25" style="background-image: url('https://media.valorant-api.com/maps/b529448b-4d60-346e-e89e-00a4c527a405/splash.png');"></div>
+              <div class="absolute inset-0 bg-gradient-to-r from-starlight-black via-starlight-black/70 to-transparent"></div>
+              <span class="font-cyber text-xs font-bold text-white relative z-10">Sunset</span>
+              <div class="text-right relative z-10">
+                <div class="font-cyber text-xs font-bold text-slate-300">37.5%</div>
+                <div class="text-[10px] text-slate-400 font-mono">3W - 5L</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="w-full mt-5 py-2.5 text-xs font-cyber font-bold border border-slate-700 rounded-xl hover:bg-slate-800 hover:border-starlight-pink transition text-slate-300">
+          View All Maps
+        </button>
+      </div>
+
+    </div>
+
+    <!-- TEAMMATES FRECUENTES -->
+    <div class="bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-6 shadow-xl space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <h2 class="font-cyber text-xl font-black text-white tracking-wide">TEAMMATES FRECUENTES</h2>
+        <span class="text-xs text-slate-400 font-cyber">Basado en tus últimas partidas</span>
+      </div>
+      <div id="teammates-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div class="text-center py-4 text-slate-400 text-sm font-cyber animate-pulse col-span-full">
+          Calculando compañeros de equipo y agentes...
+        </div>
+      </div>
+    </div>
+
+    <!-- HISTORIAL DE PARTIDAS -->
+    <div class="space-y-4 pt-4">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-pink-900/30 pb-3">
+        <h2 class="font-cyber text-xl font-black text-white tracking-wide">HISTORIAL DE PARTIDAS</h2>
+        
+        <div class="flex items-center gap-2 bg-starlight-card/80 p-1.5 rounded-2xl border border-slate-800 flex-wrap">
+          <button onclick="filtrarModo('all')" id="btn-all" class="px-4 py-1.5 rounded-xl text-xs font-cyber font-bold transition bg-starlight-pink text-black shadow-lg shadow-pink-500/20">Todas</button>
+          <button onclick="filtrarModo('Competitive')" id="btn-Competitive" class="px-4 py-1.5 rounded-xl text-xs font-cyber font-bold transition text-slate-400 hover:text-white">Competitivo</button>
+          <button onclick="filtrarModo('Unrated')" id="btn-Unrated" class="px-4 py-1.5 rounded-xl text-xs font-cyber font-bold transition text-slate-400 hover:text-white">Unrated</button>
+          <button onclick="filtrarModo('Swiftplay')" id="btn-Swiftplay" class="px-4 py-1.5 rounded-xl text-xs font-cyber font-bold transition text-slate-400 hover:text-white">Swiftplay</button>
+          <button onclick="filtrarModo('Deathmatch')" id="btn-Deathmatch" class="px-4 py-1.5 rounded-xl text-xs font-cyber font-bold transition text-slate-400 hover:text-white">Deathmatch</button>
+        </div>
+      </div>
+
+      <div id="match-history-container" class="space-y-3">
+        <div class="text-center py-8 text-slate-400 text-sm font-cyber animate-pulse">
+          Cargando historial de partidas...
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="mt-16 py-8 border-t border-slate-800/80 text-center text-xs text-slate-500 space-y-2">
+    <div class="flex justify-center space-x-6 text-slate-300 font-cyber flex-wrap gap-y-2">
+      <a href="index.html" class="hover:text-starlight-cyan transition">Inicio</a>
+      <a href="https://www.tiktok.com/@_togivt_" target="_blank" rel="noopener noreferrer" class="hover:text-starlight-cyan transition">TikTok</a>
+      <a href="https://www.youtube.com/channel/UCVksKxlWndm3k-MufaVns9A" target="_blank" rel="noopener noreferrer" class="hover:text-starlight-pink transition">YouTube</a>
+      <a href="https://discord.com/invite/GybAXP2HXn" target="_blank" rel="noopener noreferrer" class="hover:text-starlight-purple transition">Discord</a>
+    </div>
+    <p>© 2026 TOGI KIREI 💫. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- LÓGICA JAVASCRIPT Y CONEXIÓN API -->
+  <script>
+    const PUUID = "54abee7a-c3a2-5091-b94c-8f7b4f7e7ae1";
+    const WORKER_URL = "https://rapid-pond-d4d7.togivt.workers.dev";
+    
+    let cachePartidas = [];
+
+    async function cargarDatosValorant() {
+      const statusEl = document.getElementById('api-status');
+      if (statusEl) statusEl.textContent = "Conectando...";
+
+      // 1. Cargar Rango y MMR
+      try {
+        const resRango = await fetch(`${WORKER_URL}/valorant/v2/by-puuid/mmr/na/${PUUID}`);
+        if (resRango.ok) {
+          const rangoData = await resRango.json();
+          if (rangoData && rangoData.status === 200 && rangoData.data && rangoData.data.current_data) {
+            const cur = rangoData.data.current_data;
+            const rankEl = document.getElementById('val-rank');
+            const rrEl = document.getElementById('val-rr');
+            if (rankEl) rankEl.textContent = cur.currenttierpatched || "Sin rango";
+            if (rrEl) rrEl.textContent = `${cur.ranking_in_tier ?? 0} RR`;
+          }
+        }
+      } catch (err) {
+        console.error("Error al obtener MMR:", err);
+      }
+
+      // 2. Cargar Partidas
+      try {
+        const resMatches = await fetch(`${WORKER_URL}/valorant/v3/by-puuid/matches/na/${PUUID}?size=50`);
+        if (!resMatches.ok) throw new Error(`Status HTTP: ${resMatches.status}`);
+        
+        const matchesData = await resMatches.json();
+        if (matchesData && matchesData.status === 200 && Array.isArray(matchesData.data)) {
+          cachePartidas = matchesData.data;
+          if (statusEl) {
+            statusEl.textContent = "Conectado";
+            statusEl.className = "text-starlight-cyan font-medium";
+          }
+          mostrarPartidas(cachePartidas);
+          procesarTeammates(cachePartidas);
+        } else {
+          throw new Error("Respuesta no válida de la API");
+        }
+      } catch (err) {
+        console.error("Error al cargar historial:", err);
+        if (statusEl) {
+          statusEl.textContent = "Error de API";
+          statusEl.className = "text-red-400 font-medium";
+        }
+        const container = document.getElementById('match-history-container');
+        if (container) {
+          container.innerHTML = `
+            <div class="text-center py-6 text-red-400 text-sm font-cyber bg-starlight-card/40 rounded-2xl border border-red-900/30">
+              ⚠️ No se pudo conectar con el servidor de Valorant en este momento.
+            </div>`;
+        }
+      }
+    }
+
+    function procesarTeammates(listaPartidas) {
+      const teammatesMap = {};
+
+      listaPartidas.forEach(match => {
+        if (!match.metadata || !match.players || !match.players.all_players) return;
+        if (match.metadata.mode === "Deathmatch") return;
+
+        const myPlayer = match.players.all_players.find(p => p.puuid === PUUID);
+        if (!myPlayer) return;
+
+        const myTeam = myPlayer.team;
+
+        match.players.all_players.forEach(p => {
+          if (p.puuid === PUUID || p.team !== myTeam) return;
+
+          const nameTag = `${p.name}#${p.tag}`;
+          if (!teammatesMap[nameTag]) {
+            teammatesMap[nameTag] = { 
+              name: p.name, 
+              tag: p.tag, 
+              matches: 0, 
+              kills: 0, 
+              deaths: 0, 
+              wins: 0,
+              agents: {} 
+            };
+          }
+
+          teammatesMap[nameTag].matches += 1;
+          
+          const agentName = p.character || "Desconocido";
+          teammatesMap[nameTag].agents[agentName] = (teammatesMap[nameTag].agents[agentName] || 0) + 1;
+
+          if (p.stats) {
+            teammatesMap[nameTag].kills += p.stats.kills || 0;
+            teammatesMap[nameTag].deaths += (p.stats.deaths || 0) === 0 ? 1 : p.stats.deaths;
+          }
+
+          if (match.teams) {
+            const teamKey = Object.keys(match.teams).find(k => k.toLowerCase() === p.team.toLowerCase());
+            if (teamKey && match.teams[teamKey].won) {
+              teammatesMap[nameTag].wins += 1;
+            }
+          }
+        });
+      });
+
+      const sortedTeammates = Object.values(teammatesMap)
+        .sort((a, b) => b.matches - a.matches)
+        .slice(0, 6);
+
+      const container = document.getElementById('teammates-container');
+      if (!container) return;
+      container.innerHTML = '';
+
+      if (sortedTeammates.length === 0) {
+        container.innerHTML = `<div class="text-center py-4 text-slate-400 text-xs font-cyber col-span-full">No se encontraron suficientes compañeros recientes.</div>`;
+        return;
+      }
+
+      sortedTeammates.forEach(mate => {
+        const kd = (mate.kills / mate.deaths).toFixed(2);
+        const winrate = ((mate.wins / mate.matches) * 100).toFixed(1);
+
+        let favoriteAgent = "Desconocido";
+        let maxCount = -1;
+        for (const [agent, count] of Object.entries(mate.agents)) {
+          if (count > maxCount) {
+            maxCount = count;
+            favoriteAgent = agent;
+          }
+        }
+
+        container.innerHTML += `
+          <div class="bg-starlight-black/60 border border-slate-800 rounded-2xl p-4 flex items-center justify-between gap-3 shadow-md hover:border-pink-900/50 transition">
+            <div class="overflow-hidden">
+              <div class="font-cyber text-xs font-bold text-white truncate">${mate.name} <span class="text-slate-400 font-normal">#${mate.tag}</span></div>
+              <div class="text-[10px] text-starlight-pink font-medium mt-1">Main: <span class="text-white">${favoriteAgent}</span></div>
+              <div class="text-[10px] text-slate-400 mt-0.5">${mate.matches} Partidas Juntas</div>
+            </div>
+            <div class="text-right shrink-0">
+              <div class="text-xs font-cyber text-starlight-cyan font-bold">K/D: ${kd}</div>
+              <div class="text-[10px] text-starlight-pink font-medium mt-0.5">${winrate}% Win</div>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    function mostrarPartidas(listaPartidas) {
+      const container = document.getElementById('match-history-container');
+      if (!container) return;
+      container.innerHTML = '';
+
+      if (!listaPartidas || listaPartidas.length === 0) {
+        container.innerHTML = `<div class="text-center py-8 text-slate-400 text-sm font-cyber bg-starlight-card/40 rounded-2xl border border-slate-800">No hay partidas en este modo.</div>`;
+        return;
+      }
+
+      listaPartidas.forEach(match => {
+        if (!match.metadata || !match.players || !match.players.all_players) return;
+
+        const meta = match.metadata;
+        const playerStats = match.players.all_players.find(p => p.puuid === PUUID);
+        const agentName = playerStats ? playerStats.character : "Agente";
+        const agentImg = playerStats?.assets?.agent?.small || null;
+
+        const kills = playerStats?.stats?.kills || 0;
+        const deaths = playerStats?.stats?.deaths || 0;
+        const assists = playerStats?.stats?.assists || 0;
+        const scoreKDA = `${kills} / ${deaths} / ${assists}`;
+        const scorePuntos = playerStats?.stats?.score || 0;
+
+        let modoLimpio = meta.mode || "Desconocido";
+        if (meta.mode === "Competitive") modoLimpio = "Competitivo";
+        else if (meta.mode === "Unrated") modoLimpio = "Unrated";
+        else if (meta.mode === "Swiftplay") modoLimpio = "Swiftplay";
+        else if (meta.mode === "Deathmatch") modoLimpio = "Deathmatch";
+
+        let resultText = "PARTIDA";
+        let resultClass = "border-slate-800 bg-slate-900/40 text-slate-300";
+        let badgeStyle = "bg-slate-900 text-slate-300 border-slate-700";
+        let marcadorRondas = "";
+
+        if (meta.mode === "Deathmatch") {
+          const ranking = [...match.players.all_players].sort((a,b) => (b.stats?.kills || 0) - (a.stats?.kills || 0));
+          const posicion = ranking.findIndex(p => p.puuid === PUUID) + 1;
+          
+          resultText = `${posicion}º LUGAR`;
+          if (posicion <= 3) {
+            resultClass = "border-cyan-500/40 bg-cyan-950/10 text-cyan-400";
+            badgeStyle = "bg-cyan-950 text-cyan-300 border-cyan-500/30";
+          } else {
+            resultClass = "border-slate-800 bg-slate-900/40 text-slate-400";
+            badgeStyle = "bg-slate-900 text-slate-400 border-slate-800";
+          }
+        } else {
+          let hasWon = false;
+          let roundsWon = 0;
+          let roundsLost = 0;
+
+          if (match.teams && playerStats && playerStats.team) {
+            const teamId = playerStats.team.toLowerCase();
+            const matchedKey = Object.keys(match.teams).find(k => k.toLowerCase() === teamId);
+            const enemyKey = Object.keys(match.teams).find(k => k.toLowerCase() !== teamId);
+            
+            if (matchedKey) {
+              const teamData = match.teams[matchedKey];
+              hasWon = Boolean(teamData.won);
+              roundsWon = teamData.rounds_won || 0;
+
+              if (enemyKey && match.teams[enemyKey]) {
+                roundsLost = match.teams[enemyKey].rounds_won || 0;
+              }
+
+              if (!hasWon && roundsWon > roundsLost) {
+                hasWon = true;
+              }
+            }
+          }
+          
+          resultText = hasWon ? "VICTORIA" : "DERROTA";
+          resultClass = hasWon ? "border-cyan-500/40 bg-cyan-950/10 text-cyan-400" : "border-pink-900/40 bg-pink-950/10 text-pink-300";
+          badgeStyle = hasWon ? "bg-cyan-950 text-cyan-300 border-cyan-500/30" : "bg-pink-950 text-pink-300 border-pink-900/30";
+          
+          marcadorRondas = `<span class="text-xs font-cyber font-bold ml-2 text-slate-300">(${roundsWon} - ${roundsLost})</span>`;
+        }
+
+        const agentIconHTML = agentImg 
+          ? `<img src="${agentImg}" alt="${agentName}" class="w-full h-full object-cover">`
+          : `<span class="font-cyber text-xs font-bold uppercase text-white">${agentName.substring(0,3)}</span>`;
+
+        container.innerHTML += `
+          <div class="bg-starlight-card/80 border ${resultClass} rounded-2xl p-4 flex items-center justify-between gap-4 transition hover:scale-[1.01] shadow-lg">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-700 overflow-hidden flex items-center justify-center shadow-inner shrink-0">
+                ${agentIconHTML}
+              </div>
+              <div>
+                <div class="font-cyber text-xs md:text-sm font-bold text-white tracking-wider">
+                  ${meta.map || 'Mapa'} <span class="text-slate-400 font-normal text-xs">(${modoLimpio})</span>
+                </div>
+                <div class="text-xs text-slate-300 mt-0.5">K/D/A: <span class="text-white font-semibold">${scoreKDA}</span> | Puntuación: <span class="text-starlight-cyan font-medium">${scorePuntos}</span></div>
+              </div>
+            </div>
+            <div class="text-right flex items-center gap-2">
+              ${marcadorRondas}
+              <span class="px-3.5 py-1.5 rounded-full text-xs font-cyber font-bold tracking-widest border ${badgeStyle}">
+                ${resultText}
+              </span>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    function filtrarModo(modoSeleccionado) {
+      ['all', 'Competitive', 'Unrated', 'Swiftplay', 'Deathmatch'].forEach(m => {
+        const btn = document.getElementById(`btn-${m}`);
+        if (btn) {
+          if (m === modoSeleccionado) {
+            btn.className = "px-4 py-1.5 rounded-xl text-xs font-cyber font-bold transition bg-starlight-pink text-black shadow-lg shadow-pink-500/20";
+          } else {
+            btn.className = "px-4 py-1.5 rounded-xl text-xs font-cyber font-bold transition text-slate-400 hover:text-white bg-transparent";
+          }
+        }
+      });
+
+      if (modoSeleccionado === 'all') {
+        mostrarPartidas(cachePartidas);
+      } else if (modoSeleccionado === 'Deathmatch') {
+        const filtradas = cachePartidas.filter(m => m.metadata?.mode?.includes("Deathmatch"));
+        mostrarPartidas(filtradas);
+      } else {
+        const filtradas = cachePartidas.filter(m => m.metadata?.mode === modoSeleccionado);
+        mostrarPartidas(filtradas);
+      }
+    }
+
+    // Iniciar carga de datos al abrir la página
+    cargarDatosValorant();
+
+    // Animación del fondo (Canvas Starfield)
+    const canvas = document.getElementById('starfield');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    const numStars = 180;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    for (let i = 0; i < numStars; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2 + 0.5,
+        speed: Math.random() * 0.4 + 0.1,
+        color: ['#ffffff', '#ff69b4', '#00f0ff', '#ffd700'][Math.floor(Math.random() * 4)],
+        alpha: Math.random()
+      });
+    }
+
+    function animateStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      stars.forEach(star => {
+        ctx.fillStyle = star.color;
+        ctx.globalAlpha = star.alpha;
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.fill();
+        star.y += star.speed;
+        if (star.y > canvas.height) {
+          star.y = 0;
+          star.x = Math.random() * canvas.width;
+        }
+      });
+      requestAnimationFrame(animateStars);
+    }
+    animateStars();
+  </script>
+</body>
+</html>
