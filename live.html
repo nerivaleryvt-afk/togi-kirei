@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Directo EN VIVO ★ Togi Kirei</title>
+
+  <link rel="icon" type="image/png" href="me/togi.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Readex+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Readex Pro', 'sans-serif'],
+            cyber: ['Orbitron', 'sans-serif'],
+          },
+          colors: {
+            starlight: {
+              black: '#0a0814',
+              card: '#131024',
+              pink: '#ff69b4',
+              cyan: '#00f0ff',
+              star: '#ffd700',
+              purple: '#8a2be2',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    #starfield {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      background-color: #0a0814;
+    }
+  </style>
+</head>
+
+<body class="text-slate-200 font-sans min-h-screen selection:bg-starlight-pink selection:text-white relative p-4 md:p-8 flex flex-col justify-between">
+
+  <!-- Fondo de Estrellas Animado -->
+  <canvas id="starfield"></canvas>
+
+  <div class="max-w-6xl mx-auto space-y-6 w-full">
+    
+    <!-- Botón Volver -->
+    <div>
+      <a href="index.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-pink-900/50 bg-starlight-card/60 backdrop-blur-md text-xs font-cyber font-bold tracking-widest text-starlight-pink hover:bg-starlight-pink hover:text-black transition shadow-lg">
+        ← VOLVER AL INICIO
+      </a>
+    </div>
+
+    <!-- SECCIÓN DE TRANSMISIÓN EN DIRECTO DE TWITCH -->
+    <div class="bg-starlight-card/90 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-6 md:p-8 shadow-2xl space-y-6">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+        <div class="flex items-center gap-3">
+          <span class="w-3.5 h-3.5 rounded-full bg-red-500 animate-ping shadow-[0_0_10px_#ef4444]"></span>
+          <div>
+            <h1 class="font-cyber text-2xl md:text-3xl font-black text-white tracking-wide">¡ESTOY EN DIRECTO!</h1>
+            <p class="text-xs text-starlight-pink font-cyber mt-0.5">Disfruta del stream y chatea en tiempo real</p>
+          </div>
+        </div>
+        <a href="https://www.twitch.tv/togikirei" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-xl bg-purple-600/20 hover:bg-purple-600 text-purple-300 hover:text-white border border-purple-500/40 text-xs font-cyber font-bold transition flex items-center gap-2 shadow-lg">
+          <i class="fa-brands fa-twitch"></i> Abrir Twitch ↗
+        </a>
+      </div>
+
+      <!-- Aviso para archivos locales -->
+      <div id="local-warning" class="hidden bg-purple-950/40 border border-purple-500/30 rounded-2xl p-4 text-xs text-purple-200 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <i class="fa-solid fa-triangle-exclamation text-starlight-star text-base"></i>
+          <span>Estás abriendo la página como archivo local (file://). Para ver el stream aquí dentro, usa un servidor local como <strong>Live Server</strong> o sube la web.</span>
+        </div>
+        <a href="https://www.twitch.tv/togikirei" target="_blank" rel="noopener noreferrer" class="shrink-0 px-3 py-1.5 bg-purple-600 text-white rounded-lg font-cyber font-bold hover:bg-purple-500 transition">Ver en Twitch</a>
+      </div>
+
+      <!-- Contenedor adaptable del Stream y el Chat -->
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        
+        <!-- Reproductor de Video -->
+        <div class="lg:col-span-3 aspect-video w-full bg-starlight-black rounded-2xl overflow-hidden border border-slate-800 shadow-inner relative flex items-center justify-center">
+          <iframe 
+            src="https://player.twitch.tv/?channel=togikirei&parent=localhost&parent=127.0.0.1&parent=togivt.workers.dev&muted=false" 
+            height="100%" 
+            width="100%" 
+            allowfullscreen="true">
+          </iframe>
+        </div>
+
+        <!-- Chat de Twitch -->
+        <div class="lg:col-span-1 h-[400px] lg:h-auto bg-starlight-black rounded-2xl overflow-hidden border border-slate-800 shadow-inner flex flex-col">
+          <iframe 
+            src="https://www.twitch.tv/embed/togikirei/chat?darkpopout&parent=localhost&parent=127.0.0.1&parent=togivt.workers.dev" 
+            height="100%" 
+            width="100%">
+          </iframe>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="mt-16 py-8 border-t border-slate-800/85 text-center text-xs text-slate-500 space-y-2">
+    <div class="flex justify-center space-x-6 text-slate-300 font-cyber flex-wrap gap-y-2">
+      <a href="index.html" class="hover:text-starlight-cyan transition">Inicio</a>
+      <a href="live.html" class="hover:text-starlight-pink transition">Directo</a>
+      <a href="https://www.tiktok.com/@_togivt_" target="_blank" rel="noopener noreferrer" class="hover:text-starlight-cyan transition">TikTok</a>
+      <a href="https://www.youtube.com/channel/UCVksKxlWndm3k-MufaVns9A" target="_blank" rel="noopener noreferrer" class="hover:text-starlight-pink transition">YouTube</a>
+      <a href="https://discord.com/invite/GybAXP2HXn" target="_blank" rel="noopener noreferrer" class="hover:text-starlight-purple transition">Discord</a>
+    </div>
+    <p>© 2026 TOGI KIREI 💫. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    // Detectar si se está abriendo mediante archivo local para mostrar el aviso útil
+    if (window.location.protocol === 'file:') {
+      document.getElementById('local-warning').classList.remove('hidden');
+    }
+
+    // Animación del fondo (Canvas Starfield)
+    const canvas = document.getElementById('starfield');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    const numStars = 180;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    for (let i = 0; i < numStars; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2 + 0.5,
+        speed: Math.random() * 0.4 + 0.1,
+        color: ['#ffffff', '#ff69b4', '#00f0ff', '#ffd700'][Math.floor(Math.random() * 4)],
+        alpha: Math.random()
+      });
+    }
+
+    function animateStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      stars.forEach(star => {
+        ctx.fillStyle = star.color;
+        ctx.globalAlpha = star.alpha;
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.fill();
+        star.y += star.speed;
+        if (star.y > canvas.height) {
+          star.y = 0;
+          star.x = Math.random() * canvas.width;
+        }
+      });
+      requestAnimationFrame(animateStars);
+    }
+    animateStars();
+  </script>
+</body>
+</html>
