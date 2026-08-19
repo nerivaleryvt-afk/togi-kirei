@@ -58,7 +58,7 @@
   <!-- CONEXIÓN A FIREBASE -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    import { getFirestore, collection, addDoc, query, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyAEpnG4LrNgLfvqx8Jtes4hoxj9qwzGq4c",
@@ -84,6 +84,33 @@
         console.error("Error al guardar en Firebase:", e);
       }
     };
+
+    // Escuchar ganadores en tiempo real
+    const q = query(collection(db, "gachapon_results"), orderBy("fecha", "desc"), limit(5));
+    onSnapshot(q, (snapshot) => {
+      const lista = document.getElementById('listaGanadores');
+      if (!lista) return;
+      lista.innerHTML = '';
+      if (snapshot.empty) {
+        lista.innerHTML = '<li class="text-center text-sm text-slate-400 italic py-2">Aún no hay ganadores. ¡Sé el primero!</li>';
+        return;
+      }
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+        const li = document.createElement('li');
+        li.className = "flex items-center justify-between bg-starlight-black/60 p-3 rounded-xl border border-slate-800/60 shadow-inner";
+        li.innerHTML = `
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-starlight-card border border-starlight-cyan/30 flex items-center justify-center p-1">
+              <img src="${data.emote}" alt="Emote" class="w-full h-full object-contain">
+            </div>
+            <span class="text-white font-cyber text-sm font-bold">${data.usuario}</span>
+          </div>
+          <span class="text-[10px] font-cyber text-starlight-cyan tracking-widest uppercase">¡Ganó!</span>
+        `;
+        lista.appendChild(li);
+      });
+    });
   </script>
 </head>
 
@@ -238,28 +265,37 @@
       </div>
     </div>
 
-    <!-- SECCIÓN: GACHAPÓN ESTELAR -->
-    <section class="bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-8 shadow-2xl text-center space-y-6">
-      <h2 class="font-cyber text-3xl font-black text-white">GACHAPÓN ESTELAR</h2>
-      <p class="text-sm text-slate-300">¡Prueba tu suerte y obtén un emote de Togi Kirei!</p>
-      
-      <!-- Input para el nombre -->
-      <div class="flex justify-center mb-4">
-        <input type="text" id="nombreUsuario" placeholder="Ingresa tu nombre aquí..." class="w-full max-w-sm px-4 py-3 rounded-lg bg-starlight-black border border-starlight-cyan text-white focus:outline-none focus:border-starlight-pink transition-colors text-center shadow-inner">
-      </div>
+    <!-- SECCIÓN: GACHAPÓN ESTELAR Y GANADORES -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <section class="bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-8 shadow-2xl text-center space-y-6">
+          <h2 class="font-cyber text-3xl font-black text-white">GACHAPÓN ESTELAR</h2>
+          <p class="text-sm text-slate-300">¡Prueba tu suerte y obtén un emote de Togi Kirei!</p>
+          
+          <div class="flex justify-center mb-4">
+            <input type="text" id="nombreUsuario" placeholder="Ingresa tu nombre aquí..." class="w-full max-w-sm px-4 py-3 rounded-lg bg-starlight-black border border-starlight-cyan text-white focus:outline-none focus:border-starlight-pink transition-colors text-center shadow-inner">
+          </div>
 
-      <div class="flex justify-center gap-4 my-6">
-        <div id="slot1" class="w-24 h-24 bg-starlight-black border-2 border-starlight-pink rounded-2xl flex items-center justify-center text-3xl overflow-hidden p-2 text-starlight-pink">?</div>
-        <div id="slot2" class="w-24 h-24 bg-starlight-black border-2 border-starlight-cyan rounded-2xl flex items-center justify-center text-3xl overflow-hidden p-2 text-starlight-cyan">?</div>
-        <div id="slot3" class="w-24 h-24 bg-starlight-black border-2 border-starlight-star rounded-2xl flex items-center justify-center text-3xl overflow-hidden p-2 text-starlight-star">?</div>
-      </div>
-      
-      <button onclick="girarRuleta()" id="btnGirar" class="px-10 py-4 rounded-xl bg-starlight-pink hover:bg-pink-400 text-black font-cyber font-bold text-lg transition-all hover:scale-105 shadow-[0_0_15px_rgba(255,105,180,0.5)] disabled:opacity-50 disabled:hover:scale-100">
-        ¡PROBAR SUERTE!
-      </button>
-      
-      <p id="resultado" class="font-cyber text-starlight-cyan mt-4 text-xl min-h-[30px]"></p>
-    </section>
+          <div class="flex justify-center gap-4 my-6">
+            <div id="slot1" class="w-24 h-24 bg-starlight-black border-2 border-starlight-pink rounded-2xl flex items-center justify-center text-3xl overflow-hidden p-2 text-starlight-pink">?</div>
+            <div id="slot2" class="w-24 h-24 bg-starlight-black border-2 border-starlight-cyan rounded-2xl flex items-center justify-center text-3xl overflow-hidden p-2 text-starlight-cyan">?</div>
+            <div id="slot3" class="w-24 h-24 bg-starlight-black border-2 border-starlight-star rounded-2xl flex items-center justify-center text-3xl overflow-hidden p-2 text-starlight-star">?</div>
+          </div>
+          
+          <button onclick="girarRuleta()" id="btnGirar" class="px-10 py-4 rounded-xl bg-starlight-pink hover:bg-pink-400 text-black font-cyber font-bold text-lg transition-all hover:scale-105 shadow-[0_0_15px_rgba(255,105,180,0.5)] disabled:opacity-50 disabled:hover:scale-100">
+            ¡PROBAR SUERTE!
+          </button>
+          
+          <p id="resultado" class="font-cyber text-starlight-cyan mt-4 text-xl min-h-[30px]"></p>
+        </section>
+
+        <!-- ÚLTIMOS GANADORES -->
+        <div class="bg-starlight-card/80 backdrop-blur-xl border border-starlight-cyan/40 rounded-3xl p-8 shadow-2xl">
+          <h3 class="font-cyber text-xl font-bold text-starlight-cyan text-center mb-6">🏆 ÚLTIMOS GANADORES</h3>
+          <ul id="listaGanadores" class="space-y-3">
+            <li class="text-center text-sm text-slate-400 italic py-4">Cargando ganadores...</li>
+          </ul>
+        </div>
+    </div>
 
     <!-- SECCIÓN: SETUP -->
     <div class="space-y-6 pt-6">
@@ -434,7 +470,7 @@
     }
     animateStars();
 
-    // Lógica Gachapón Estelar
+    // Lógica Gachapón Estelar (Modo Suerte)
     const emotes = [
       "emotes/ASUSTADO.png", "emotes/ban.png", "emotes/Barritas.png", 
       "emotes/CUMPLEEE.png", "emotes/Emotes.png", "emotes/JEJEJEJ.png", 
@@ -449,6 +485,8 @@
       
       btn.disabled = true;
       resultado.innerText = "Girando...";
+      resultado.classList.remove("text-starlight-pink", "text-starlight-cyan");
+      resultado.classList.add("text-starlight-cyan"); 
       
       let contador = 0;
       
@@ -464,20 +502,38 @@
         if (contador > 15) { 
             clearInterval(intervalo);
             
-            // Elegir el ganador final
-            const ganador = emotes[Math.floor(Math.random() * emotes.length)];
-            const imgHTML = `<img src="${ganador}" class="w-full h-full object-contain p-1">`;
+            const probabilidadGanar = 0.15; 
+            const esGanador = Math.random() < probabilidadGanar;
             
-            // Asegurar que los 3 slots muestren la misma imagen
-            document.getElementById('slot1').innerHTML = imgHTML;
-            document.getElementById('slot2').innerHTML = imgHTML;
-            document.getElementById('slot3').innerHTML = imgHTML;
+            let res1, res2, res3;
             
-            resultado.innerText = `¡Felicidades ${nombre}! Te tocó un premio.`;
+            if (esGanador) {
+                const premio = emotes[Math.floor(Math.random() * emotes.length)];
+                res1 = premio;
+                res2 = premio;
+                res3 = premio;
+            } else {
+                do {
+                    res1 = emotes[Math.floor(Math.random() * emotes.length)];
+                    res2 = emotes[Math.floor(Math.random() * emotes.length)];
+                    res3 = emotes[Math.floor(Math.random() * emotes.length)];
+                } while (res1 === res2 && res2 === res3);
+            }
             
-            // Guardar en Firebase
-            if (typeof window.guardarGacha === 'function') {
-              window.guardarGacha(nombre, ganador);
+            document.getElementById('slot1').innerHTML = `<img src="${res1}" class="w-full h-full object-contain p-1">`;
+            document.getElementById('slot2').innerHTML = `<img src="${res2}" class="w-full h-full object-contain p-1">`;
+            document.getElementById('slot3').innerHTML = `<img src="${res3}" class="w-full h-full object-contain p-1">`;
+            
+            if (res1 === res2 && res2 === res3) {
+                resultado.innerText = `¡Felicidades ${nombre}! Te tocó un premio.`;
+                resultado.classList.add("text-starlight-cyan");
+                
+                if (typeof window.guardarGacha === 'function') {
+                  window.guardarGacha(nombre, res1);
+                }
+            } else {
+                resultado.innerText = `¡Lástima ${nombre}! No hubo suerte esta vez.`;
+                resultado.classList.add("text-starlight-pink");
             }
             
             btn.disabled = false;
