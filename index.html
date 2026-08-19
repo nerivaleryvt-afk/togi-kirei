@@ -74,7 +74,7 @@
         TOGI KIREI <span class="text-starlight-star">💫</span>
       </a>
 
-      <!-- ENLACES DE NAVEGACIÓN -->
+      <!-- ENLACES DE NAVEGACIÓN (DESKTOP) -->
       <nav class="hidden lg:flex flex-1 justify-center space-x-6 xl:space-x-10 text-sm font-semibold uppercase tracking-wider text-slate-300">
         <a href="sobre.mi.html" class="hover:text-starlight-pink transition whitespace-nowrap">Sobre Mí</a>
         <a href="#favorites" class="hover:text-starlight-pink transition whitespace-nowrap">Mis Gustos</a>
@@ -84,11 +84,36 @@
         <a href="#mediakit" class="hover:text-starlight-pink transition whitespace-nowrap">Marcas</a>
       </nav>
 
-      <!-- BOTÓN DIRECTO A TIKTOK -->
-      <a href="https://www.tiktok.com/@_togivt_" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 text-xs md:text-sm font-cyber font-bold uppercase tracking-wider rounded-full border border-starlight-cyan text-starlight-cyan hover:bg-starlight-cyan hover:text-black transition flex items-center gap-2 whitespace-nowrap shrink-0">
-        TikTok Oficial 🎵
-      </a>
+      <!-- BOTONES DERECHA -->
+      <div class="flex items-center gap-4">
+        <!-- BOTÓN DIRECTO A TIKTOK (DESKTOP) -->
+        <a href="https://www.tiktok.com/@_togivt_" target="_blank" rel="noopener noreferrer" class="hidden md:flex px-5 py-2.5 text-xs md:text-sm font-cyber font-bold uppercase tracking-wider rounded-full border border-starlight-cyan text-starlight-cyan hover:bg-starlight-cyan hover:text-black transition items-center gap-2 whitespace-nowrap shrink-0">
+          TikTok Oficial 🎵
+        </a>
+        
+        <!-- BOTÓN HAMBURGUESA (MÓVIL) -->
+        <button id="menu-btn" class="lg:hidden text-white focus:outline-none p-2">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
+      </div>
       
+    </div>
+
+    <!-- MENÚ MÓVIL DESPLEGABLE -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-starlight-black/95 backdrop-blur-md border-t border-pink-900/30 px-6 py-6 space-y-4 text-center font-cyber text-sm uppercase">
+      <a href="sobre.mi.html" class="block py-2 hover:text-starlight-pink transition">Sobre Mí</a>
+      <a href="#favorites" class="block py-2 hover:text-starlight-pink transition">Mis Gustos</a>
+      <a href="valorant.html" class="block py-2 text-starlight-cyan transition">Valorant</a>
+      <a href="fan-art-gallery.html" class="block py-2 hover:text-starlight-pink transition">Fan Art ✨</a>
+      <a href="#content" class="block py-2 hover:text-starlight-pink transition">Contenido</a>
+      <a href="#mediakit" class="block py-2 hover:text-starlight-pink transition">Marcas</a>
+      <div class="pt-2">
+        <a href="https://www.tiktok.com/@_togivt_" target="_blank" rel="noopener noreferrer" class="block w-full py-3 text-starlight-cyan border border-starlight-cyan rounded-full hover:bg-starlight-cyan hover:text-black transition">
+          TikTok Oficial 🎵
+        </a>
+      </div>
     </div>
   </header>
 
@@ -301,6 +326,24 @@
     }
 
     animateStars();
+  </script>
+
+  <!-- SCRIPT PARA EL MENÚ MÓVIL -->
+  <script>
+    const btn = document.getElementById('menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+
+    // Opcional: Cierra el menú al hacer clic en cualquier enlace del menú móvil
+    const mobileLinks = menu.querySelectorAll('a');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.add('hidden');
+      });
+    });
   </script>
 
 </body>
