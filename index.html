@@ -70,18 +70,15 @@
     <div class="max-w-[1400px] mx-auto px-4 lg:px-8 h-20 flex items-center justify-between gap-4">
       
       <!-- LOGO -->
-      <a href="#" class="font-cyber text-lg md:text-2xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-starlight-pink via-starlight-purple to-starlight-cyan flex items-center gap-2 whitespace-nowrap shrink-0">
+      <a href="index.html" class="font-cyber text-lg md:text-2xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-starlight-pink via-starlight-purple to-starlight-cyan flex items-center gap-2 whitespace-nowrap shrink-0">
         TOGI KIREI <span class="text-starlight-star">💫</span>
       </a>
 
-      <!-- ENLACES DE NAVEGACIÓN (DESKTOP) -->
+      <!-- ENLACES DE NAVEGACIÓN LIMPIOS (DESKTOP) -->
       <nav class="hidden lg:flex flex-1 justify-center space-x-6 xl:space-x-10 text-sm font-semibold uppercase tracking-wider text-slate-300">
         <a href="sobre.mi.html" class="hover:text-starlight-pink transition whitespace-nowrap">Sobre Mí</a>
-        <a href="#favorites" class="hover:text-starlight-pink transition whitespace-nowrap">Mis Gustos</a>
         <a href="valorant.html" class="hover:text-starlight-pink transition whitespace-nowrap text-starlight-cyan border-b border-starlight-cyan">Valorant</a>
         <a href="fan-art-gallery.html" class="hover:text-starlight-pink transition whitespace-nowrap">Fan Art ✨</a>
-        <a href="#content" class="hover:text-starlight-pink transition whitespace-nowrap">Contenido</a>
-        <a href="#mediakit" class="hover:text-starlight-pink transition whitespace-nowrap">Marcas</a>
       </nav>
 
       <!-- BOTONES DERECHA -->
@@ -101,14 +98,11 @@
       
     </div>
 
-    <!-- MENÚ MÓVIL DESPLEGABLE -->
+    <!-- MENÚ MÓVIL DESPLEGABLE LIMPIO -->
     <div id="mobile-menu" class="hidden lg:hidden bg-starlight-black/95 backdrop-blur-md border-t border-pink-900/30 px-6 py-6 space-y-4 text-center font-cyber text-sm uppercase">
       <a href="sobre.mi.html" class="block py-2 hover:text-starlight-pink transition">Sobre Mí</a>
-      <a href="#favorites" class="block py-2 hover:text-starlight-pink transition">Mis Gustos</a>
       <a href="valorant.html" class="block py-2 text-starlight-cyan transition">Valorant</a>
       <a href="fan-art-gallery.html" class="block py-2 hover:text-starlight-pink transition">Fan Art ✨</a>
-      <a href="#content" class="block py-2 hover:text-starlight-pink transition">Contenido</a>
-      <a href="#mediakit" class="block py-2 hover:text-starlight-pink transition">Marcas</a>
       <div class="pt-2">
         <a href="https://www.tiktok.com/@_togivt_" target="_blank" rel="noopener noreferrer" class="block w-full py-3 text-starlight-cyan border border-starlight-cyan rounded-full hover:bg-starlight-cyan hover:text-black transition">
           TikTok Oficial 🎵
@@ -132,9 +126,6 @@
         <div class="flex flex-wrap justify-center md:justify-start gap-4 pt-4">
           <a href="https://www.tiktok.com/@_togivt_" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-full bg-gradient-to-r from-starlight-cyan to-starlight-purple text-white font-cyber font-bold text-sm hover:opacity-90 transition glow-starlight">
             Seguir en TikTok
-          </a>
-          <a href="#favorites" class="px-6 py-3 rounded-full bg-starlight-card/80 border border-slate-700 text-slate-200 font-cyber font-bold text-sm hover:border-starlight-pink hover:text-starlight-pink transition">
-            Conocer Mis Gustos
           </a>
         </div>
       </div>
@@ -337,7 +328,6 @@
       menu.classList.toggle('hidden');
     });
 
-    // Opcional: Cierra el menú al hacer clic en cualquier enlace del menú móvil
     const mobileLinks = menu.querySelectorAll('a');
     mobileLinks.forEach(link => {
       link.addEventListener('click', () => {
