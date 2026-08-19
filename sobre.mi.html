@@ -54,6 +54,37 @@
       background-color: #0a0814;
     }
   </style>
+
+  <!-- CONEXIÓN A FIREBASE -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAEpnG4LrNgLfvqx8Jtes4hoxj9qwzGq4c",
+      authDomain: "togikirei.firebaseapp.com",
+      projectId: "togikirei",
+      storageBucket: "togikirei.firebasestorage.app",
+      messagingSenderId: "125764799178",
+      appId: "1:125764799178:web:14651582df57666b41c233"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    window.guardarGacha = async (usuario, emote) => {
+      try {
+        await addDoc(collection(db, "gachapon_results"), {
+          usuario: usuario,
+          emote: emote,
+          fecha: new Date().toISOString()
+        });
+        console.log("Datos guardados exitosamente en Firebase.");
+      } catch (e) {
+        console.error("Error al guardar en Firebase:", e);
+      }
+    };
+  </script>
 </head>
 
 <body class="text-slate-200 font-sans min-h-screen selection:bg-starlight-pink selection:text-white relative p-6 md:p-12">
@@ -206,6 +237,29 @@
 
       </div>
     </div>
+
+    <!-- SECCIÓN: GACHAPÓN ESTELAR -->
+    <section class="bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-8 shadow-2xl text-center space-y-6">
+      <h2 class="font-cyber text-3xl font-black text-white">GACHAPÓN ESTELAR</h2>
+      <p class="text-sm text-slate-300">¡Prueba tu suerte y obtén un emote de Togi Kirei!</p>
+      
+      <!-- Input para el nombre -->
+      <div class="flex justify-center mb-4">
+        <input type="text" id="nombreUsuario" placeholder="Ingresa tu nombre aquí..." class="w-full max-w-sm px-4 py-3 rounded-lg bg-starlight-black border border-starlight-cyan text-white focus:outline-none focus:border-starlight-pink transition-colors text-center shadow-inner">
+      </div>
+
+      <div class="flex justify-center gap-4 my-6">
+        <div id="slot1" class="w-24 h-24 bg-starlight-black border-2 border-starlight-pink rounded-2xl flex items-center justify-center text-3xl overflow-hidden p-2 text-starlight-pink">?</div>
+        <div id="slot2" class="w-24 h-24 bg-starlight-black border-2 border-starlight-cyan rounded-2xl flex items-center justify-center text-3xl overflow-hidden p-2 text-starlight-cyan">?</div>
+        <div id="slot3" class="w-24 h-24 bg-starlight-black border-2 border-starlight-star rounded-2xl flex items-center justify-center text-3xl overflow-hidden p-2 text-starlight-star">?</div>
+      </div>
+      
+      <button onclick="girarRuleta()" id="btnGirar" class="px-10 py-4 rounded-xl bg-starlight-pink hover:bg-pink-400 text-black font-cyber font-bold text-lg transition-all hover:scale-105 shadow-[0_0_15px_rgba(255,105,180,0.5)] disabled:opacity-50 disabled:hover:scale-100">
+        ¡PROBAR SUERTE!
+      </button>
+      
+      <p id="resultado" class="font-cyber text-starlight-cyan mt-4 text-xl min-h-[30px]"></p>
+    </section>
 
     <!-- SECCIÓN: SETUP -->
     <div class="space-y-6 pt-6">
@@ -379,6 +433,57 @@
       requestAnimationFrame(animateStars);
     }
     animateStars();
+
+    // Lógica Gachapón Estelar
+    const emotes = [
+      "emotes/ASUSTADO.png", "emotes/ban.png", "emotes/Barritas.png", 
+      "emotes/CUMPLEEE.png", "emotes/Emotes.png", "emotes/JEJEJEJ.png", 
+      "emotes/Lengu.png", "emotes/Limon.png", "emotes/muslos.png", "emotes/Tiburon.png"
+    ];
+    
+    function girarRuleta() {
+      const nombreInput = document.getElementById('nombreUsuario').value.trim();
+      const nombre = nombreInput !== "" ? nombreInput : "Anónimo";
+      const btn = document.getElementById('btnGirar');
+      const resultado = document.getElementById('resultado');
+      
+      btn.disabled = true;
+      resultado.innerText = "Girando...";
+      
+      let contador = 0;
+      
+      const intervalo = setInterval(() => {
+        const rand = () => emotes[Math.floor(Math.random() * emotes.length)];
+        
+        document.getElementById('slot1').innerHTML = `<img src="${rand()}" class="w-full h-full object-contain p-1">`;
+        document.getElementById('slot2').innerHTML = `<img src="${rand()}" class="w-full h-full object-contain p-1">`;
+        document.getElementById('slot3').innerHTML = `<img src="${rand()}" class="w-full h-full object-contain p-1">`;
+        
+        contador++;
+        
+        if (contador > 15) { 
+            clearInterval(intervalo);
+            
+            // Elegir el ganador final
+            const ganador = emotes[Math.floor(Math.random() * emotes.length)];
+            const imgHTML = `<img src="${ganador}" class="w-full h-full object-contain p-1">`;
+            
+            // Asegurar que los 3 slots muestren la misma imagen
+            document.getElementById('slot1').innerHTML = imgHTML;
+            document.getElementById('slot2').innerHTML = imgHTML;
+            document.getElementById('slot3').innerHTML = imgHTML;
+            
+            resultado.innerText = `¡Felicidades ${nombre}! Te tocó un premio.`;
+            
+            // Guardar en Firebase
+            if (typeof window.guardarGacha === 'function') {
+              window.guardarGacha(nombre, ganador);
+            }
+            
+            btn.disabled = false;
+        }
+      }, 100);
+    }
   </script>
 </body>
 </html>
