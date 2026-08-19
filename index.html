@@ -7,6 +7,9 @@
   
   <link rel="icon" type="image/png" href="me/togi2.PNG">
 
+  <!-- FontAwesome (Íconos) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
   <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -79,6 +82,7 @@
         <a href="sobre.mi.html" class="hover:text-starlight-pink transition whitespace-nowrap">Sobre Mí</a>
         <a href="valorant.html" class="hover:text-starlight-pink transition whitespace-nowrap text-starlight-cyan border-b border-starlight-cyan">Valorant</a>
         <a href="fan-art-gallery.html" class="hover:text-starlight-pink transition whitespace-nowrap">Fan Art ✨</a>
+        <a href="#extension" class="hover:text-starlight-pink transition whitespace-nowrap text-starlight-pink">Extensión ⚡</a>
       </nav>
 
       <!-- BOTONES DERECHA -->
@@ -103,6 +107,7 @@
       <a href="sobre.mi.html" class="block py-2 hover:text-starlight-pink transition">Sobre Mí</a>
       <a href="valorant.html" class="block py-2 text-starlight-cyan transition">Valorant</a>
       <a href="fan-art-gallery.html" class="block py-2 hover:text-starlight-pink transition">Fan Art ✨</a>
+      <a href="#extension" class="block py-2 text-starlight-pink transition">Extensión ⚡</a>
       <div class="pt-2">
         <a href="https://www.tiktok.com/@_togivt_" target="_blank" rel="noopener noreferrer" class="block w-full py-3 text-starlight-cyan border border-starlight-cyan rounded-full hover:bg-starlight-cyan hover:text-black transition">
           TikTok Oficial 🎵
@@ -237,6 +242,39 @@
       </div>
     </section>
 
+    <!-- SECCIÓN DE DESCARGA DE LA EXTENSIÓN -->
+    <section id="extension" class="py-12 max-w-5xl mx-auto px-6">
+      <div class="relative overflow-hidden rounded-3xl bg-starlight-card/90 border-2 border-starlight-pink/50 p-8 md:p-12 text-center shadow-[0_0_30px_rgba(255,105,180,0.25)]">
+        
+        <div class="absolute -top-12 left-1/2 -translate-x-1/2 w-64 h-64 bg-starlight-cyan/15 blur-3xl rounded-full pointer-events-none"></div>
+
+        <div class="relative z-10 space-y-4">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-starlight-cyan font-cyber text-xs font-bold uppercase tracking-wider">
+            <span>⚡</span> TOGI LIVE ALERT EXTENSION <span>💫</span>
+          </div>
+
+          <h2 class="font-cyber text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-starlight-pink via-starlight-purple to-starlight-cyan">
+            ¡No te pierdas ningún directo!
+          </h2>
+
+          <p class="text-slate-300 text-xs md:text-sm max-w-xl mx-auto leading-relaxed">
+            Instala la extensión oficial para tu navegador y recibe notificaciones con sonido e ícono flotante al instante en tu pantalla cuando Togi Kirei esté en vivo.
+          </p>
+
+          <div class="flex flex-wrap justify-center items-center gap-4 pt-4">
+            <a href="TogiLiveAlert.zip" download class="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-gradient-to-r from-starlight-pink via-starlight-purple to-starlight-cyan text-white font-cyber text-xs font-bold uppercase tracking-wider hover:scale-105 hover:shadow-[0_0_20px_rgba(255,105,180,0.5)] transition duration-300">
+              <i class="fa-solid fa-download text-sm"></i> Descargar Extensión (.zip)
+            </a>
+
+            <button onclick="document.getElementById('tutorial-modal').classList.remove('hidden')" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/10 border border-white/20 text-starlight-cyan font-cyber text-xs font-bold uppercase tracking-wider hover:bg-white/20 transition duration-300">
+              <i class="fa-solid fa-circle-info"></i> ¿Cómo instalar?
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <!-- MARCAS & COLABORACIONES -->
     <section id="mediakit" class="py-16 bg-starlight-card/50 backdrop-blur-md border-t border-pink-900/20">
       <div class="max-w-6xl mx-auto px-6 text-center space-y-8">
@@ -258,6 +296,25 @@
       </div>
     </section>
   </main>
+
+  <!-- MODAL TUTORIAL DE INSTALACIÓN -->
+  <div id="tutorial-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+    <div class="relative w-full max-w-md bg-starlight-black border-2 border-starlight-cyan rounded-3xl p-6 shadow-[0_0_40px_rgba(0,240,255,0.3)] text-left space-y-4">
+      
+      <button onclick="document.getElementById('tutorial-modal').classList.add('hidden')" class="absolute top-4 right-4 text-slate-400 hover:text-white font-bold text-lg">✕</button>
+
+      <h3 class="font-cyber text-base font-extrabold text-starlight-cyan flex items-center gap-2">
+        <i class="fa-solid fa-gears text-starlight-pink"></i> Instrucciones de Instalación
+      </h3>
+
+      <ol class="space-y-3 text-xs text-slate-200 list-decimal list-inside leading-relaxed font-sans">
+        <li>Descarga y descomprime el archivo <strong class="text-starlight-pink">TogiLiveAlert.zip</strong>.</li>
+        <li>Abre tu navegador (Chrome / Brave / Edge) y entra a: <br><code class="bg-white/10 px-2 py-0.5 rounded text-starlight-cyan font-mono mt-1 inline-block">chrome://extensions/</code></li>
+        <li>Activa el interruptor <strong class="text-emerald-400">Modo de desarrollador</strong> (arriba a la derecha).</li>
+        <li>Haz clic en el botón <strong class="text-starlight-cyan">Cargar descomprimida</strong> y selecciona la carpeta descomprimida. ¡Listo! ✨</li>
+      </ol>
+    </div>
+  </div>
 
   <!-- FOOTER -->
   <footer class="py-12 border-t border-slate-800/80 text-center text-xs text-slate-500 space-y-4">
