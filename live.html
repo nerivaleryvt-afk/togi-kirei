@@ -178,7 +178,6 @@
     <div class="space-y-6 reveal">
       <h2 class="font-cyber text-2xl font-bold text-white text-center">TOP DONADORES DE BITS 💜</h2>
       
-      <!-- Resumen rápido -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div class="bg-starlight-card/80 border border-pink-900/40 rounded-2xl p-4 text-center">
           <div class="text-sm text-slate-400 font-cyber uppercase">Seguidores</div>
@@ -194,7 +193,6 @@
         </div>
       </div>
 
-      <!-- Lista de donadores -->
       <div id="top-bits-list" class="space-y-3">
         <div class="text-center py-10 text-slate-400">
           <i class="fa-solid fa-spinner fa-spin text-2xl"></i>
@@ -203,18 +201,125 @@
       </div>
     </div>
 
-    <!-- SECCIÓN CHAT STATS (StreamElements) -->
-    <div class="space-y-4 reveal">
-      <h2 class="font-cyber text-2xl font-bold text-white text-center">📊 CHAT STATS EN VIVO</h2>
-      <div class="bg-starlight-card/80 backdrop-blur-xl border border-purple-900/40 rounded-3xl p-2 shadow-2xl glow-purple">
-        <iframe 
-          src="https://streamelements.com/togikirei/chatstats" 
-          width="100%" 
-          height="600" 
-          style="border:none; border-radius:16px;"
-          loading="lazy"
-          title="Estadísticas de chat de togikirei"
-        ></iframe>
+    <!-- SECCIÓN CHAT STATS (ESTÁTICA CON LOS DATOS PROPORCIONADOS) -->
+    <div class="space-y-6 reveal">
+      <h2 class="font-cyber text-2xl font-bold text-white text-center">📊 CHAT STATS</h2>
+
+      <!-- Resumen -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-starlight-card/80 border border-pink-900/40 rounded-2xl p-4 text-center">
+          <div class="text-sm text-slate-400 font-cyber uppercase">Total Mensajes</div>
+          <div class="font-cyber text-2xl font-black text-white mt-1">34,477</div>
+        </div>
+        <div class="bg-starlight-card/80 border border-purple-900/40 rounded-2xl p-4 text-center">
+          <div class="text-sm text-slate-400 font-cyber uppercase">Chatters Únicos</div>
+          <div class="font-cyber text-2xl font-black text-white mt-1">367</div>
+        </div>
+        <div class="bg-starlight-card/80 border border-cyan-900/40 rounded-2xl p-4 text-center">
+          <div class="text-sm text-slate-400 font-cyber uppercase">Msg por segundo</div>
+          <div class="font-cyber text-2xl font-black text-white mt-1">0.0</div>
+        </div>
+      </div>
+
+      <!-- Top Chatters y Top Emotes -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Top Chatters -->
+        <div class="bg-starlight-card/80 border border-pink-900/40 rounded-2xl p-4">
+          <h3 class="font-cyber text-sm font-bold text-starlight-pink mb-3">TOP CHATTERS 💬</h3>
+          <div class="space-y-2 max-h-80 overflow-y-auto">
+            <!-- Los primeros 10 se muestran; puedes ajustar -->
+            <div class="flex justify-between bg-starlight-black/60 p-2 rounded-xl"><span class="text-sm">1. 2l3x1s12</span><span class="text-sm text-starlight-cyan">2647</span></div>
+            <div class="flex justify-between bg-starlight-black/60 p-2 rounded-xl"><span class="text-sm">2. haru_4650</span><span class="text-sm text-starlight-cyan">2001</span></div>
+            <div class="flex justify-between bg-starlight-black/60 p-2 rounded-xl"><span class="text-sm">3. chrisuser25</span><span class="text-sm text-starlight-cyan">1416</span></div>
+            <div class="flex justify-between bg-starlight-black/60 p-2 rounded-xl"><span class="text-sm">4. neytanvzm</span><span class="text-sm text-starlight-cyan">1138</span></div>
+            <div class="flex justify-between bg-starlight-black/60 p-2 rounded-xl"><span class="text-sm">5. arbolgris</span><span class="text-sm text-starlight-cyan">1098</span></div>
+            <div class="flex justify-between bg-starlight-black/60 p-2 rounded-xl"><span class="text-sm">6. gojoconderechos</span><span class="text-sm text-starlight-cyan">1097</span></div>
+            <div class="flex justify-between bg-starlight-black/60 p-2 rounded-xl"><span class="text-sm">7. thiagolugo43</span><span class="text-sm text-starlight-cyan">901</span></div>
+            <div class="flex justify-between bg-starlight-black/60 p-2 rounded-xl"><span class="text-sm">8. isai_583</span><span class="text-sm text-starlight-cyan">828</span></div>
+            <div class="flex justify-between bg-starlight-black/60 p-2 rounded-xl"><span class="text-sm">9. nexor_x0</span><span class="text-sm text-starlight-cyan">753</span></div>
+            <div class="flex justify-between bg-starlight-black/60 p-2 rounded-xl"><span class="text-sm">10. soul_vladi</span><span class="text-sm text-starlight-cyan">709</span></div>
+          </div>
+        </div>
+
+        <!-- Top Twitch Emotes -->
+        <div class="bg-starlight-card/80 border border-purple-900/40 rounded-2xl p-4">
+          <h3 class="font-cyber text-sm font-bold text-purple-300 mb-3">TOP TWITCH EMOTES 🎭</h3>
+          <div class="space-y-2 max-h-80 overflow-y-auto">
+            <div class="flex items-center gap-3 bg-starlight-black/60 p-2 rounded-xl">
+              <span class="text-sm">1.</span>
+              <img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_dcd06b30a5c24f6eb871e8f5edbd44f7/default/dark/1.0" alt="DinoDance" class="w-8 h-8 object-contain">
+              <span class="text-sm flex-1">DinoDance</span>
+              <span class="text-sm text-purple-300">1748</span>
+            </div>
+            <div class="flex items-center gap-3 bg-starlight-black/60 p-2 rounded-xl">
+              <span class="text-sm">2.</span>
+              <img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_3085b6b73c714004a87089e38c3cc143/default/dark/1.0" alt="togikiLimon" class="w-8 h-8 object-contain">
+              <span class="text-sm flex-1">togikiLimon</span>
+              <span class="text-sm text-purple-300">1279</span>
+            </div>
+            <div class="flex items-center gap-3 bg-starlight-black/60 p-2 rounded-xl">
+              <span class="text-sm">3.</span>
+              <img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_57140fa4b6f646b28c5d4749f2a2f83d/default/dark/1.0" alt="togikiTiburoncin" class="w-8 h-8 object-contain">
+              <span class="text-sm flex-1">togikiTiburoncin</span>
+              <span class="text-sm text-purple-300">1151</span>
+            </div>
+            <div class="flex items-center gap-3 bg-starlight-black/60 p-2 rounded-xl">
+              <span class="text-sm">4.</span>
+              <img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_35a346bf76aa4fd69b430f97cdadbafc/default/dark/1.0" alt="seryboLove" class="w-8 h-8 object-contain">
+              <span class="text-sm flex-1">seryboLove</span>
+              <span class="text-sm text-purple-300">296</span>
+            </div>
+            <div class="flex items-center gap-3 bg-starlight-black/60 p-2 rounded-xl">
+              <span class="text-sm">5.</span>
+              <img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_e737fdaab78847319ace029cca4cd43e/default/dark/1.0" alt="lugivtAmor" class="w-8 h-8 object-contain">
+              <span class="text-sm flex-1">lugivtAmor</span>
+              <span class="text-sm text-purple-300">293</span>
+            </div>
+            <div class="flex items-center gap-3 bg-starlight-black/60 p-2 rounded-xl">
+              <span class="text-sm">6.</span>
+              <img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_4d94e764b743425f96ffd097cba624b3/default/dark/1.0" alt="lugivtTroya" class="w-8 h-8 object-contain">
+              <span class="text-sm flex-1">lugivtTroya</span>
+              <span class="text-sm text-purple-300">263</span>
+            </div>
+            <div class="flex items-center gap-3 bg-starlight-black/60 p-2 rounded-xl">
+              <span class="text-sm">7.</span>
+              <img src="https://static-cdn.jtvnw.net/emoticons/v2/58765/default/dark/1.0" alt="NotLikeThis" class="w-8 h-8 object-contain">
+              <span class="text-sm flex-1">NotLikeThis</span>
+              <span class="text-sm text-purple-300">258</span>
+            </div>
+            <div class="flex items-center gap-3 bg-starlight-black/60 p-2 rounded-xl">
+              <span class="text-sm">8.</span>
+              <img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_18047354897c4a07bee58bc515dcf100/default/dark/1.0" alt="togikiAsustado" class="w-8 h-8 object-contain">
+              <span class="text-sm flex-1">togikiAsustado</span>
+              <span class="text-sm text-purple-300">251</span>
+            </div>
+            <div class="flex items-center gap-3 bg-starlight-black/60 p-2 rounded-xl">
+              <span class="text-sm">9.</span>
+              <img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_a25ad7124e584c949e2f63917e3d747a/default/dark/1.0" alt="PikaRamen" class="w-8 h-8 object-contain">
+              <span class="text-sm flex-1">PikaRamen</span>
+              <span class="text-sm text-purple-300">177</span>
+            </div>
+            <div class="flex items-center gap-3 bg-starlight-black/60 p-2 rounded-xl">
+              <span class="text-sm">10.</span>
+              <img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_bfb533e2253044f3a77d0032b2354c0b/default/dark/1.0" alt="SUBtember" class="w-8 h-8 object-contain">
+              <span class="text-sm flex-1">SUBtember</span>
+              <span class="text-sm text-purple-300">172</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top Commands -->
+      <div class="bg-starlight-card/80 border border-cyan-900/40 rounded-2xl p-4">
+        <h3 class="font-cyber text-sm font-bold text-starlight-cyan mb-3">TOP COMMANDS 🔧</h3>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+          <div class="bg-starlight-black/60 p-2 rounded-xl"><span class="text-sm">!tts</span> <span class="float-right text-starlight-cyan">196</span></div>
+          <div class="bg-starlight-black/60 p-2 rounded-xl"><span class="text-sm">!discord</span> <span class="float-right text-starlight-cyan">68</span></div>
+          <div class="bg-starlight-black/60 p-2 rounded-xl"><span class="text-sm">!redes</span> <span class="float-right text-starlight-cyan">7</span></div>
+          <div class="bg-starlight-black/60 p-2 rounded-xl"><span class="text-sm">!donaciones</span> <span class="float-right text-starlight-cyan">4</span></div>
+          <div class="bg-starlight-black/60 p-2 rounded-xl"><span class="text-sm">!that</span> <span class="float-right text-starlight-cyan">3</span></div>
+          <div class="bg-starlight-black/60 p-2 rounded-xl"><span class="text-sm">!memide</span> <span class="float-right text-starlight-cyan">3</span></div>
+        </div>
       </div>
     </div>
 
@@ -281,10 +386,10 @@
     animateStars();
   </script>
 
-  <!-- SCRIPT TWITCH (configuración dinámica) -->
+  <!-- SCRIPT TWITCH -->
   <script>
     const domain = window.location.hostname;
-    const channel = "togikirei"; // ← tu canal
+    const channel = "togikirei";
 
     document.getElementById('twitch-player').src =
       `https://player.twitch.tv/?channel=${channel}&parent=${domain}`;
@@ -293,7 +398,7 @@
       `https://www.twitch.tv/embed/${channel}/chat?parent=${domain}`;
   </script>
 
-  <!-- SCRIPT PARA CARGAR TOP DONADORES -->
+  <!-- SCRIPT TOP DONADORES -->
   <script>
     const API_URL = 'https://nameless-resonance-e957togi-kirei-stats.togivt.workers.dev/api/stats';
 
@@ -310,23 +415,15 @@
         renderizarTopBits(data.topBits);
       } catch (error) {
         console.error('Error:', error);
-        document.getElementById('top-bits-list').innerHTML = `
-          <div class="text-center py-10 text-red-400">
-            <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
-            <p class="mt-2">No se pudo cargar el top de donadores.</p>
-            <p class="text-xs mt-1">${error.message}</p>
-          </div>`;
+        document.getElementById('top-bits-list').innerHTML =
+          `<div class="text-center py-10 text-red-400"><i class="fa-solid fa-triangle-exclamation text-2xl"></i><p class="mt-2">No se pudo cargar el top de donadores.</p><p class="text-xs mt-1">${error.message}</p></div>`;
       }
     }
 
     function renderizarTopBits(top) {
       const container = document.getElementById('top-bits-list');
       if (!top || top.length === 0) {
-        container.innerHTML = `
-          <div class="text-center py-10 text-slate-400">
-            <i class="fa-solid fa-heart text-2xl"></i>
-            <p class="mt-2">Aún no hay donadores de Bits este mes. ¡Sé el primero!</p>
-          </div>`;
+        container.innerHTML = `<div class="text-center py-10 text-slate-400"><i class="fa-solid fa-heart text-2xl"></i><p class="mt-2">Aún no hay donadores de Bits este mes. ¡Sé el primero!</p></div>`;
         return;
       }
 
@@ -334,20 +431,7 @@
       let html = '';
       top.forEach((donador, index) => {
         const medalla = index < 3 ? medallas[index] : '';
-        html += `
-          <div class="flex items-center justify-between bg-starlight-card/60 border border-slate-700/60 rounded-2xl p-4 shadow-md">
-            <div class="flex items-center gap-3">
-              <span class="text-2xl">${medalla || `#${index+1}`}</span>
-              <div>
-                <div class="font-cyber text-sm font-bold text-white">${donador.name}</div>
-                <div class="text-[10px] text-slate-400">${donador.login}</div>
-              </div>
-            </div>
-            <div class="text-right">
-              <div class="font-cyber text-lg font-black text-purple-300">${donador.bits.toLocaleString()}</div>
-              <div class="text-[10px] text-slate-400 uppercase">Bits</div>
-            </div>
-          </div>`;
+        html += `<div class="flex items-center justify-between bg-starlight-card/60 border border-slate-700/60 rounded-2xl p-4 shadow-md"><div class="flex items-center gap-3"><span class="text-2xl">${medalla || `#${index+1}`}</span><div><div class="font-cyber text-sm font-bold text-white">${donador.name}</div><div class="text-[10px] text-slate-400">${donador.login}</div></div></div><div class="text-right"><div class="font-cyber text-lg font-black text-purple-300">${donador.bits.toLocaleString()}</div><div class="text-[10px] text-slate-400 uppercase">Bits</div></div></div>`;
       });
       container.innerHTML = html;
     }
