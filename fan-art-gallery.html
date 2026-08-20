@@ -3,7 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Galería de Fan Art - Togi ★ Rizz Project</title>
+  <title>Galería de Fan Art ★ Togi Kirei</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Galería de fan art de Togi Kirei. Ilustraciones y dibujos creados por la comunidad. ¡Haz clic para verlos en grande!">
+  <meta property="og:title" content="Galería de Fan Art ★ Togi Kirei">
+  <meta property="og:description" content="Galería de fan art de Togi Kirei. Ilustraciones y dibujos creados por la comunidad. ¡Haz clic para verlos en grande!">
+  <meta property="og:image" content="me/togi.png">
+  <meta property="og:url" content="https://togikirei.com/fan-art">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Icono de pestaña -->
+  <link rel="icon" type="image/png" href="me/togi.png">
 
   <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -14,14 +25,37 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700;800;900&family=Readex+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Readex+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Readex Pro', 'sans-serif'],
+            cyber: ['Orbitron', 'sans-serif'],
+          },
+          colors: {
+            starlight: {
+              black: '#0a0814',
+              card: '#131024',
+              pink: '#ff69b4',
+              cyan: '#00f0ff',
+              star: '#ffd700',
+              purple: '#8a2be2',
+            }
+          }
+        }
+      }
+    }
+  </script>
 
   <style>
     body {
       margin: 0;
       padding: 40px 20px;
-      background-color: #0c0b14;
-      background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 0);
+      background-color: #0a0814;
+      background-image: radial-gradient(rgba(255, 105, 180, 0.08) 1px, transparent 0);
       background-size: 40px 40px;
       display: flex;
       flex-direction: column;
@@ -30,6 +64,18 @@
       font-family: 'Readex Pro', 'Segoe UI', sans-serif;
       color: #ffffff;
       overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Fondo de estrellas fijo */
+    #starfield {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      background-color: #0a0814;
     }
 
     .wrapper {
@@ -43,25 +89,25 @@
 
     .fanart-card {
       position: relative;
-      background: rgba(18, 16, 30, 0.9);
-      border: 2px solid #5d2568;
+      background: rgba(19, 16, 36, 0.85);
+      border: 1px solid rgba(255, 105, 180, 0.2);
       border-radius: 25px;
-      padding: 45px 30px;
+      padding: 40px 25px;
       text-align: center;
       width: 100%;
       box-sizing: border-box;
-      box-shadow: 0 0 30px rgba(122, 45, 140, 0.4);
+      box-shadow: 0 0 30px rgba(255, 105, 180, 0.2);
       backdrop-filter: blur(12px);
     }
 
     .fanart-card h3 {
-      font-family: 'Fredoka', cursive;
+      font-family: 'Orbitron', cursive;
       font-size: 32px;
       letter-spacing: 1px;
       margin-top: 0;
       margin-bottom: 10px;
       color: #fff;
-      text-shadow: 0 0 12px rgba(155, 81, 224, 0.6);
+      text-shadow: 0 0 12px rgba(255, 105, 180, 0.6);
     }
 
     .fanart-card p {
@@ -70,100 +116,101 @@
       margin-bottom: 35px;
     }
 
-    @keyframes orbit {
-      0% { transform: rotate(0deg) translate(240px) rotate(0deg); }
-      100% { transform: rotate(360deg) translate(240px) rotate(-360deg); }
+    /* Animaciones de scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    .butterfly {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      font-size: 22px;
-      margin-top: -11px;
-      margin-left: -11px;
-      pointer-events: none;
-      animation: orbit 10s linear infinite;
-      z-index: 10;
-    }
-
-    .b1 { animation-duration: 9s; }
-    .b2 { animation-duration: 12s; animation-delay: -4s; font-size: 18px; }
-    .b3 { animation-duration: 7s; animation-delay: -2s; font-size: 20px; }
-
+    /* Galería estilo Pinterest */
     .pinterest-grid {
       column-count: 3;
-      column-gap: 20px;
+      column-gap: 16px;
       width: 100%;
     }
-
     @media (max-width: 900px) {
       .pinterest-grid { column-count: 2; }
     }
-
     @media (max-width: 600px) {
       .pinterest-grid { column-count: 1; }
     }
 
     .pinterest-item {
       break-inside: avoid;
-      margin-bottom: 20px;
-      background: #1a172b;
-      border: 1.5px solid #4a1f54;
-      border-radius: 18px;
+      margin-bottom: 16px;
+      background: #131024;
+      border-radius: 16px;
       overflow: hidden;
       position: relative;
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
       cursor: pointer;
     }
 
     .pinterest-item:hover {
-      transform: translateY(-6px) scale(1.02);
-      border-color: #9b51e0;
-      box-shadow: 0 12px 25px rgba(155, 81, 224, 0.45);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 240, 255, 0.3);
     }
 
     .pinterest-item img {
       width: 100%;
       height: auto;
       display: block;
-      transition: transform 0.4s ease;
+      transition: transform 0.3s ease;
+    }
+
+    .pinterest-item:hover img {
+      transform: scale(1.03);
     }
 
     .pinterest-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(12, 11, 20, 0.2) 0%, rgba(37, 30, 58, 0.85) 100%);
+      background: linear-gradient(180deg, rgba(10, 8, 20, 0) 0%, rgba(10, 8, 20, 0.6) 100%);
       opacity: 0;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-end;
       padding: 16px;
       transition: opacity 0.3s ease;
     }
 
-    .pinterest-item:hover .pinterest-overlay { opacity: 1; }
-    .pinterest-item:hover img { transform: scale(1.05); }
-
-    .zoom-btn {
-      align-self: flex-end;
-      background: rgba(155, 81, 224, 0.9);
-      color: white;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    .pinterest-item:hover .pinterest-overlay {
+      opacity: 1;
     }
 
+    .overlay-text {
+      align-self: flex-start;
+      background: rgba(255, 105, 180, 0.9);
+      color: #0a0814;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 6px 12px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.2s ease;
+    }
+
+    .pinterest-item:hover .overlay-text {
+      transform: translateY(0);
+    }
+
+    /* Lightbox */
     .lightbox-modal {
       position: fixed;
       inset: 0;
       z-index: 100;
-      background: rgba(12, 11, 20, 0.92);
+      background: rgba(10, 8, 20, 0.92);
       backdrop-filter: blur(16px);
       display: flex;
       align-items: center;
@@ -173,120 +220,115 @@
       pointer-events: none;
       transition: opacity 0.3s ease;
     }
-
     .lightbox-modal.active {
       opacity: 1;
       pointer-events: auto;
     }
-
     .lightbox-content {
       max-width: 90vw;
       max-height: 85vh;
       border-radius: 20px;
-      border: 2px solid #9b51e0;
-      box-shadow: 0 0 40px rgba(155, 81, 224, 0.5);
+      border: 2px solid #ff69b4;
+      box-shadow: 0 0 40px rgba(255, 105, 180, 0.5);
       object-fit: contain;
+    }
+
+    /* Botón volver arriba */
+    #btn-top {
+      transition: all 0.3s ease;
+    }
+    #btn-top:hover {
+      transform: translateY(-3px);
+    }
+
+    /* Soporte para prefers-reduced-motion */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .pinterest-item, .pinterest-item img {
+        animation: none !important;
+        transition: none !important;
+      }
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
     }
   </style>
 </head>
-<body>
+<body class="p-4 md:p-8">
 
-  <div class="wrapper">
+  <!-- CANVAS DE ESTRELLAS -->
+  <canvas id="starfield"></canvas>
+
+  <div class="wrapper max-w-6xl mx-auto">
     
-    <!-- BOTÓN VOLVER DIRIGIDO A INDEX.HTML -->
-    <a href="index.html" class="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-[#12101e]/80 border-2 border-[#5d2568] text-[#d1cceb] font-display text-xs font-extrabold uppercase tracking-wider hover:bg-[#251e3a] hover:text-white hover:border-[#9b51e0] transition-all duration-300 shadow-[0_4px_15px_rgba(122,45,140,0.3)] hover:shadow-[0_6px_20px_rgba(155,81,224,0.5)] hover:-translate-y-0.5">
-      <i class="fa-solid fa-arrow-left text-sm"></i> Volver a la página principal
-    </a>
+    <!-- BOTÓN VOLVER -->
+    <div class="reveal w-full flex justify-center">
+      <a href="index.html" class="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-starlight-card/80 border-2 border-pink-900/50 text-slate-200 font-cyber text-xs font-extrabold uppercase tracking-wider hover:bg-starlight-pink hover:text-black hover:border-starlight-pink transition-all duration-300 shadow-lg hover:shadow-pink-500/30 hover:-translate-y-0.5">
+        <i class="fa-solid fa-arrow-left text-sm"></i> Volver a la página principal
+      </a>
+    </div>
 
     <!-- TARJETA PRINCIPAL -->
-    <div class="fanart-card">
-      <div class="butterfly b1">🦋</div>
-      <div class="butterfly b2">🦋</div>
-      <div class="butterfly b3">🦋</div>
-
-      <h3>GALERÍA DE FAN ART 🎨</h3>
+    <div class="fanart-card reveal">
+      <h3 class="font-cyber">GALERÍA DE FAN ART 🎨</h3>
       <p>¡Todo el amor y arte que la comunidad ha creado para Togi! (Haz clic en cualquier dibujo para verlo en grande)</p>
 
       <!-- GALERÍA ESTILO PINTEREST -->
       <div class="pinterest-grid">
 
         <div class="pinterest-item" onclick="openLightbox('img/17_sin_titulo_20260122160007.png')">
-          <img src="img/17_sin_titulo_20260122160007.png" alt="Fan Art Togi" referrerpolicy="no-referrer">
+          <img src="img/17_sin_titulo_20260122160007.png" alt="Fan Art Togi" loading="lazy" decoding="async">
           <div class="pinterest-overlay">
-            <div class="zoom-btn"><i class="fa-solid fa-expand text-xs"></i></div>
-            <div class="text-left">
-              <span class="text-[11px] font-bold text-pink-300 uppercase tracking-wider block">Ver Ilustración 💖</span>
-            </div>
+            <span class="overlay-text"><i class="fa-solid fa-eye"></i> Ver</span>
           </div>
         </div>
 
         <div class="pinterest-item" onclick="openLightbox('img/31_sin_titulo.png')">
-          <img src="img/31_sin_titulo.png" alt="Fan Art Togi" referrerpolicy="no-referrer">
+          <img src="img/31_sin_titulo.png" alt="Fan Art Togi" loading="lazy" decoding="async">
           <div class="pinterest-overlay">
-            <div class="zoom-btn"><i class="fa-solid fa-expand text-xs"></i></div>
-            <div class="text-left">
-              <span class="text-[11px] font-bold text-pink-300 uppercase tracking-wider block">Ver Ilustración 💖</span>
-            </div>
+            <span class="overlay-text"><i class="fa-solid fa-eye"></i> Ver</span>
           </div>
         </div>
 
         <div class="pinterest-item" onclick="openLightbox('img/image.png')">
-          <img src="img/image.png" alt="Fan Art Togi" referrerpolicy="no-referrer">
+          <img src="img/image.png" alt="Fan Art Togi" loading="lazy" decoding="async">
           <div class="pinterest-overlay">
-            <div class="zoom-btn"><i class="fa-solid fa-expand text-xs"></i></div>
-            <div class="text-left">
-              <span class="text-[11px] font-bold text-pink-300 uppercase tracking-wider block">Ver Ilustración 💖</span>
-            </div>
+            <span class="overlay-text"><i class="fa-solid fa-eye"></i> Ver</span>
           </div>
         </div>
 
         <div class="pinterest-item" onclick="openLightbox('img/Screenshot_20250325_211815_TikTok.jpg')">
-          <img src="img/Screenshot_20250325_211815_TikTok.jpg" alt="Fan Art Togi" referrerpolicy="no-referrer">
+          <img src="img/Screenshot_20250325_211815_TikTok.jpg" alt="Fan Art Togi" loading="lazy" decoding="async">
           <div class="pinterest-overlay">
-            <div class="zoom-btn"><i class="fa-solid fa-expand text-xs"></i></div>
-            <div class="text-left">
-              <span class="text-[11px] font-bold text-pink-300 uppercase tracking-wider block">Ver Ilustración 💖</span>
-            </div>
+            <span class="overlay-text"><i class="fa-solid fa-eye"></i> Ver</span>
           </div>
         </div>
 
         <div class="pinterest-item" onclick="openLightbox('img/SPOILER_COMISION_INICIAL_TOGI_Y_AMIGA.jpg')">
-          <img src="img/SPOILER_COMISION_INICIAL_TOGI_Y_AMIGA.jpg" alt="Fan Art Togi" referrerpolicy="no-referrer">
+          <img src="img/SPOILER_COMISION_INICIAL_TOGI_Y_AMIGA.jpg" alt="Fan Art Togi" loading="lazy" decoding="async">
           <div class="pinterest-overlay">
-            <div class="zoom-btn"><i class="fa-solid fa-expand text-xs"></i></div>
-            <div class="text-left">
-              <span class="text-[11px] font-bold text-pink-300 uppercase tracking-wider block">Ver Ilustración 💖</span>
-            </div>
+            <span class="overlay-text"><i class="fa-solid fa-eye"></i> Ver</span>
           </div>
         </div>
 
         <div class="pinterest-item" onclick="openLightbox('img/TOGI.jpg')">
-          <img src="img/TOGI.jpg" alt="Fan Art Togi" referrerpolicy="no-referrer">
+          <img src="img/TOGI.jpg" alt="Fan Art Togi" loading="lazy" decoding="async">
           <div class="pinterest-overlay">
-            <div class="zoom-btn"><i class="fa-solid fa-expand text-xs"></i></div>
-            <div class="text-left">
-              <span class="text-[11px] font-bold text-pink-300 uppercase tracking-wider block">Ver Ilustración 💖</span>
-            </div>
+            <span class="overlay-text"><i class="fa-solid fa-eye"></i> Ver</span>
           </div>
         </div>
 
         <div class="pinterest-item" onclick="openLightbox('img/togi_.png')">
-          <img src="img/togi_.png" alt="Fan Art Togi" referrerpolicy="no-referrer">
+          <img src="img/togi_.png" alt="Fan Art Togi" loading="lazy" decoding="async">
           <div class="pinterest-overlay">
-            <div class="zoom-btn"><i class="fa-solid fa-expand text-xs"></i></div>
-            <div class="text-left">
-              <span class="text-[11px] font-bold text-pink-300 uppercase tracking-wider block">Ver Ilustración 💖</span>
-            </div>
+            <span class="overlay-text"><i class="fa-solid fa-eye"></i> Ver</span>
           </div>
         </div>
 
         <div class="pinterest-item" onclick="openLightbox('img/TOGI_COMISION_2.jpg')">
-          <img src="img/TOGI_COMISION_2.jpg" alt="Fan Art Togi" referrerpolicy="no-referrer">
+          <img src="img/TOGI_COMISION_2.jpg" alt="Fan Art Togi" loading="lazy" decoding="async">
           <div class="pinterest-overlay">
-            <div class="zoom-btn"><i class="fa-solid fa-expand text-xs"></i></div>
-            <div class="text-left">
-              <span class="text-[11px] font-bold text-pink-300 uppercase tracking-wider block">Ver Ilustración 💖</span>
-            </div>
+            <span class="overlay-text"><i class="fa-solid fa-eye"></i> Ver</span>
           </div>
         </div>
 
@@ -297,10 +339,65 @@
 
   <!-- VISOR DE IMAGEN GRANDE -->
   <div id="lightbox" class="lightbox-modal" onclick="closeLightbox()">
-    <button class="absolute top-6 right-6 w-11 h-11 rounded-full bg-white/10 border-2 border-white/30 text-white font-bold text-xl flex items-center justify-center hover:bg-pink-600 transition">✕</button>
+    <button class="absolute top-6 right-6 w-11 h-11 rounded-full bg-white/10 border-2 border-white/30 text-white font-bold text-xl flex items-center justify-center hover:bg-starlight-pink hover:text-black transition z-20" aria-label="Cerrar visor">✕</button>
     <img id="lightbox-img" class="lightbox-content" src="" alt="Fan Art Ampliado">
   </div>
 
+  <!-- BOTÓN VOLVER ARRIBA -->
+  <button id="btn-top" class="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full bg-starlight-pink/80 text-black font-cyber font-extrabold text-xl border-2 border-white/40 shadow-lg hidden items-center justify-center" aria-label="Volver arriba">↑</button>
+
+  <!-- SCRIPT FONDO DE ESTRELLAS -->
+  <script>
+    const canvas = document.getElementById('starfield');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    const numStars = 180;
+    let isPageVisible = true;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    for (let i = 0; i < numStars; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2 + 0.5,
+        speed: Math.random() * 0.4 + 0.1,
+        color: ['#ffffff', '#ff69b4', '#00f0ff', '#ffd700'][Math.floor(Math.random() * 4)],
+        alpha: Math.random()
+      });
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      isPageVisible = !document.hidden;
+    });
+
+    function animateStars() {
+      if (isPageVisible) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        stars.forEach(star => {
+          ctx.fillStyle = star.color;
+          ctx.globalAlpha = star.alpha;
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+          ctx.fill();
+          star.y += star.speed;
+          if (star.y > canvas.height) {
+            star.y = 0;
+            star.x = Math.random() * canvas.width;
+          }
+        });
+      }
+      requestAnimationFrame(animateStars);
+    }
+    animateStars();
+  </script>
+
+  <!-- SCRIPT LIGHTBOX -->
   <script>
     function openLightbox(imageSrc) {
       const modal = document.getElementById('lightbox');
@@ -315,6 +412,43 @@
       modal.classList.remove('active');
       document.body.style.overflow = 'auto';
     }
+
+    // Cerrar con Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
   </script>
+
+  <!-- SCRIPT ANIMACIONES DE SCROLL -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+  <!-- SCRIPT BOTÓN VOLVER ARRIBA -->
+  <script>
+    const btnTop = document.getElementById('btn-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) {
+        btnTop.classList.remove('hidden');
+        btnTop.classList.add('flex');
+      } else {
+        btnTop.classList.add('hidden');
+        btnTop.classList.remove('flex');
+      }
+    });
+    btnTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+
 </body>
 </html>
