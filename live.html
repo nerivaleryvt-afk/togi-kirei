@@ -88,6 +88,14 @@
     .glow-cyan {
       box-shadow: 0 0 30px rgba(0,240,255,0.4);
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center p-4 md:p-8">
@@ -228,14 +236,20 @@
       requestAnimationFrame(animateStars);
     }
     animateStars();
+  </script>
 
-    // Configurar iframes de Twitch con el dominio actual
+  <!-- SCRIPT TWITCH (configuración dinámica) -->
+  <script>
+    // Dominio actual (necesario para el parent de Twitch)
     const domain = window.location.hostname;
-    const channel = "_togivt_"; // ← cambia por tu canal de Twitch si es necesario
+    // Canal correcto de Twitch
+    const channel = "togikirei"; // ← tu canal
 
+    // Configurar reproductor de video
     document.getElementById('twitch-player').src =
       `https://player.twitch.tv/?channel=${channel}&parent=${domain}`;
 
+    // Configurar chat
     document.getElementById('twitch-chat').src =
       `https://www.twitch.tv/embed/${channel}/chat?parent=${domain}`;
   </script>
