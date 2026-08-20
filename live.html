@@ -6,9 +6,9 @@
   <title>En Vivo ★ Togi Kirei</title>
 
   <!-- SEO -->
-  <meta name="description" content="Mira los directos de Togi Kirei en Twitch y consulta el top de donadores de Bits en tiempo real.">
+  <meta name="description" content="Mira los directos de Togi Kirei en Twitch, consulta el top de donadores de Bits y las estadísticas del chat en tiempo real.">
   <meta property="og:title" content="En Vivo ★ Togi Kirei">
-  <meta property="og:description" content="Mira los directos de Togi Kirei en Twitch y consulta el top de donadores de Bits en tiempo real.">
+  <meta property="og:description" content="Mira los directos de Togi Kirei en Twitch, consulta el top de donadores de Bits y las estadísticas del chat en tiempo real.">
   <meta property="og:image" content="me/togi.png">
   <meta property="og:url" content="https://togikirei.com/en-vivo">
   <meta name="twitter:card" content="summary_large_image">
@@ -124,7 +124,7 @@
         DIRECTO DE TOGI KIREI
       </h1>
       <p class="text-slate-400 text-sm max-w-xl mx-auto">
-        Únete a la transmisión en vivo desde Twitch y mira quiénes apoyan con Bits. ✨
+        Únete a la transmisión en vivo desde Twitch, mira quiénes apoyan con Bits y revisa las estadísticas del chat. ✨
       </p>
     </div>
 
@@ -203,12 +203,32 @@
       </div>
     </div>
 
+    <!-- SECCIÓN CHAT STATS (StreamElements) -->
+    <div class="space-y-4 reveal">
+      <h2 class="font-cyber text-2xl font-bold text-white text-center">📊 CHAT STATS EN VIVO</h2>
+      <div class="bg-starlight-card/80 backdrop-blur-xl border border-purple-900/40 rounded-3xl p-2 shadow-2xl glow-purple">
+        <iframe 
+          src="https://streamelements.com/togikirei/chatstats" 
+          width="100%" 
+          height="600" 
+          style="border:none; border-radius:16px;"
+          loading="lazy"
+          title="Estadísticas de chat de togikirei"
+        ></iframe>
+      </div>
+    </div>
+
     <!-- SECCIÓN DE AVISO -->
     <div class="text-center text-xs text-slate-500 space-y-2 reveal">
       <p>💡 Si no estoy en vivo, el reproductor mostrará una miniatura o un mensaje de "fuera de línea".</p>
       <p>📱 También puedes seguirme en mis redes para recibir notificaciones de directos.</p>
     </div>
   </div>
+
+  <!-- BOTÓN VOLVER ARRIBA -->
+  <button id="btn-top" class="fixed bottom-6 right-6 z-50 p-3 rounded-full bg-starlight-pink/80 hover:bg-starlight-pink text-black font-cyber font-bold shadow-lg hidden transition" aria-label="Volver arriba">
+    ↑
+  </button>
 
   <!-- SCRIPT ESTRELLAS -->
   <script>
@@ -348,6 +368,21 @@
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+  <!-- SCRIPT BOTÓN VOLVER ARRIBA -->
+  <script>
+    const btnTop = document.getElementById('btn-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) {
+        btnTop.classList.remove('hidden');
+      } else {
+        btnTop.classList.add('hidden');
+      }
+    });
+    btnTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   </script>
 
 </body>
