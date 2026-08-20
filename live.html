@@ -6,9 +6,9 @@
   <title>En Vivo ★ Togi Kirei</title>
 
   <!-- SEO -->
-  <meta name="description" content="Mira los directos de Togi Kirei en Twitch y TikTok. ¡Únete a la comunidad en vivo!">
+  <meta name="description" content="Mira los directos de Togi Kirei en Twitch y consulta el top de donadores de Bits en tiempo real.">
   <meta property="og:title" content="En Vivo ★ Togi Kirei">
-  <meta property="og:description" content="Mira los directos de Togi Kirei en Twitch y TikTok. ¡Únete a la comunidad en vivo!">
+  <meta property="og:description" content="Mira los directos de Togi Kirei en Twitch y consulta el top de donadores de Bits en tiempo real.">
   <meta property="og:image" content="me/togi.png">
   <meta property="og:url" content="https://togikirei.com/en-vivo">
   <meta name="twitter:card" content="summary_large_image">
@@ -88,6 +88,9 @@
     .glow-cyan {
       box-shadow: 0 0 30px rgba(0,240,255,0.4);
     }
+    .glow-purple {
+      box-shadow: 0 0 30px rgba(138,43,226,0.4);
+    }
 
     @media (prefers-reduced-motion: reduce) {
       .reveal {
@@ -121,7 +124,7 @@
         DIRECTO DE TOGI KIREI
       </h1>
       <p class="text-slate-400 text-sm max-w-xl mx-auto">
-        Únete a la transmisión en vivo desde Twitch o TikTok. ¡No te lo pierdas! ✨
+        Únete a la transmisión en vivo desde Twitch y mira quiénes apoyan con Bits. ✨
       </p>
     </div>
 
@@ -132,7 +135,6 @@
       <div class="lg:col-span-2 space-y-4 reveal">
         <div class="bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-4 shadow-2xl glow-pink">
           <div class="aspect-video rounded-2xl overflow-hidden bg-starlight-black">
-            <!-- IFRAME DE TWITCH -->
             <iframe
               id="twitch-player"
               src=""
@@ -146,14 +148,6 @@
             ></iframe>
           </div>
         </div>
-
-        <!-- Botón alternativo de TikTok -->
-        <div class="flex justify-center">
-          <a href="https://www.tiktok.com/@_togivt_/live" target="_blank" rel="noopener noreferrer"
-             class="inline-flex items-center gap-3 px-8 py-3 rounded-full bg-starlight-black/80 border-2 border-starlight-cyan text-starlight-cyan font-cyber text-sm font-extrabold uppercase tracking-wider hover:bg-starlight-cyan hover:text-black transition-all hover:scale-105 shadow-lg glow-cyan">
-            <i class="fa-brands fa-tiktok text-lg"></i> Ver en TikTok Live
-          </a>
-        </div>
       </div>
 
       <!-- CHAT DE TWITCH (columna derecha) -->
@@ -163,9 +157,7 @@
             <h2 class="font-cyber text-sm font-bold text-starlight-pink uppercase tracking-wider">💬 Chat en vivo</h2>
             <span class="text-[10px] text-slate-400">Twitch</span>
           </div>
-
-          <!-- CHAT EMBEBIDO (solo lectura) -->
-          <div class="flex-1 rounded-2xl overflow-hidden bg-starlight-black" style="min-height: 350px;">
+          <div class="flex-1 rounded-2xl overflow-hidden bg-starlight-black" style="min-height: 400px;">
             <iframe
               id="twitch-chat"
               src=""
@@ -177,18 +169,38 @@
               title="Chat de Twitch"
             ></iframe>
           </div>
-
-          <!-- BOTÓN PARA PARTICIPAR -->
-          <div class="pt-3 space-y-2">
-            <a href="https://www.twitch.tv/popout/togikirei/chat" target="_blank" rel="noopener noreferrer"
-               class="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white font-cyber text-xs font-bold uppercase tracking-wider hover:opacity-90 transition shadow-lg">
-              <i class="fa-solid fa-comment"></i> Participar en el chat
-            </a>
-            <p class="text-[10px] text-slate-500 text-center">Se abrirá una pestaña nueva</p>
-          </div>
         </div>
       </div>
 
+    </div>
+
+    <!-- SECCIÓN TOP DONADORES DE BITS -->
+    <div class="space-y-6 reveal">
+      <h2 class="font-cyber text-2xl font-bold text-white text-center">TOP DONADORES DE BITS 💜</h2>
+      
+      <!-- Resumen rápido -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-starlight-card/80 border border-pink-900/40 rounded-2xl p-4 text-center">
+          <div class="text-sm text-slate-400 font-cyber uppercase">Seguidores</div>
+          <div id="total-followers" class="font-cyber text-2xl font-black text-white mt-1">—</div>
+        </div>
+        <div class="bg-starlight-card/80 border border-purple-900/40 rounded-2xl p-4 text-center">
+          <div class="text-sm text-slate-400 font-cyber uppercase">Bits totales</div>
+          <div id="total-bits" class="font-cyber text-2xl font-black text-white mt-1">—</div>
+        </div>
+        <div class="bg-starlight-card/80 border border-cyan-900/40 rounded-2xl p-4 text-center">
+          <div class="text-sm text-slate-400 font-cyber uppercase">Horas totales</div>
+          <div id="total-hours" class="font-cyber text-2xl font-black text-white mt-1">—</div>
+        </div>
+      </div>
+
+      <!-- Lista de donadores -->
+      <div id="top-bits-list" class="space-y-3">
+        <div class="text-center py-10 text-slate-400">
+          <i class="fa-solid fa-spinner fa-spin text-2xl"></i>
+          <p class="mt-2">Cargando top de donadores...</p>
+        </div>
+      </div>
     </div>
 
     <!-- SECCIÓN DE AVISO -->
@@ -251,18 +263,77 @@
 
   <!-- SCRIPT TWITCH (configuración dinámica) -->
   <script>
-    // Dominio actual (necesario para el parent de Twitch)
     const domain = window.location.hostname;
-    // Canal correcto de Twitch
     const channel = "togikirei"; // ← tu canal
 
-    // Configurar reproductor de video
     document.getElementById('twitch-player').src =
       `https://player.twitch.tv/?channel=${channel}&parent=${domain}`;
 
-    // Configurar chat de solo lectura
     document.getElementById('twitch-chat').src =
       `https://www.twitch.tv/embed/${channel}/chat?parent=${domain}`;
+  </script>
+
+  <!-- SCRIPT PARA CARGAR TOP DONADORES -->
+  <script>
+    const API_URL = 'https://nameless-resonance-e957togi-kirei-stats.togivt.workers.dev/api/stats';
+
+    async function cargarEstadisticas() {
+      try {
+        const response = await fetch(API_URL);
+        if (!response.ok) throw new Error('Error al obtener datos');
+        const data = await response.json();
+
+        document.getElementById('total-followers').textContent = data.totalFollowers.toLocaleString();
+        document.getElementById('total-bits').textContent = data.totalBits.toLocaleString();
+        document.getElementById('total-hours').textContent = data.totalHours.toLocaleString();
+
+        renderizarTopBits(data.topBits);
+      } catch (error) {
+        console.error('Error:', error);
+        document.getElementById('top-bits-list').innerHTML = `
+          <div class="text-center py-10 text-red-400">
+            <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
+            <p class="mt-2">No se pudo cargar el top de donadores.</p>
+            <p class="text-xs mt-1">${error.message}</p>
+          </div>`;
+      }
+    }
+
+    function renderizarTopBits(top) {
+      const container = document.getElementById('top-bits-list');
+      if (!top || top.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-10 text-slate-400">
+            <i class="fa-solid fa-heart text-2xl"></i>
+            <p class="mt-2">Aún no hay donadores de Bits este mes. ¡Sé el primero!</p>
+          </div>`;
+        return;
+      }
+
+      const medallas = ['🥇', '🥈', '🥉'];
+      let html = '';
+      top.forEach((donador, index) => {
+        const medalla = index < 3 ? medallas[index] : '';
+        html += `
+          <div class="flex items-center justify-between bg-starlight-card/60 border border-slate-700/60 rounded-2xl p-4 shadow-md">
+            <div class="flex items-center gap-3">
+              <span class="text-2xl">${medalla || `#${index+1}`}</span>
+              <div>
+                <div class="font-cyber text-sm font-bold text-white">${donador.name}</div>
+                <div class="text-[10px] text-slate-400">${donador.login}</div>
+              </div>
+            </div>
+            <div class="text-right">
+              <div class="font-cyber text-lg font-black text-purple-300">${donador.bits.toLocaleString()}</div>
+              <div class="text-[10px] text-slate-400 uppercase">Bits</div>
+            </div>
+          </div>`;
+      });
+      container.innerHTML = html;
+    }
+
+    cargarEstadisticas();
+    setInterval(cargarEstadisticas, 60000);
   </script>
 
   <!-- SCRIPT REVEAL -->
