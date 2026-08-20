@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sobre Mí ★ Togi Kirei</title>
 
+  <!-- SEO -->
+  <meta name="description" content="Conoce a Togi Kirei, VTuber salvadoreña. Descubre su perfil, intereses, setup, redes sociales y prueba el Gachapón Estelar.">
+  <meta property="og:title" content="Sobre Mí ★ Togi Kirei">
+  <meta property="og:description" content="Conoce a Togi Kirei, VTuber salvadoreña. Descubre su perfil, intereses, setup, redes sociales y prueba el Gachapón Estelar.">
+  <meta property="og:image" content="me/togi.png">
+  <meta property="og:url" content="https://togikirei.com/sobre-mi">
+  <meta name="twitter:card" content="summary_large_image">
+
   <!-- Icono de pestaña -->
   <link rel="icon" type="image/png" href="me/togi.png">
 
@@ -53,6 +61,26 @@
       z-index: -1;
       background-color: #0a0814;
     }
+
+    /* Animaciones de aparición al hacer scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Soporte para usuarios que prefieren menos movimiento */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
   </style>
 </head>
 
@@ -64,7 +92,7 @@
   <div class="max-w-6xl mx-auto space-y-12">
     
     <!-- BOTÓN VOLVER AL INICIO -->
-    <div>
+    <div class="reveal">
       <a href="index.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-pink-900/50 bg-starlight-card/60 backdrop-blur-md text-xs font-cyber font-bold tracking-widest text-starlight-pink hover:bg-starlight-pink hover:text-black transition shadow-lg">
         ← VOLVER AL INICIO
       </a>
@@ -74,9 +102,9 @@
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
       
       <!-- COLUMNA IZQUIERDA: TARJETA DE AVATAR -->
-      <div class="lg:col-span-5 bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-6 shadow-2xl flex flex-col items-center justify-center text-center relative overflow-hidden">
+      <div class="reveal lg:col-span-5 bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-6 shadow-2xl flex flex-col items-center justify-center text-center relative overflow-hidden">
         <div class="w-full aspect-square rounded-2xl overflow-hidden flex items-center justify-center relative mb-4 bg-slate-900/50">
-          <img src="me/togi.png" alt="Togi Kirei VTuber" class="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(255,105,180,0.4)]">
+          <img src="me/togi.png" alt="Togi Kirei VTuber" class="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(255,105,180,0.4)]" loading="lazy" decoding="async">
         </div>
         <div class="font-cyber text-xs md:text-sm font-bold tracking-widest text-starlight-star uppercase">
           ★ TOGI KIREI · VTUBER ★
@@ -84,7 +112,7 @@
       </div>
 
       <!-- COLUMNA DERECHA: SOBRE MÍ Y VALORANT STATS -->
-      <div class="lg:col-span-7 bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-8 shadow-2xl space-y-6 relative overflow-hidden">
+      <div class="reveal lg:col-span-7 bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-8 shadow-2xl space-y-6 relative overflow-hidden">
         
         <div class="space-y-3">
           <div class="inline-block px-4 py-1.5 rounded-full bg-purple-950/60 border border-purple-500/30 text-starlight-purple font-cyber text-xs tracking-wider font-semibold">
@@ -131,7 +159,7 @@
 
     <!-- SECCIÓN: FICHA TÉCNICA -->
     <div class="space-y-6 pt-6">
-      <div class="text-center space-y-2">
+      <div class="reveal text-center space-y-2">
         <div class="inline-block px-4 py-1.5 rounded-full border border-pink-900/50 bg-starlight-card/60 backdrop-blur-md text-xs font-cyber font-bold tracking-widest text-starlight-pink shadow-md">
           💫 FICHA TÉCNICA
         </div>
@@ -144,7 +172,7 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
         
         <!-- PERFIL & IDENTIDAD -->
-        <div class="bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-6 shadow-2xl flex flex-col justify-between space-y-6">
+        <div class="reveal bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-6 shadow-2xl flex flex-col justify-between space-y-6">
           <div class="space-y-4">
             <div class="flex items-center gap-2 font-cyber text-starlight-pink text-sm font-bold tracking-widest uppercase border-b border-pink-900/30 pb-3">
               <span>🎯</span> PERFIL & IDENTIDAD
@@ -171,7 +199,7 @@
         </div>
 
         <!-- MIS INTERESES -->
-        <div class="bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-6 shadow-2xl flex flex-col justify-between space-y-6">
+        <div class="reveal bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-6 shadow-2xl flex flex-col justify-between space-y-6">
            <div class="space-y-4">
             <div class="flex items-center gap-2 font-cyber text-starlight-cyan text-sm font-bold tracking-widest uppercase border-b border-cyan-900/30 pb-3">
               <span>✨</span> MIS INTERESES
@@ -188,7 +216,7 @@
         </div>
 
         <!-- VIBRA DEL CANAL -->
-        <div class="bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-6 shadow-2xl flex flex-col justify-between space-y-6">
+        <div class="reveal bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-6 shadow-2xl flex flex-col justify-between space-y-6">
           <div class="space-y-4">
             <div class="flex items-center gap-2 font-cyber text-starlight-star text-sm font-bold tracking-widest uppercase border-b border-yellow-900/30 pb-3">
               <span>🌟</span> VIBRA DEL CANAL
@@ -209,7 +237,7 @@
 
     <!-- SECCIÓN: GACHAPÓN ESTELAR Y GANADORES -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <section class="bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-8 shadow-2xl text-center space-y-6">
+        <section class="reveal bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-8 shadow-2xl text-center space-y-6">
           <h2 class="font-cyber text-3xl font-black text-white">GACHAPÓN ESTELAR</h2>
           <p class="text-sm text-slate-300">¡Prueba tu suerte y obtén un emote de Togi Kirei!</p>
           
@@ -231,7 +259,7 @@
         </section>
 
         <!-- ÚLTIMOS GANADORES / RANKING -->
-        <div class="bg-starlight-card/80 backdrop-blur-xl border border-starlight-cyan/40 rounded-3xl p-8 shadow-2xl">
+        <div class="reveal bg-starlight-card/80 backdrop-blur-xl border border-starlight-cyan/40 rounded-3xl p-8 shadow-2xl">
           <h3 class="font-cyber text-xl font-bold text-starlight-cyan text-center mb-6">🏆 LÍDERES DEL GACHAPÓN</h3>
           <ul id="listaGanadores" class="space-y-3">
             <li class="text-center text-sm text-slate-400 italic py-4">Cargando ganadores...</li>
@@ -241,14 +269,14 @@
 
     <!-- SECCIÓN: SETUP -->
     <div class="space-y-6 pt-6">
-      <div class="text-center space-y-2">
+      <div class="reveal text-center space-y-2">
         <div class="inline-block px-4 py-1.5 rounded-full border border-purple-900/50 bg-starlight-card/60 backdrop-blur-md text-xs font-cyber font-bold tracking-widest text-starlight-purple shadow-md">
           🖥️ SETUP
         </div>
         <h2 class="font-cyber text-2xl font-bold text-white">Especificaciones de mi equipo</h2>
       </div>
 
-      <div class="max-w-xl mx-auto bg-starlight-card/80 backdrop-blur-xl border border-purple-900/40 rounded-3xl p-8 shadow-2xl hover:border-purple-500/50 transition duration-500">
+      <div class="reveal max-w-xl mx-auto bg-starlight-card/80 backdrop-blur-xl border border-purple-900/40 rounded-3xl p-8 shadow-2xl hover:border-purple-500/50 transition duration-500">
         <div class="text-starlight-purple font-cyber text-lg font-bold mb-4 flex items-center gap-2">🖥️ PC Rig</div>
         <ul class="text-sm text-slate-300 space-y-3">
           <li>• <b>CPU:</b> AMD Ryzen™ 7 5800XT</li>
@@ -261,7 +289,7 @@
 
     <!-- SECCIÓN: REDES SOCIALES Y ENLACES -->
     <div class="space-y-6 pt-6">
-      <div class="text-center space-y-2">
+      <div class="reveal text-center space-y-2">
         <div class="inline-block px-4 py-1.5 rounded-full border border-pink-900/50 bg-starlight-card/60 backdrop-blur-md text-xs font-cyber font-bold tracking-widest text-starlight-cyan shadow-md">
           🌐 CONECTEMOS
         </div>
@@ -271,7 +299,7 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         
         <!-- TikTok -->
-        <a href="https://www.tiktok.com/@_togivt_" target="_blank" rel="noopener noreferrer" class="bg-starlight-card/80 backdrop-blur-xl border border-cyan-900/40 hover:border-starlight-cyan rounded-3xl p-6 shadow-2xl flex items-center gap-4 transition group">
+        <a href="https://www.tiktok.com/@_togivt_" target="_blank" rel="noopener noreferrer" class="reveal bg-starlight-card/80 backdrop-blur-xl border border-cyan-900/40 hover:border-starlight-cyan rounded-3xl p-6 shadow-2xl flex items-center gap-4 transition group">
           <div class="w-12 h-12 rounded-2xl bg-cyan-950/60 border border-cyan-500/30 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition">
             <i class="fa-brands fa-tiktok text-cyan-400"></i>
           </div>
@@ -282,7 +310,7 @@
         </a>
 
         <!-- YouTube -->
-        <a href="https://www.youtube.com/channel/UCVksKxlWndm3k-MufaVns9A" target="_blank" rel="noopener noreferrer" class="bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 hover:border-starlight-pink rounded-3xl p-6 shadow-2xl flex items-center gap-4 transition group">
+        <a href="https://www.youtube.com/channel/UCVksKxlWndm3k-MufaVns9A" target="_blank" rel="noopener noreferrer" class="reveal bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 hover:border-starlight-pink rounded-3xl p-6 shadow-2xl flex items-center gap-4 transition group">
           <div class="w-12 h-12 rounded-2xl bg-pink-950/60 border border-pink-500/30 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition">
             <i class="fa-brands fa-youtube text-pink-400"></i>
           </div>
@@ -293,7 +321,7 @@
         </a>
 
         <!-- Twitch -->
-        <a href="https://www.twitch.tv/_togivt_" target="_blank" rel="noopener noreferrer" class="bg-starlight-card/80 backdrop-blur-xl border border-purple-900/40 hover:border-purple-500 rounded-3xl p-6 shadow-2xl flex items-center gap-4 transition group">
+        <a href="https://www.twitch.tv/_togivt_" target="_blank" rel="noopener noreferrer" class="reveal bg-starlight-card/80 backdrop-blur-xl border border-purple-900/40 hover:border-purple-500 rounded-3xl p-6 shadow-2xl flex items-center gap-4 transition group">
           <div class="w-12 h-12 rounded-2xl bg-purple-950/60 border border-purple-500/30 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition">
             <i class="fa-brands fa-twitch text-purple-400"></i>
           </div>
@@ -304,7 +332,7 @@
         </a>
 
         <!-- Discord -->
-        <a href="https://discord.com/invite/GybAXP2HXn" target="_blank" rel="noopener noreferrer" class="bg-starlight-card/80 backdrop-blur-xl border border-indigo-900/40 hover:border-indigo-500 rounded-3xl p-6 shadow-2xl flex items-center gap-4 transition group">
+        <a href="https://discord.com/invite/GybAXP2HXn" target="_blank" rel="noopener noreferrer" class="reveal bg-starlight-card/80 backdrop-blur-xl border border-indigo-900/40 hover:border-indigo-500 rounded-3xl p-6 shadow-2xl flex items-center gap-4 transition group">
           <div class="w-12 h-12 rounded-2xl bg-indigo-950/60 border border-indigo-500/30 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition">
             <i class="fa-brands fa-discord text-indigo-400"></i>
           </div>
@@ -315,7 +343,7 @@
         </a>
 
         <!-- Instagram -->
-        <a href="https://www.instagram.com/_togivt_" target="_blank" rel="noopener noreferrer" class="bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 hover:border-pink-500 rounded-3xl p-6 shadow-2xl flex items-center gap-4 transition group">
+        <a href="https://www.instagram.com/_togivt_" target="_blank" rel="noopener noreferrer" class="reveal bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 hover:border-pink-500 rounded-3xl p-6 shadow-2xl flex items-center gap-4 transition group">
           <div class="w-12 h-12 rounded-2xl bg-pink-950/60 border border-pink-500/30 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition">
             <i class="fa-brands fa-instagram text-pink-400"></i>
           </div>
@@ -326,7 +354,7 @@
         </a>
 
         <!-- X / Twitter -->
-        <a href="https://x.com/_togivt_" target="_blank" rel="noopener noreferrer" class="bg-starlight-card/80 backdrop-blur-xl border border-slate-700 hover:border-slate-400 rounded-3xl p-6 shadow-2xl flex items-center gap-4 transition group">
+        <a href="https://x.com/_togivt_" target="_blank" rel="noopener noreferrer" class="reveal bg-starlight-card/80 backdrop-blur-xl border border-slate-700 hover:border-slate-400 rounded-3xl p-6 shadow-2xl flex items-center gap-4 transition group">
           <div class="w-12 h-12 rounded-2xl bg-slate-900/80 border border-slate-700 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition">
             <i class="fa-brands fa-x-twitter text-slate-200"></i>
           </div>
@@ -337,7 +365,7 @@
         </a>
 
         <!-- Roblox -->
-        <a href="https://www.roblox.com/es/users/8137332335/profile" target="_blank" rel="noopener noreferrer" class="bg-starlight-card/80 backdrop-blur-xl border border-red-900/40 hover:border-red-500 rounded-3xl p-6 shadow-2xl flex items-center gap-4 transition group">
+        <a href="https://www.roblox.com/es/users/8137332335/profile" target="_blank" rel="noopener noreferrer" class="reveal bg-starlight-card/80 backdrop-blur-xl border border-red-900/40 hover:border-red-500 rounded-3xl p-6 shadow-2xl flex items-center gap-4 transition group">
           <div class="w-12 h-12 rounded-2xl bg-red-950/60 border border-red-500/30 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition">
             <i class="fa-solid fa-gamepad text-red-400"></i>
           </div>
@@ -348,7 +376,7 @@
         </a>
 
         <!-- PayPal -->
-        <a href="https://www.paypal.com/ncp/payment/2HKXXXHCMJGQW" target="_blank" rel="noopener noreferrer" class="bg-starlight-card/80 backdrop-blur-xl border border-blue-900/40 hover:border-blue-500 rounded-3xl p-6 shadow-2xl flex items-center gap-4 transition group">
+        <a href="https://www.paypal.com/ncp/payment/2HKXXXHCMJGQW" target="_blank" rel="noopener noreferrer" class="reveal bg-starlight-card/80 backdrop-blur-xl border border-blue-900/40 hover:border-blue-500 rounded-3xl p-6 shadow-2xl flex items-center gap-4 transition group">
           <div class="w-12 h-12 rounded-2xl bg-blue-950/60 border border-blue-500/30 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition">
             <i class="fa-brands fa-paypal text-blue-400"></i>
           </div>
@@ -363,6 +391,11 @@
 
   </div>
 
+  <!-- BOTÓN VOLVER ARRIBA -->
+  <button id="btn-top" class="fixed bottom-6 right-6 z-50 p-3 rounded-full bg-starlight-pink/80 hover:bg-starlight-pink text-black font-cyber font-bold shadow-lg hidden transition" aria-label="Volver arriba">
+    ↑
+  </button>
+
   <footer class="mt-16 py-8 border-t border-slate-800/80 text-center text-xs text-slate-500 space-y-2">
     <div class="flex justify-center space-x-6 text-slate-300 font-cyber flex-wrap gap-y-2">
       <a href="index.html" class="hover:text-starlight-cyan transition">Inicio</a>
@@ -375,6 +408,7 @@
 
   <!-- SCRIPT DE ESTRELLAS Y GACHAPÓN -->
   <script>
+    // Fondo de estrellas con pausa si la pestaña no está visible
     const canvas = document.getElementById('starfield');
     const ctx = canvas.getContext('2d');
     let stars = [];
@@ -395,20 +429,26 @@
         alpha: Math.random()
       });
     }
+    let isPageVisible = true;
+    document.addEventListener('visibilitychange', () => {
+      isPageVisible = !document.hidden;
+    });
     function animateStars() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      stars.forEach(star => {
-        ctx.fillStyle = star.color;
-        ctx.globalAlpha = star.alpha;
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-        ctx.fill();
-        star.y += star.speed;
-        if (star.y > canvas.height) {
-          star.y = 0;
-          star.x = Math.random() * canvas.width;
-        }
-      });
+      if (isPageVisible) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        stars.forEach(star => {
+          ctx.fillStyle = star.color;
+          ctx.globalAlpha = star.alpha;
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+          ctx.fill();
+          star.y += star.speed;
+          if (star.y > canvas.height) {
+            star.y = 0;
+            star.x = Math.random() * canvas.width;
+          }
+        });
+      }
       requestAnimationFrame(animateStars);
     }
     animateStars();
@@ -556,5 +596,35 @@
       });
     });
   </script>
+
+  <!-- SCRIPT PARA ANIMACIONES DE SCROLL -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+  <!-- SCRIPT PARA BOTÓN VOLVER ARRIBA -->
+  <script>
+    const btnTop = document.getElementById('btn-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) {
+        btnTop.classList.remove('hidden');
+      } else {
+        btnTop.classList.add('hidden');
+      }
+    });
+    btnTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+
 </body>
 </html>
