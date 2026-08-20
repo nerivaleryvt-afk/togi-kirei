@@ -4,7 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Togi Kirei ★ VTuber & Content Creator</title>
-  
+
+  <!-- SEO -->
+  <meta name="description" content="Togi Kirei, VTuber salvadoreña. Contenido de Valorant, streams, clips destacados, extensión de alertas en vivo y más. ¡Únete a la comunidad!">
+  <meta property="og:title" content="Togi Kirei ★ VTuber & Content Creator">
+  <meta property="og:description" content="Togi Kirei, VTuber salvadoreña. Contenido de Valorant, streams, clips destacados, extensión de alertas en vivo y más.">
+  <meta property="og:image" content="me/togi2.PNG">
+  <meta property="og:url" content="https://togikirei.com">
+  <meta name="twitter:card" content="summary_large_image">
+
   <link rel="icon" type="image/png" href="me/togi2.PNG">
 
   <!-- FontAwesome (Íconos) -->
@@ -60,6 +68,26 @@
     section {
       scroll-margin-top: 90px;
     }
+
+    /* Animaciones de aparición al hacer scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Soporte para usuarios que prefieren menos movimiento */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
   </style>
 </head>
 
@@ -78,7 +106,7 @@
       </a>
 
       <!-- ENLACES DE NAVEGACIÓN LIMPIOS (DESKTOP) -->
-      <nav class="hidden lg:flex flex-1 justify-center space-x-6 xl:space-x-10 text-sm font-semibold uppercase tracking-wider text-slate-300">
+      <nav class="hidden lg:flex flex-1 justify-center space-x-6 xl:space-x-10 text-sm font-semibold uppercase tracking-wider text-slate-300" aria-label="Navegación principal">
         <a href="sobre.mi.html" class="hover:text-starlight-pink transition whitespace-nowrap">Sobre Mí</a>
         <a href="valorant.html" class="hover:text-starlight-pink transition whitespace-nowrap text-starlight-cyan border-b border-starlight-cyan">Valorant</a>
         <a href="fan-art-gallery.html" class="hover:text-starlight-pink transition whitespace-nowrap">Fan Art ✨</a>
@@ -93,7 +121,7 @@
         </a>
         
         <!-- BOTÓN HAMBURGUESA (MÓVIL) -->
-        <button id="menu-btn" class="lg:hidden text-white focus:outline-none p-2">
+        <button id="menu-btn" class="lg:hidden text-white focus:outline-none p-2" aria-label="Abrir menú de navegación">
           <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
           </svg>
@@ -118,7 +146,7 @@
 
   <main>
     <!-- HERO SECTION -->
-    <section id="about" class="relative max-w-6xl mx-auto px-6 py-20 md:py-28 flex flex-col md:flex-row items-center justify-between gap-12">
+    <section id="about" class="reveal relative max-w-6xl mx-auto px-6 py-20 md:py-28 flex flex-col md:flex-row items-center justify-between gap-12">
       <div class="flex-1 space-y-6 text-center md:text-left">
         <div class="inline-block px-4 py-1 text-xs font-cyber font-bold uppercase tracking-widest rounded-full bg-pink-950/60 border border-pink-500/30 text-starlight-pink">
           💫 Chica Trans • VTuber • El Salvador 🇸🇻
@@ -143,6 +171,8 @@
             src="me/togi2.PNG" 
             alt="Togi Kirei Modelo" 
             class="w-full h-full object-contain p-4 group-hover:scale-105 transition duration-500" 
+            loading="lazy" 
+            decoding="async" 
           />
           <div class="absolute inset-0 bg-gradient-to-t from-starlight-black via-transparent to-transparent"></div>
           <div class="absolute bottom-4 left-4 right-4 text-center">
@@ -153,7 +183,7 @@
     </section>
 
     <!-- SECCIÓN DE MIS FAVORITOS -->
-    <section id="favorites" class="py-16 bg-starlight-card/40 backdrop-blur-md border-t border-slate-800">
+    <section id="favorites" class="reveal py-16 bg-starlight-card/40 backdrop-blur-md border-t border-slate-800">
       <div class="max-w-6xl mx-auto px-6">
         <div class="text-center space-y-2 mb-12">
           <h2 class="font-cyber text-3xl font-bold text-white">MIS FAVORITOS ✨</h2>
@@ -198,7 +228,7 @@
     </section>
 
     <!-- CONTENIDO DESTACADO CON MINIATURAS -->
-    <section id="content" class="py-20 max-w-6xl mx-auto px-6">
+    <section id="content" class="reveal py-20 max-w-6xl mx-auto px-6">
       <div class="text-center space-y-2 mb-12">
         <h2 class="font-cyber text-3xl font-bold text-white">CONTENIDO DESTACADO</h2>
         <p class="text-slate-400 text-sm">Momentos y clips destacados</p>
@@ -209,7 +239,7 @@
         <!-- Video 1 -->
         <a href="https://www.youtube.com/watch?v=uJdp0wL5Fno" target="_blank" rel="noopener noreferrer" class="bg-starlight-card/80 rounded-2xl overflow-hidden border border-slate-800 hover:border-starlight-pink transition group flex flex-col">
           <div class="aspect-video w-full overflow-hidden bg-slate-900 relative">
-            <img src="https://img.youtube.com/vi/uJdp0wL5Fno/hqdefault.jpg" alt="¡Vamos Flaminguitos!" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            <img src="https://img.youtube.com/vi/uJdp0wL5Fno/hqdefault.jpg" alt="¡Vamos Flaminguitos!" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" loading="lazy" decoding="async">
           </div>
           <div class="p-5 text-left space-y-2 flex-1 flex flex-col justify-between">
             <h3 class="font-bold text-sm text-white group-hover:text-starlight-pink transition">¡Vamos Flaminguitos!</h3>
@@ -220,7 +250,7 @@
         <!-- Video 2 -->
         <a href="https://www.youtube.com/watch?v=T7J5L4Xb458" target="_blank" rel="noopener noreferrer" class="bg-starlight-card/80 rounded-2xl overflow-hidden border border-slate-800 hover:border-starlight-pink transition group flex flex-col">
           <div class="aspect-video w-full overflow-hidden bg-slate-900 relative">
-            <img src="https://img.youtube.com/vi/T7J5L4Xb458/hqdefault.jpg" alt="¡Lleve su Togi Luche!" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            <img src="https://img.youtube.com/vi/T7J5L4Xb458/hqdefault.jpg" alt="¡Lleve su Togi Luche!" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" loading="lazy" decoding="async">
           </div>
           <div class="p-5 text-left space-y-2 flex-1 flex flex-col justify-between">
             <h3 class="font-bold text-sm text-white group-hover:text-starlight-pink transition">¡Lleve su Togi Luche!</h3>
@@ -231,7 +261,7 @@
         <!-- Video 3 -->
         <a href="https://www.youtube.com/watch?v=Z-8hwyTwk0c" target="_blank" rel="noopener noreferrer" class="bg-starlight-card/80 rounded-2xl overflow-hidden border border-slate-800 hover:border-starlight-pink transition group flex flex-col">
           <div class="aspect-video w-full overflow-hidden bg-slate-900 relative">
-            <img src="https://img.youtube.com/vi/Z-8hwyTwk0c/hqdefault.jpg" alt="¿Cuánto Te Mide?" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            <img src="https://img.youtube.com/vi/Z-8hwyTwk0c/hqdefault.jpg" alt="¿Cuánto Te Mide?" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" loading="lazy" decoding="async">
           </div>
           <div class="p-5 text-left space-y-2 flex-1 flex flex-col justify-between">
             <h3 class="font-bold text-sm text-white group-hover:text-starlight-pink transition">¿Cuánto Te Mide?</h3>
@@ -243,7 +273,7 @@
     </section>
 
     <!-- SECCIÓN DE DESCARGA DE LA EXTENSIÓN -->
-    <section id="extension" class="py-12 max-w-5xl mx-auto px-6">
+    <section id="extension" class="reveal py-12 max-w-5xl mx-auto px-6">
       <div class="relative overflow-hidden rounded-3xl bg-starlight-card/90 border-2 border-starlight-pink/50 p-8 md:p-12 text-center shadow-[0_0_30px_rgba(255,105,180,0.25)]">
         
         <div class="absolute -top-12 left-1/2 -translate-x-1/2 w-64 h-64 bg-starlight-cyan/15 blur-3xl rounded-full pointer-events-none"></div>
@@ -276,7 +306,7 @@
     </section>
 
     <!-- MARCAS & COLABORACIONES -->
-    <section id="mediakit" class="py-16 bg-starlight-card/50 backdrop-blur-md border-t border-pink-900/20">
+    <section id="mediakit" class="reveal py-16 bg-starlight-card/50 backdrop-blur-md border-t border-pink-900/20">
       <div class="max-w-6xl mx-auto px-6 text-center space-y-8">
         <div class="space-y-2">
           <h2 class="font-cyber text-3xl font-bold text-white">MARCAS & COLABORACIONES</h2>
@@ -297,11 +327,16 @@
     </section>
   </main>
 
+  <!-- BOTÓN VOLVER ARRIBA -->
+  <button id="btn-top" class="fixed bottom-6 right-6 z-50 p-3 rounded-full bg-starlight-pink/80 hover:bg-starlight-pink text-black font-cyber font-bold shadow-lg hidden transition" aria-label="Volver arriba">
+    ↑
+  </button>
+
   <!-- MODAL TUTORIAL DE INSTALACIÓN -->
   <div id="tutorial-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
     <div class="relative w-full max-w-md bg-starlight-black border-2 border-starlight-cyan rounded-3xl p-6 shadow-[0_0_40px_rgba(0,240,255,0.3)] text-left space-y-4">
       
-      <button onclick="document.getElementById('tutorial-modal').classList.add('hidden')" class="absolute top-4 right-4 text-slate-400 hover:text-white font-bold text-lg">✕</button>
+      <button onclick="document.getElementById('tutorial-modal').classList.add('hidden')" class="absolute top-4 right-4 text-slate-400 hover:text-white font-bold text-lg" aria-label="Cerrar">✕</button>
 
       <h3 class="font-cyber text-base font-extrabold text-starlight-cyan flex items-center gap-2">
         <i class="fa-solid fa-gears text-starlight-pink"></i> Instrucciones de Instalación
@@ -352,24 +387,31 @@
       });
     }
 
+    // Pausar animación cuando la pestaña no está visible
+    let isPageVisible = true;
+    document.addEventListener('visibilitychange', () => {
+      isPageVisible = !document.hidden;
+    });
+
     function animateStars() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (isPageVisible) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      stars.forEach(star => {
-        ctx.fillStyle = star.color;
-        ctx.globalAlpha = star.alpha;
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-        ctx.fill();
+        stars.forEach(star => {
+          ctx.fillStyle = star.color;
+          ctx.globalAlpha = star.alpha;
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+          ctx.fill();
 
-        star.y += star.speed;
+          star.y += star.speed;
 
-        if (star.y > canvas.height) {
-          star.y = 0;
-          star.x = Math.random() * canvas.width;
-        }
-      });
-
+          if (star.y > canvas.height) {
+            star.y = 0;
+            star.x = Math.random() * canvas.width;
+          }
+        });
+      }
       requestAnimationFrame(animateStars);
     }
 
@@ -390,6 +432,35 @@
       link.addEventListener('click', () => {
         menu.classList.add('hidden');
       });
+    });
+  </script>
+
+  <!-- SCRIPT PARA ANIMACIONES DE SCROLL -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+  <!-- SCRIPT PARA BOTÓN VOLVER ARRIBA -->
+  <script>
+    const btnTop = document.getElementById('btn-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) {
+        btnTop.classList.remove('hidden');
+      } else {
+        btnTop.classList.add('hidden');
+      }
+    });
+    btnTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   </script>
 
