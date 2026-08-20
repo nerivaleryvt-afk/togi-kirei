@@ -163,7 +163,9 @@
             <h2 class="font-cyber text-sm font-bold text-starlight-pink uppercase tracking-wider">💬 Chat en vivo</h2>
             <span class="text-[10px] text-slate-400">Twitch</span>
           </div>
-          <div class="flex-1 rounded-2xl overflow-hidden bg-starlight-black" style="min-height: 400px;">
+
+          <!-- CHAT EMBEBIDO (solo lectura) -->
+          <div class="flex-1 rounded-2xl overflow-hidden bg-starlight-black" style="min-height: 350px;">
             <iframe
               id="twitch-chat"
               src=""
@@ -174,6 +176,15 @@
               class="w-full h-full"
               title="Chat de Twitch"
             ></iframe>
+          </div>
+
+          <!-- BOTÓN PARA PARTICIPAR -->
+          <div class="pt-3 space-y-2">
+            <a href="https://www.twitch.tv/popout/togikirei/chat" target="_blank" rel="noopener noreferrer"
+               class="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white font-cyber text-xs font-bold uppercase tracking-wider hover:opacity-90 transition shadow-lg">
+              <i class="fa-solid fa-comment"></i> Participar en el chat
+            </a>
+            <p class="text-[10px] text-slate-500 text-center">Se abrirá una pestaña nueva</p>
           </div>
         </div>
       </div>
@@ -249,7 +260,7 @@
     document.getElementById('twitch-player').src =
       `https://player.twitch.tv/?channel=${channel}&parent=${domain}`;
 
-    // Configurar chat
+    // Configurar chat de solo lectura
     document.getElementById('twitch-chat').src =
       `https://www.twitch.tv/embed/${channel}/chat?parent=${domain}`;
   </script>
