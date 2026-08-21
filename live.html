@@ -203,13 +203,43 @@
       </div>
     </div>
 
-    <!-- SECCIÓN CHAT STATS (enlace directo, sin iframe) -->
-    <div class="space-y-4 reveal text-center">
-      <h2 class="font-cyber text-2xl font-bold text-white">📊 CHAT STATS EN VIVO</h2>
-      <a href="https://streamelements.com/togikirei/chatstats" target="_blank" rel="noopener noreferrer"
-         class="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-purple-900/60 border border-purple-500/50 text-white font-cyber font-bold uppercase tracking-wider hover:bg-purple-700 transition">
-        Ver Chat Stats <i class="fa-solid fa-external-link text-sm"></i>
-      </a>
+    <!-- SECCIÓN CHAT STATS EN VIVO -->
+    <div class="space-y-6 reveal">
+      <h2 class="font-cyber text-2xl font-bold text-white text-center">📊 CHAT STATS EN VIVO</h2>
+
+      <!-- Resumen -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-starlight-card/80 border border-pink-900/40 rounded-2xl p-4 text-center">
+          <div class="text-sm text-slate-400 font-cyber uppercase">Total Mensajes</div>
+          <div id="total-messages" class="font-cyber text-2xl font-black text-white mt-1">—</div>
+        </div>
+        <div class="bg-starlight-card/80 border border-purple-900/40 rounded-2xl p-4 text-center">
+          <div class="text-sm text-slate-400 font-cyber uppercase">Usuarios Únicos</div>
+          <div id="unique-chatters" class="font-cyber text-2xl font-black text-white mt-1">—</div>
+        </div>
+        <div class="bg-starlight-card/80 border border-cyan-900/40 rounded-2xl p-4 text-center">
+          <div class="text-sm text-slate-400 font-cyber uppercase">Msgs/Segundo</div>
+          <div id="messages-per-second" class="font-cyber text-2xl font-black text-white mt-1">—</div>
+        </div>
+      </div>
+
+      <!-- Top Chatters -->
+      <div class="bg-starlight-card/80 border border-pink-900/40 rounded-2xl p-4">
+        <h3 class="font-cyber text-lg font-bold text-white mb-3">💬 Top Chatters</h3>
+        <div id="top-chatters" class="space-y-2"></div>
+      </div>
+
+      <!-- Top Twitch Emotes -->
+      <div class="bg-starlight-card/80 border border-purple-900/40 rounded-2xl p-4">
+        <h3 class="font-cyber text-lg font-bold text-white mb-3">😎 Top Twitch Emotes</h3>
+        <div id="top-twitch-emotes" class="flex flex-wrap gap-2"></div>
+      </div>
+
+      <!-- Top Comandos -->
+      <div class="bg-starlight-card/80 border border-cyan-900/40 rounded-2xl p-4">
+        <h3 class="font-cyber text-lg font-bold text-white mb-3">⚡ Top Comandos</h3>
+        <div id="top-commands" class="space-y-2"></div>
+      </div>
     </div>
 
     <!-- SECCIÓN CLIPS DESTACADOS -->
@@ -322,7 +352,7 @@
     animateStars();
   </script>
 
-  <!-- SCRIPT TWITCH (configuración dinámica) -->
+  <!-- SCRIPT TWITCH -->
   <script>
     const domain = window.location.hostname;
     const channel = "togikirei";
@@ -395,6 +425,73 @@
 
     cargarEstadisticas();
     setInterval(cargarEstadisticas, 60000);
+  </script>
+
+  <!-- SCRIPT CHAT STATS (ACTUALIZACIÓN CADA 30 SEGUNDOS) -->
+  <script>
+    const CHAT_STATS_API = 'https://nameless-resonance-e957togi-kirei-stats.togivt.workers.dev/api/chat-stats';
+
+    async function cargarChatStats() {
+      try {
+        const response = await fetch(CHAT_STATS_API);
+        if (!response.ok) throw new Error('Error al cargar stats');
+        const data = await response.json();
+
+        document.getElementById('total-messages').textContent = data.totalMessages.toLocaleString();
+        document.getElementById('unique-chatters').textContent = data.uniqueChatters.toLocaleString();
+        document.getElementById('messages-per-second').textContent = data.messagesPerSecond.toFixed(1);
+
+        renderTopChatters(data.topChatters);
+        renderTopEmotes('top-twitch-emotes', data.topTwitchEmotes);
+        renderTopCommands(data.topCommands);
+      } catch (error) {
+        console.error('Error cargando chat stats:', error);
+      }
+    }
+
+    function renderTopChatters(chatters) {
+      const container = document.getElementById('top-chatters');
+      if (!chatters || chatters.length === 0) {
+        container.innerHTML = '<p class="text-slate-400">Aún no hay datos</p>';
+        return;
+      }
+      container.innerHTML = chatters.slice(0, 10).map((c, i) => `
+        <div class="flex items-center justify-between bg-black/30 rounded-xl px-4 py-2">
+          <span class="font-cyber text-sm font-bold text-white">${i+1}. ${c.name}</span>
+          <span class="font-cyber text-sm text-purple-300">${c.messages.toLocaleString()}</span>
+        </div>
+      `).join('');
+    }
+
+    function renderTopEmotes(containerId, emotes) {
+      const container = document.getElementById(containerId);
+      if (!emotes || emotes.length === 0) {
+        container.innerHTML = '<p class="text-slate-400">Aún no hay datos</p>';
+        return;
+      }
+      container.innerHTML = emotes.slice(0, 20).map((e, i) => `
+        <span class="bg-black/30 border border-slate-700 rounded-full px-3 py-1 text-xs font-cyber text-cyan-300">
+          ${e.name} (${e.count})
+        </span>
+      `).join('');
+    }
+
+    function renderTopCommands(commands) {
+      const container = document.getElementById('top-commands');
+      if (!commands || commands.length === 0) {
+        container.innerHTML = '<p class="text-slate-400">Aún no hay datos</p>';
+        return;
+      }
+      container.innerHTML = commands.slice(0, 10).map((cmd, i) => `
+        <div class="flex items-center justify-between bg-black/30 rounded-xl px-4 py-2">
+          <span class="font-cyber text-sm font-bold text-white">${cmd.command}</span>
+          <span class="font-cyber text-sm text-pink-300">${cmd.uses}</span>
+        </div>
+      `).join('');
+    }
+
+    cargarChatStats();
+    setInterval(cargarChatStats, 30000);
   </script>
 
   <!-- SCRIPT REVEAL -->
