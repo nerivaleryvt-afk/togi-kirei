@@ -6,14 +6,13 @@
   <title>En Vivo ★ Togi Kirei</title>
 
   <!-- SEO -->
-  <meta name="description" content="Mira los directos de Togi Kirei en Twitch, consulta el top de donadores de Bits y las estadísticas del chat.">
+  <meta name="description" content="Mira los directos de Togi Kirei en Twitch, consulta el top de donadores de Bits, las estadísticas del chat y los clips destacados.">
   <meta property="og:title" content="En Vivo ★ Togi Kirei">
-  <meta property="og:description" content="Mira los directos de Togi Kirei en Twitch, consulta el top de donadores de Bits y las estadísticas del chat.">
+  <meta property="og:description" content="Mira los directos de Togi Kirei en Twitch, consulta el top de donadores de Bits, las estadísticas del chat y los clips destacados.">
   <meta property="og:image" content="me/togi.png">
   <meta property="og:url" content="https://togikirei.com/en-vivo">
   <meta name="twitter:card" content="summary_large_image">
 
-  <!-- Icono de pestaña -->
   <link rel="icon" type="image/png" href="me/togi.png">
 
   <!-- Tailwind CSS via CDN -->
@@ -131,7 +130,7 @@
     <!-- SECCIÓN DEL STREAM -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
       
-      <!-- REPRODUCTOR DE TWITCH -->
+      <!-- REPRODUCTOR DE TWITCH (ocupa 2 columnas) -->
       <div class="lg:col-span-2 space-y-4 reveal">
         <div class="bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-4 shadow-2xl glow-pink">
           <div class="aspect-video rounded-2xl overflow-hidden bg-starlight-black">
@@ -150,7 +149,7 @@
         </div>
       </div>
 
-      <!-- CHAT DE TWITCH -->
+      <!-- CHAT DE TWITCH (columna derecha) -->
       <div class="space-y-4 reveal">
         <div class="bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-4 shadow-2xl h-full flex flex-col">
           <div class="flex items-center justify-between mb-3">
@@ -178,6 +177,7 @@
     <div class="space-y-6 reveal">
       <h2 class="font-cyber text-2xl font-bold text-white text-center">TOP DONADORES DE BITS 💜</h2>
       
+      <!-- Resumen rápido -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div class="bg-starlight-card/80 border border-pink-900/40 rounded-2xl p-4 text-center">
           <div class="text-sm text-slate-400 font-cyber uppercase">Seguidores</div>
@@ -193,6 +193,7 @@
         </div>
       </div>
 
+      <!-- Lista de donadores -->
       <div id="top-bits-list" class="space-y-3">
         <div class="text-center py-10 text-slate-400">
           <i class="fa-solid fa-spinner fa-spin text-2xl"></i>
@@ -201,51 +202,80 @@
       </div>
     </div>
 
-    <!-- SECCIÓN CHAT STATS (TOP 100) -->
+    <!-- SECCIÓN CHAT STATS (StreamElements) -->
+    <div class="space-y-4 reveal">
+      <h2 class="font-cyber text-2xl font-bold text-white text-center">📊 CHAT STATS EN VIVO</h2>
+      <div class="bg-starlight-card/80 backdrop-blur-xl border border-purple-900/40 rounded-3xl p-2 shadow-2xl glow-purple">
+        <iframe 
+          src="https://streamelements.com/togikirei/chatstats" 
+          width="100%" 
+          height="600" 
+          style="border:none; border-radius:16px;"
+          loading="lazy"
+          title="Estadísticas de chat de togikirei"
+        ></iframe>
+      </div>
+    </div>
+
+    <!-- SECCIÓN CLIPS DESTACADOS DE TWITCH -->
     <div class="space-y-6 reveal">
-      <h2 class="font-cyber text-2xl font-bold text-white text-center">📊 CHAT STATS</h2>
-
-      <!-- Resumen -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="bg-starlight-card/80 border border-pink-900/40 rounded-2xl p-4 text-center">
-          <div class="text-sm text-slate-400 font-cyber uppercase">Total Mensajes</div>
-          <div class="font-cyber text-2xl font-black text-white mt-1">34,477</div>
-        </div>
-        <div class="bg-starlight-card/80 border border-purple-900/40 rounded-2xl p-4 text-center">
-          <div class="text-sm text-slate-400 font-cyber uppercase">Chatters Únicos</div>
-          <div class="font-cyber text-2xl font-black text-white mt-1">367</div>
-        </div>
-        <div class="bg-starlight-card/80 border border-cyan-900/40 rounded-2xl p-4 text-center">
-          <div class="text-sm text-slate-400 font-cyber uppercase">Msg por segundo</div>
-          <div class="font-cyber text-2xl font-black text-white mt-1">0.0</div>
-        </div>
-      </div>
-
-      <!-- Top Chatters y Top Emotes Top 100 -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Top Chatters -->
-        <div class="bg-starlight-card/80 border border-pink-900/40 rounded-2xl p-4">
-          <h3 class="font-cyber text-sm font-bold text-starlight-pink mb-3">TOP 100 CHATTERS 💬</h3>
-          <div id="top-chatters-list" class="space-y-2 max-h-96 overflow-y-auto">
-            <!-- Se llena dinámicamente -->
+      <h2 class="font-cyber text-2xl font-bold text-white text-center">🎬 CLIPS DESTACADOS</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Clip 1 (reemplaza el slug con el tuyo) -->
+        <div class="bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl overflow-hidden shadow-xl hover:border-starlight-pink transition group">
+          <div class="aspect-video bg-starlight-black">
+            <iframe 
+              src="https://clips.twitch.tv/embed?clip=ClipSlug1&parent=nerivaleryvt-afk.github.io" 
+              height="100%" 
+              width="100%" 
+              frameborder="0" 
+              allowfullscreen 
+              title="Clip destacado 1">
+            </iframe>
+          </div>
+          <div class="p-4 text-left">
+            <h3 class="font-cyber text-sm font-bold text-white group-hover:text-starlight-pink transition">Clip épico #1</h3>
+            <span class="text-xs text-starlight-cyan font-cyber inline-flex items-center gap-1 mt-1">Ver clip →</span>
           </div>
         </div>
 
-        <!-- Top Twitch Emotes -->
-        <div class="bg-starlight-card/80 border border-purple-900/40 rounded-2xl p-4">
-          <h3 class="font-cyber text-sm font-bold text-purple-300 mb-3">TOP 100 TWITCH EMOTES 🎭</h3>
-          <div id="top-emotes-list" class="space-y-2 max-h-96 overflow-y-auto">
-            <!-- Se llena dinámicamente -->
+        <!-- Clip 2 -->
+        <div class="bg-starlight-card/80 backdrop-blur-xl border border-cyan-900/40 rounded-3xl overflow-hidden shadow-xl hover:border-starlight-cyan transition group">
+          <div class="aspect-video bg-starlight-black">
+            <iframe 
+              src="https://clips.twitch.tv/embed?clip=ClipSlug2&parent=nerivaleryvt-afk.github.io" 
+              height="100%" 
+              width="100%" 
+              frameborder="0" 
+              allowfullscreen 
+              title="Clip destacado 2">
+            </iframe>
+          </div>
+          <div class="p-4 text-left">
+            <h3 class="font-cyber text-sm font-bold text-white group-hover:text-starlight-cyan transition">Clip épico #2</h3>
+            <span class="text-xs text-starlight-cyan font-cyber inline-flex items-center gap-1 mt-1">Ver clip →</span>
           </div>
         </div>
-      </div>
 
-      <!-- Top Commands -->
-      <div class="bg-starlight-card/80 border border-cyan-900/40 rounded-2xl p-4">
-        <h3 class="font-cyber text-sm font-bold text-starlight-cyan mb-3">TOP COMMANDS 🔧</h3>
-        <div id="top-commands-list" class="grid grid-cols-2 md:grid-cols-3 gap-2">
-          <!-- Se llena dinámicamente -->
+        <!-- Clip 3 -->
+        <div class="bg-starlight-card/80 backdrop-blur-xl border border-purple-900/40 rounded-3xl overflow-hidden shadow-xl hover:border-starlight-purple transition group">
+          <div class="aspect-video bg-starlight-black">
+            <iframe 
+              src="https://clips.twitch.tv/embed?clip=ClipSlug3&parent=nerivaleryvt-afk.github.io" 
+              height="100%" 
+              width="100%" 
+              frameborder="0" 
+              allowfullscreen 
+              title="Clip destacado 3">
+            </iframe>
+          </div>
+          <div class="p-4 text-left">
+            <h3 class="font-cyber text-sm font-bold text-white group-hover:text-starlight-purple transition">Clip épico #3</h3>
+            <span class="text-xs text-starlight-cyan font-cyber inline-flex items-center gap-1 mt-1">Ver clip →</span>
+          </div>
         </div>
+
       </div>
     </div>
 
@@ -312,17 +342,19 @@
     animateStars();
   </script>
 
-  <!-- SCRIPT TWITCH -->
+  <!-- SCRIPT TWITCH (configuración dinámica) -->
   <script>
     const domain = window.location.hostname;
-    const channel = "togikirei";
+    const channel = "togikirei"; // ← tu canal
+
     document.getElementById('twitch-player').src =
       `https://player.twitch.tv/?channel=${channel}&parent=${domain}`;
+
     document.getElementById('twitch-chat').src =
       `https://www.twitch.tv/embed/${channel}/chat?parent=${domain}`;
   </script>
 
-  <!-- SCRIPT TOP DONADORES -->
+  <!-- SCRIPT PARA CARGAR TOP DONADORES -->
   <script>
     const API_URL = 'https://nameless-resonance-e957togi-kirei-stats.togivt.workers.dev/api/stats';
 
@@ -331,204 +363,58 @@
         const response = await fetch(API_URL);
         if (!response.ok) throw new Error('Error al obtener datos');
         const data = await response.json();
+
         document.getElementById('total-followers').textContent = data.totalFollowers.toLocaleString();
         document.getElementById('total-bits').textContent = data.totalBits.toLocaleString();
         document.getElementById('total-hours').textContent = data.totalHours.toLocaleString();
+
         renderizarTopBits(data.topBits);
       } catch (error) {
         console.error('Error:', error);
-        document.getElementById('top-bits-list').innerHTML =
-          `<div class="text-center py-10 text-red-400"><i class="fa-solid fa-triangle-exclamation text-2xl"></i><p class="mt-2">No se pudo cargar el top de donadores.</p><p class="text-xs mt-1">${error.message}</p></div>`;
+        document.getElementById('top-bits-list').innerHTML = `
+          <div class="text-center py-10 text-red-400">
+            <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
+            <p class="mt-2">No se pudo cargar el top de donadores.</p>
+            <p class="text-xs mt-1">${error.message}</p>
+          </div>`;
       }
     }
 
     function renderizarTopBits(top) {
       const container = document.getElementById('top-bits-list');
       if (!top || top.length === 0) {
-        container.innerHTML = `<div class="text-center py-10 text-slate-400"><i class="fa-solid fa-heart text-2xl"></i><p class="mt-2">Aún no hay donadores de Bits este mes. ¡Sé el primero!</p></div>`;
+        container.innerHTML = `
+          <div class="text-center py-10 text-slate-400">
+            <i class="fa-solid fa-heart text-2xl"></i>
+            <p class="mt-2">Aún no hay donadores de Bits este mes. ¡Sé el primero!</p>
+          </div>`;
         return;
       }
+
       const medallas = ['🥇', '🥈', '🥉'];
       let html = '';
       top.forEach((donador, index) => {
         const medalla = index < 3 ? medallas[index] : '';
-        html += `<div class="flex items-center justify-between bg-starlight-card/60 border border-slate-700/60 rounded-2xl p-4 shadow-md"><div class="flex items-center gap-3"><span class="text-2xl">${medalla || `#${index+1}`}</span><div><div class="font-cyber text-sm font-bold text-white">${donador.name}</div><div class="text-[10px] text-slate-400">${donador.login}</div></div></div><div class="text-right"><div class="font-cyber text-lg font-black text-purple-300">${donador.bits.toLocaleString()}</div><div class="text-[10px] text-slate-400 uppercase">Bits</div></div></div>`;
+        html += `
+          <div class="flex items-center justify-between bg-starlight-card/60 border border-slate-700/60 rounded-2xl p-4 shadow-md">
+            <div class="flex items-center gap-3">
+              <span class="text-2xl">${medalla || `#${index+1}`}</span>
+              <div>
+                <div class="font-cyber text-sm font-bold text-white">${donador.name}</div>
+                <div class="text-[10px] text-slate-400">${donador.login}</div>
+              </div>
+            </div>
+            <div class="text-right">
+              <div class="font-cyber text-lg font-black text-purple-300">${donador.bits.toLocaleString()}</div>
+              <div class="text-[10px] text-slate-400 uppercase">Bits</div>
+            </div>
+          </div>`;
       });
       container.innerHTML = html;
     }
 
     cargarEstadisticas();
     setInterval(cargarEstadisticas, 60000);
-  </script>
-
-  <!-- SCRIPT CHAT STATS ESTÁTICO (Top 100) -->
-  <script>
-    // Datos top 100 chatters (nombre, cantidad)
-    const topChattersData = [
-      ["2l3x1s12", 2647], ["haru_4650", 2001], ["chrisuser25", 1416], ["neytanvzm", 1138], ["arbolgris", 1098],
-      ["gojoconderechos", 1097], ["thiagolugo43", 901], ["isai_583", 828], ["nexor_x0", 753], ["soul_vladi", 709],
-      ["sombragame220", 678], ["chark345", 676], ["monguita_17", 550], ["isaias_saeitoshi", 505], ["togikirei", 461],
-      ["darkreiner433", 452], ["liamsecondking5522", 433], ["tkmoonlight", 430], ["aliverrr1", 430], ["kenssen_", 380],
-      ["lesterdesafios", 351], ["s4muuuxd", 350], ["captainkribe", 342], ["kalabaza5", 340], ["streamelements", 329],
-      ["maild2", 289], ["sery_bot", 282], ["soundalerts", 216], ["x_xzack", 212], ["rex_god_cookie", 200],
-      ["tutututuntuntun", 199], ["akmedp", 199], ["pedro__uy", 197], ["diego_j_a_l20", 195], ["xxxangelxxx_2015", 188],
-      ["junmilo333", 182], ["limzardice", 174], ["eldiegipr", 170], ["goldgusgus", 169], ["gigi_aestetic", 167],
-      ["diegoagentej1", 161], ["inuivt", 160], ["culia_femboy", 152], ["kalet_v2", 149], ["shadox85", 146],
-      ["ayikyvt", 144], ["lucky_ow0", 139], ["la_rocaxd19", 139], ["vendhar123", 138], ["mr_koyotesame", 134],
-      ["utc_holaa", 126], ["ale_prixy", 121], ["kensr_xd", 120], ["chrisgamer19102011", 120], ["agua_de_aire_season_2", 117],
-      ["cloclast", 116], ["linghtninght", 112], ["papistasx94", 108], ["alexiszumi", 101], ["eyelss_30604", 100],
-      ["el_casad0r", 99], ["ivandiego775", 96], ["ecjplayt", 95], ["jefer718", 94], ["dantemky", 93],
-      ["ashuvt", 93], ["wdavidafton21", 92], ["elpana29xd", 91], ["per5roo_", 87], ["tacomjvt", 85],
-      ["serbax1", 83], ["exariel12", 81], ["dead_mark3111", 81], ["g4t0jo", 80], ["bertram_kuro", 80],
-      ["smilez_201", 78], ["quesito350", 76], ["clietor", 75], ["naminobile_", 74], ["valfevt", 73],
-      ["lugivt", 73], ["sololester", 72], ["shadow_milkfan", 72], ["anore_heart", 71], ["2l3x1s", 71],
-      ["rubi_luky", 70], ["l3g3ndcapokillo", 70], ["hadronix_alfa_tube", 70], ["jordy_simp_de_lilrosevt", 68], ["elpapukenme", 68],
-      ["antony_estrada_tolentino", 65], ["cristian_shippo29", 63], ["mikyjim3n3z", 61], ["valenvt_", 60], ["trazestar", 60],
-      ["soypussh", 60], ["pr0j3ct0r_man", 60], ["legangames", 57], ["epicforge_", 56], ["dksjdbcish19", 56]
-    ];
-
-    // Datos top 100 emotes (nombre, url, cantidad)
-    const topEmotesData = [
-      ["DinoDance", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_dcd06b30a5c24f6eb871e8f5edbd44f7/default/dark/1.0", 1748],
-      ["togikiLimon", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_3085b6b73c714004a87089e38c3cc143/default/dark/1.0", 1279],
-      ["togikiTiburoncin", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_57140fa4b6f646b28c5d4749f2a2f83d/default/dark/1.0", 1151],
-      ["seryboLove", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_35a346bf76aa4fd69b430f97cdadbafc/default/dark/1.0", 296],
-      ["lugivtAmor", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_e737fdaab78847319ace029cca4cd43e/default/dark/1.0", 293],
-      ["lugivtTroya", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_4d94e764b743425f96ffd097cba624b3/default/dark/1.0", 263],
-      ["NotLikeThis", "https://static-cdn.jtvnw.net/emoticons/v2/58765/default/dark/1.0", 258],
-      ["togikiAsustado", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_18047354897c4a07bee58bc515dcf100/default/dark/1.0", 251],
-      ["PikaRamen", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_a25ad7124e584c949e2f63917e3d747a/default/dark/1.0", 177],
-      ["SUBtember", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_bfb533e2253044f3a77d0032b2354c0b/default/dark/1.0", 172],
-      ["togikiPensando", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_247bd65363fd45a893829d985a19203f/default/dark/1.0", 171],
-      ["ladymi56Uwu", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_777e8ca1d33b43ee82d24156d2a044da/default/dark/1.0", 162],
-      ["PopNemo", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_5d523adb8bbb4786821cd7091e47da21/default/dark/1.0", 161],
-      ["togikiLamer", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_dcf88bcb15ee443482d96e5742885045/default/dark/1.0", 157],
-      ["thefro6Amor", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_45a90df4f7df4bc2a69c451b7c563677/default/dark/1.0", 154],
-      ["<3", "https://static-cdn.jtvnw.net/emoticons/v2/555555584/default/dark/1.0", 152],
-      ["ladymi56Kichunebaila", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_8cf0713a9af54ebbb482bc13b71a0f5c/default/dark/1.0", 138],
-      ["seryboArrive", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_a4648bf8dbbd4b8380c59c8c761427c1/default/dark/1.0", 137],
-      ["togikiMuslini", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_7742afcfbe8942959bf224a91d1d7252/default/dark/1.0", 127],
-      ["PewPewPew", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_587405136a8147148c77df74baaa1bf4/default/dark/1.0", 122],
-      ["togikiLamer_SQ", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_dcf88bcb15ee443482d96e5742885045_SQ/default/dark/1.0", 109],
-      ["thefro6Yipee", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_86459c2db0404770bae8b4aa05da5eee/default/dark/1.0", 100],
-      ["PotFriend", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_e02650251d204198923de93a0c62f5f5/default/dark/1.0", 99],
-      ["togikiPastel", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_d62085c354d04af5a5e5bf5032960310/default/dark/1.0", 90],
-      ["LUL", "https://static-cdn.jtvnw.net/emoticons/v2/425618/default/dark/1.0", 88],
-      ["BangbooBounce", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_f9feac06649548448b3127dd9bd7710e/default/dark/1.0", 85],
-      ["thefro6Padoru", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_0601ad0376ac48ed9cb6fbf8761d3cc0/default/dark/1.0", 80],
-      ["PopGhost", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_cff32f43571543828847738e27acf4ef/default/dark/1.0", 78],
-      ["TwitchConHYPE", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_13b6dd7f3a3146ef8dc10f66d8b42a96/default/dark/1.0", 69],
-      ["SeemsGood", "https://static-cdn.jtvnw.net/emoticons/v2/64138/default/dark/1.0", 60],
-      ["Squid2", "https://static-cdn.jtvnw.net/emoticons/v2/191763/default/dark/1.0", 60],
-      ["FeelsVi", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_4b51b45f35df4dd8ad45a611c9a9ec35/default/dark/1.0", 59],
-      ["GoldPLZ", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_c1f4899e65cf4f53b2fd98e15733973a/default/dark/1.0", 57],
-      ["Kreygasm", "https://static-cdn.jtvnw.net/emoticons/v2/41/default/dark/1.0", 55],
-      [":D", "https://static-cdn.jtvnw.net/emoticons/v2/555555560/default/dark/1.0", 49],
-      ["thefro6Smug", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_d3d2531a1598477286f6a65876bfdc30/default/dark/1.0", 47],
-      ["VoteNay", "https://static-cdn.jtvnw.net/emoticons/v2/106294/default/dark/1.0", 42],
-      ["Kappa", "https://static-cdn.jtvnw.net/emoticons/v2/25/default/dark/1.0", 41],
-      ["lugivtFiesta", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_9b04adcfca0a4e6ea7689758fb7d734a/default/dark/1.0", 39],
-      ["thefro6Baman", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_652d4a80b1ab4149acee8db04f1ba58f/default/dark/1.0", 39],
-      ["PogChamp", "https://static-cdn.jtvnw.net/emoticons/v2/305954156/default/dark/1.0", 39],
-      ["AmbessaLove", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_a829c76ca15f49a2bf71e1270f83fe83/default/dark/1.0", 38],
-      ["PogBones", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_30050f4353aa4322b25b6b044703e5d1/default/dark/1.0", 38],
-      ["BigSad", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_db3cd788399347a8b2ebfb8a85f5badb/default/dark/1.0", 35],
-      ["PoroSad", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_4c39207000564711868f3196cc0a8748/default/dark/1.0", 33],
-      ["bleedPurple", "https://static-cdn.jtvnw.net/emoticons/v2/62835/default/dark/1.0", 31],
-      ["thefro6Glorpshit", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_02e78278cbe84d43b323a6337c11ddcb/default/dark/1.0", 30],
-      ["TPFufun", "https://static-cdn.jtvnw.net/emoticons/v2/508650/default/dark/1.0", 30],
-      ["DoritosChip", "https://static-cdn.jtvnw.net/emoticons/v2/102242/default/dark/1.0", 28],
-      ["JinxLUL", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_4e1c5651219a462894aefa8b6720efc5/default/dark/1.0", 27],
-      ["OhMyDog", "https://static-cdn.jtvnw.net/emoticons/v2/81103/default/dark/1.0", 27],
-      [":(", "https://static-cdn.jtvnw.net/emoticons/v2/555555558/default/dark/1.0", 26],
-      ["hamaFiteFast", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_8dede9f3bf524920bb524a656556329e/default/dark/1.0", 25],
-      ["hamaWiggleTail", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_435ce7c256e04b0d84afc7279f65a206/default/dark/1.0", 25],
-      ["Squid4", "https://static-cdn.jtvnw.net/emoticons/v2/191767/default/dark/1.0", 25],
-      ["lugivtPatPat", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_0f14ac17dacf460ca7c17f65708e66d6/default/dark/1.0", 24],
-      ["Squid1", "https://static-cdn.jtvnw.net/emoticons/v2/191762/default/dark/1.0", 24],
-      ["CaitThinking", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_50b3304bc0884c6792f13615db072a5c/default/dark/1.0", 23],
-      ["Squid3", "https://static-cdn.jtvnw.net/emoticons/v2/191764/default/dark/1.0", 23],
-      ["DarthJarJar", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_d1f3a59775454943b4e2c6a6db8892a2/default/dark/1.0", 22],
-      ["xzaiko1Fuaa", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_4b9d137c54f3425e82b9d9070515a0ff/default/dark/1.0", 21],
-      ["chonky32Pop2", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_bd73bf11feee422a998f0458a891f277/default/dark/1.0", 20],
-      ["thefro6Glorp", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_877b20570e1a4fadabef19f4a40f3203/default/dark/1.0", 20],
-      ["ladyer4MichiDancing", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_dc23fbe1e43c4bb9bd9d4e155564a4fe/default/dark/1.0", 19],
-      ["BratChat", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_f2fd474fbe964964b2570671575b39ea/default/dark/1.0", 18],
-      ["SSSsss", "https://static-cdn.jtvnw.net/emoticons/v2/46/default/dark/1.0", 18],
-      ["dooder4Patita", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_9bc1e65e83ff410aa9e1720df7b92eea/default/dark/1.0", 17],
-      ["HungryPaimon", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_535e40afa0b34a9481997627b1b47d96/default/dark/1.0", 17],
-      ["VoHiYo", "https://static-cdn.jtvnw.net/emoticons/v2/81274/default/dark/1.0", 17],
-      ["xzaiko1PATOINOSKE", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_7ad50de973e142869573d07523d99780/default/dark/1.0", 16],
-      ["ladymi56Ubuu", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_54edb73b1d40473aa01d28059992494f/default/dark/1.0", 16],
-      ["GivePLZ", "https://static-cdn.jtvnw.net/emoticons/v2/112291/default/dark/1.0", 16],
-      ["chainavtSugoma", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_efd77f956ca34d5499ff3de165ad7b29/default/dark/1.0", 15],
-      ["dooder4Nya", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_eae1a9c0cbc5494f87307189f7f05ed0/default/dark/1.0", 15],
-      ["FallWinning", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_dee4ecfb7f0940bead9765da02c57ca9/default/dark/1.0", 15],
-      ["ButtonMash", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_92d34a3642744c6bb540b091d3e9e9b0/default/dark/1.0", 15],
-      ["xzaiko1Patogoku", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_7ac9ea79b35e4fd5b1050fb1c39f21be/default/dark/1.0", 15],
-      ["ladymi56Bop", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_76b16c9230444c0b8f79b3142abe2177/default/dark/1.0", 15],
-      ["PowerUpL", "https://static-cdn.jtvnw.net/emoticons/v2/425688/default/dark/1.0", 15],
-      ["PowerUpR", "https://static-cdn.jtvnw.net/emoticons/v2/425671/default/dark/1.0", 15],
-      ["ResidentSleeper", "https://static-cdn.jtvnw.net/emoticons/v2/245/default/dark/1.0", 15],
-      ["HolidayTree", "https://static-cdn.jtvnw.net/emoticons/v2/1713825/default/dark/1.0", 15],
-      ["doraim1Party", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_dfcb4dc101154c4cb429990a8dd30e79/default/dark/1.0", 14],
-      ["lobete3GluGlu", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_2e6a801efbda4f9387af942b89bca40e/default/dark/1.0", 14],
-      ["PunchTrees", "https://static-cdn.jtvnw.net/emoticons/v2/47/default/dark/1.0", 14],
-      ["GlitchCat", "https://static-cdn.jtvnw.net/emoticons/v2/304486301/default/dark/1.0", 14],
-      [":)", "https://static-cdn.jtvnw.net/emoticons/v2/1/default/dark/1.0", 14],
-      ["gabulmPotaxioo", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_b861248ab51b4f11b48c9c9c769083a9/default/dark/1.0", 13],
-      ["mrkoyoFunnysaber", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_93ca116890754ea1a6c6a7ef47bb33be/default/dark/1.0", 13],
-      ["patita10BITEE", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_68febdfcd44742f798d39503c373ce41/default/dark/1.0", 13],
-      ["xzaiko1Caguamas", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_fad6b0f8496140bd82435cc25f006ce5/default/dark/1.0", 12],
-      ["rawrriCushi", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_dede6637c9774eab9fc025ff159924c1/default/dark/1.0", 12],
-      ["shizaa367", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_94087bb6ce054b54bd876272db8da6f5/default/dark/1.0", 12],
-      ["lugivtJeJeJe", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_8d1f9b99686c47358b7c85641217db17/default/dark/1.0", 12],
-      ["nightheartViva", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_785d017bf44e44b493b2ab03217d5f20/default/dark/1.0", 12],
-      ["xbonyxTedoyamor", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_6fe10fecc1df455c87a0721b05ca5702/default/dark/1.0", 12],
-      ["StinkyCheese", "https://static-cdn.jtvnw.net/emoticons/v2/90076/default/dark/1.0", 12],
-      ["AppaK", "https://static-cdn.jtvnw.net/emoticons/v2/304432181/default/dark/1.0", 12],
-      ["TwitchUnity", "https://static-cdn.jtvnw.net/emoticons/v2/196892/default/dark/1.0", 12],
-      ["sylphi10Disociao", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_f3c8daf9100e45d8bc2d7ea59bb81e83/default/dark/1.0", 11]
-    ];
-
-    // Renderizar top chatters
-    const chattersContainer = document.getElementById('top-chatters-list');
-    if (chattersContainer) {
-      chattersContainer.innerHTML = topChattersData.map(([name, amount], index) =>
-        `<div class="flex justify-between items-center bg-starlight-black/60 p-2 rounded-xl">
-          <span class="text-sm">${index+1}. ${name}</span>
-          <span class="text-sm text-starlight-cyan">${amount}</span>
-        </div>`
-      ).join('');
-    }
-
-    // Renderizar top emotes
-    const emotesContainer = document.getElementById('top-emotes-list');
-    if (emotesContainer) {
-      emotesContainer.innerHTML = topEmotesData.map(([name, imageUrl, amount], index) =>
-        `<div class="flex items-center gap-3 bg-starlight-black/60 p-2 rounded-xl">
-          <span class="text-sm">${index+1}.</span>
-          <img src="${imageUrl}" alt="${name}" class="w-8 h-8 object-contain">
-          <span class="text-sm flex-1">${name}</span>
-          <span class="text-sm text-purple-300">${amount}</span>
-        </div>`
-      ).join('');
-    }
-
-    // Top commands
-    const topCommandsData = [
-      ["!tts", 196], ["!discord", 68], ["!redes", 7], ["!donaciones", 4], ["!that", 3],
-      ["!memide", 3], ["!followage", 3], ["!clip", 3], ["!sorteo", 2], ["!shinra", 2]
-    ];
-    const commandsContainer = document.getElementById('top-commands-list');
-    if (commandsContainer) {
-      commandsContainer.innerHTML = topCommandsData.map(([cmd, count]) =>
-        `<div class="bg-starlight-black/60 p-2 rounded-xl flex justify-between">
-          <span class="text-sm">${cmd}</span>
-          <span class="text-sm text-starlight-cyan">${count}</span>
-        </div>`
-      ).join('');
-    }
   </script>
 
   <!-- SCRIPT REVEAL -->
