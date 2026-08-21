@@ -137,7 +137,7 @@
           <div class="aspect-video rounded-2xl overflow-hidden bg-starlight-black">
             <iframe
               id="twitch-player"
-              src=""
+              src="https://player.twitch.tv/?channel=togikirei&parent=togikirei.lat"
               height="100%"
               width="100%"
               frameborder="0"
@@ -160,7 +160,7 @@
           <div class="flex-1 rounded-2xl overflow-hidden bg-starlight-black" style="min-height: 400px;">
             <iframe
               id="twitch-chat"
-              src=""
+              src="https://www.twitch.tv/embed/togikirei/chat?parent=togikirei.lat"
               height="100%"
               width="100%"
               frameborder="0"
@@ -350,18 +350,6 @@
       requestAnimationFrame(animateStars);
     }
     animateStars();
-  </script>
-
-  <!-- SCRIPT TWITCH -->
-  <script>
-    const domain = window.location.hostname;
-    const channel = "togikirei";
-
-    document.getElementById('twitch-player').src =
-      `https://player.twitch.tv/?channel=${channel}&parent=${domain}`;
-
-    document.getElementById('twitch-chat').src =
-      `https://www.twitch.tv/embed/${channel}/chat?parent=${domain}`;
   </script>
 
   <!-- SCRIPT PARA CARGAR TOP DONADORES -->
