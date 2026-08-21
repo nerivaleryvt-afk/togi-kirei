@@ -1,816 +1,630 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="dark scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sobre Mí ★ Neri Aiko</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sobre Mí ★ Togi Kirei</title>
 
-    <!-- SEO -->
-    <meta name="description" content="Conoce a Neri Aiko, VTuber roedora urbana. Descubre su historia, gustos, ficha técnica y más.">
-    <meta property="og:title" content="Sobre Mí ★ Neri Aiko">
-    <meta property="og:description" content="Conoce a Neri Aiko, VTuber roedora urbana. Descubre su historia, gustos, ficha técnica y más.">
-    <meta property="og:image" content="img/Neri.png">
-    <meta property="og:url" content="https://nerivaleryvt-afk.github.io/NeriAiko/sobre-mi">
-    <meta name="twitter:card" content="summary_large_image">
+  <!-- SEO -->
+  <meta name="description" content="Conoce a Togi Kirei, VTuber salvadoreña. Descubre su perfil, intereses, setup, redes sociales y prueba el Gachapón Estelar.">
+  <meta property="og:title" content="Sobre Mí ★ Togi Kirei">
+  <meta property="og:description" content="Conoce a Togi Kirei, VTuber salvadoreña. Descubre su perfil, intereses, setup, redes sociales y prueba el Gachapón Estelar.">
+  <meta property="og:image" content="me/togi.png">
+  <meta property="og:url" content="https://togikirei.com/sobre-mi">
+  <meta name="twitter:card" content="summary_large_image">
 
-    <!-- Icono -->
-    <link rel="icon" href="img/Neri.png">
+  <!-- Icono de pestaña -->
+  <link rel="icon" type="image/png" href="me/togi.png">
 
-    <!-- Fuentes -->
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700;900&family=Grape+Nuts&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-    <style>
-        /* ===== ESTILOS GENERALES ===== */
-        :root {
-            --asfalto: #1a1a1a;
-            --carbon: #0f0f0f;
-            --burdeos: #8b2e2e;
-            --burdeos-oscuro: #5e1f1f;
-            --fucsia: #ff44cc;
-            --fucsia-suave: rgba(255, 68, 204, 0.6);
-            --blanco: #f5f0eb;
-            --gris: #aaa;
-        }
+  <!-- FontAwesome para iconos de redes sociales -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Readex+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-        body {
-            background-color: var(--asfalto);
-            color: var(--blanco);
-            font-family: 'Rubik', sans-serif;
-            overflow-x: hidden;
-            cursor: none;
-            position: relative;
-            min-height: 100vh;
-        }
-
-        /* Textura de cuadrícula */
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background-image: 
-                repeating-linear-gradient(45deg, 
-                    rgba(139,46,46,0.05) 0px, 
-                    rgba(139,46,46,0.05) 2px, 
-                    transparent 2px, 
-                    transparent 8px);
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        /* Cursor personalizado */
-        #cursor-skull {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 40px;
-            height: 40px;
-            pointer-events: none;
-            z-index: 10000;
-            font-size: 30px;
-            line-height: 1;
-            transform: translate(-50%, -50%);
-            transition: transform 0.1s ease;
-            filter: drop-shadow(0 0 6px var(--fucsia));
-        }
-
-        #cursor-skull.click-effect {
-            transform: translate(-50%, -50%) scale(0.8);
-        }
-
-        /* Partículas */
-        .particle {
-            position: fixed;
-            width: 5px;
-            height: 5px;
-            background: var(--fucsia);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            animation: fadeOut 0.6s linear forwards;
-        }
-
-        @keyframes fadeOut {
-            to {
-                opacity: 0;
-                transform: translateY(10px) scale(0.2);
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Readex Pro', 'sans-serif'],
+            cyber: ['Orbitron', 'sans-serif'],
+          },
+          colors: {
+            starlight: {
+              black: '#0a0814',
+              card: '#131024',
+              pink: '#ff69b4',
+              cyan: '#00f0ff',
+              star: '#ffd700',
+              purple: '#8a2be2',
             }
+          }
         }
+      }
+    }
+  </script>
 
-        /* Header */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 15px 30px;
-            background: rgba(15,15,15,0.85);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--burdeos);
-            z-index: 1000;
-        }
+  <style>
+    #starfield {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      background-color: #0a0814;
+    }
 
-        .logo {
-            font-family: 'Grape Nuts', cursive;
-            font-size: 1.8rem;
-            color: var(--fucsia);
-            text-decoration: none;
-        }
+    /* Animaciones de aparición al hacer scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-        .nav-desktop {
-            display: flex;
-            gap: 25px;
-        }
-
-        .nav-desktop a {
-            color: var(--blanco);
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.95rem;
-            letter-spacing: 1px;
-            transition: color 0.3s;
-        }
-
-        .nav-desktop a:hover,
-        .nav-desktop a.active {
-            color: var(--fucsia);
-        }
-
-        .live-indicator {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--carbon);
-            padding: 6px 14px;
-            border-radius: 20px;
-            border: 1px solid var(--burdeos);
-            font-size: 0.85rem;
-            font-weight: bold;
-        }
-
-        .live-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #555;
-        }
-        .live-dot.active {
-            background: #ff2a2a;
-            box-shadow: 0 0 8px #ff2a2a;
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.3); }
-            100% { transform: scale(1); }
-        }
-
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--blanco);
-            font-size: 1.8rem;
-            cursor: pointer;
-        }
-
-        .mobile-menu {
-            display: none;
-            flex-direction: column;
-            background: var(--carbon);
-            padding: 20px;
-            gap: 15px;
-            position: fixed;
-            top: 70px;
-            left: 20px;
-            right: 20px;
-            border-radius: 15px;
-            border: 1px solid var(--burdeos);
-            z-index: 999;
-        }
-        .mobile-menu a {
-            color: var(--blanco);
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .mobile-menu.show {
-            display: flex;
-        }
-
-        @media (max-width: 768px) {
-            .nav-desktop {
-                display: none;
-            }
-            .menu-toggle {
-                display: block;
-            }
-        }
-
-        /* Contenedor principal */
-        .main-container {
-            max-width: 1000px;
-            margin: 100px auto 40px;
-            padding: 0 20px;
-        }
-
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: var(--fucsia);
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-        .back-link:hover {
-            color: #ff77dd;
-            transform: translateX(-3px);
-        }
-
-        /* Hero */
-        .hero-card {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 40px;
-            background: rgba(15,15,15,0.8);
-            backdrop-filter: blur(10px);
-            border: 2px solid var(--burdeos);
-            border-radius: 30px;
-            padding: 40px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-card::before {
-            content: "💀";
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            font-size: 4rem;
-            opacity: 0.15;
-            transform: rotate(15deg);
-        }
-
-        .hero-card::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 80% 20%, rgba(255,68,204,0.1), transparent 60%);
-            pointer-events: none;
-        }
-
-        .hero-image {
-            flex: 0 0 250px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .hero-image img {
-            width: 100%;
-            max-width: 250px;
-            height: auto;
-            border-radius: 50%;
-            border: 5px solid var(--burdeos);
-            box-shadow: 0 0 30px rgba(139,46,46,0.5);
-            background: rgba(15,15,15,0.7);
-            object-fit: contain;
-        }
-
-        .hero-info {
-            flex: 1;
-            min-width: 280px;
-        }
-
-        .hero-name {
-            font-size: clamp(2rem, 8vw, 4rem);
-            font-weight: 900;
-            text-transform: uppercase;
-            color: var(--blanco);
-            text-shadow: 4px 4px 0 var(--burdeos);
-            line-height: 1;
-        }
-
-        .hero-desc {
-            font-family: 'Grape Nuts', cursive;
-            font-size: 1.5rem;
-            color: var(--fucsia);
-            margin-top: 15px;
-        }
-
-        .hero-lore {
-            margin-top: 15px;
-            font-size: 1.1rem;
-            color: #ddd;
-            font-style: italic;
-            line-height: 1.5;
-        }
-
-        /* Chips de gustos/disgustos */
-        .chips-section {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .chips-box {
-            flex: 1 1 250px;
-            background: rgba(15,15,15,0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--burdeos);
-            border-radius: 20px;
-            padding: 20px;
-        }
-
-        .chips-box h3 {
-            font-size: 1.3rem;
-            font-weight: 900;
-            margin-bottom: 15px;
-        }
-
-        .chips-box.love h3 { color: var(--fucsia); }
-        .chips-box.hate h3 { color: var(--burdeos); }
-
-        .chip-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .chip {
-            background: rgba(15,15,15,0.6);
-            border: 1px solid rgba(139,46,46,0.5);
-            color: var(--blanco);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .chip:hover {
-            border-color: var(--fucsia);
-            color: var(--fucsia);
-        }
-
-        /* Ficha técnica */
-        .ficha-tecnica {
-            margin-top: 70px;
-        }
-
-        .ficha-title {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .ficha-title h2 {
-            font-size: 2.5rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            color: var(--blanco);
-            text-shadow: 3px 3px 0 var(--burdeos);
-        }
-
-        .ficha-title p {
-            font-size: 1.2rem;
-            color: var(--fucsia);
-            margin-top: 8px;
-        }
-
-        .ficha-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .ficha-card {
-            background: rgba(15,15,15,0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--burdeos);
-            border-radius: 20px;
-            padding: 20px;
-            transition: all 0.3s;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        .ficha-card:hover {
-            border-color: var(--fucsia);
-            box-shadow: 0 0 20px rgba(255,68,204,0.3);
-            transform: translateY(-5px);
-        }
-
-        .ficha-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 900;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: var(--fucsia);
-            border-bottom: 1px solid rgba(139,46,46,0.3);
-            padding-bottom: 10px;
-        }
-
-        .ficha-list {
-            list-style: none;
-            padding: 0;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .ficha-list li {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(15,15,15,0.5);
-            padding: 10px 12px;
-            border-radius: 10px;
-            border: 1px solid rgba(139,46,46,0.4);
-        }
-
-        .ficha-list .label {
-            color: var(--gris);
-            font-weight: 600;
-        }
-
-        .ficha-list .value {
-            color: var(--blanco);
-            font-weight: 700;
-            text-align: right;
-        }
-
-        .badge-trans {
-            background: rgba(255,68,204,0.15);
-            border: 1px solid var(--fucsia);
-            color: var(--fucsia);
-            padding: 2px 10px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-        }
-
-        .interest-chips {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .vibra-quote {
-            font-style: italic;
-            color: #ddd;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        .community-box {
-            background: rgba(15,15,15,0.6);
-            border: 1px solid rgba(139,46,46,0.5);
-            border-radius: 10px;
-            text-align: center;
-            padding: 10px;
-            font-weight: 900;
-            color: var(--fucsia);
-            letter-spacing: 1px;
-            font-size: 0.8rem;
-        }
-
-        .community-box span {
-            display: block;
-            margin-top: 4px;
-            color: var(--burdeos);
-        }
-
-        /* Reproductor de música flotante */
-        #music-player {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(15,15,15,0.85);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--burdeos);
-            border-radius: 40px;
-            padding: 8px 15px;
-            z-index: 1000;
-            box-shadow: 0 0 20px rgba(255,68,204,0.2);
-        }
-
-        #music-toggle {
-            background: linear-gradient(135deg, var(--fucsia), #b3007a);
-            color: var(--blanco);
-            border: none;
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            font-size: 1.3rem;
-            cursor: pointer;
-            box-shadow: 0 0 15px rgba(255,68,204,0.6);
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #music-toggle:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 25px rgba(255,68,204,0.9);
-        }
-
-        #volume-control {
-            width: 100px;
-            cursor: pointer;
-            accent-color: var(--fucsia);
-        }
-
-        .music-title {
-            position: absolute;
-            bottom: calc(100% + 10px);
-            left: 0;
-            max-width: 250px;
-            overflow: hidden;
-            white-space: nowrap;
-            pointer-events: none;
-            font-size: 0.9rem;
-            font-weight: bold;
-            color: var(--fucsia);
-            z-index: 1001;
-        }
-
-        .music-title span {
-            display: inline-block;
-            padding-left: 100%;
-            animation: scrollText 12s linear infinite;
-        }
-
-        @keyframes scrollText {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px;
-            color: var(--gris);
-            font-size: 0.9rem;
-            border-top: 1px solid var(--burdeos);
-        }
-    </style>
+    /* Soporte para usuarios que prefieren menos movimiento */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+  </style>
 </head>
-<body>
 
-    <!-- Cursor personalizado -->
-    <div id="cursor-skull">💀</div>
+<body class="text-slate-200 font-sans min-h-screen selection:bg-starlight-pink selection:text-white relative p-6 md:p-12">
 
-    <!-- HEADER -->
-    <header class="header">
-        <a href="index.html" class="logo">Neri Aiko</a>
-        <nav class="nav-desktop">
-            <a href="index.html#inicio">Inicio</a>
-            <a href="sobre-mi.html" class="active">Sobre Mí</a>
-            <a href="index.html#horario">Horario</a>
-            <a href="index.html#contacto">Contacto</a>
-        </nav>
-        <div class="live-indicator" id="liveIndicator">
-            <span class="live-dot" id="liveDot"></span>
-            <span id="liveText">Cargando...</span>
+  <!-- CANVAS FONDO DE ESTRELLAS MOVIÉNDOSE -->
+  <canvas id="starfield"></canvas>
+
+  <div class="max-w-6xl mx-auto space-y-12">
+    
+    <!-- BOTÓN VOLVER AL INICIO -->
+    <div class="reveal">
+      <a href="index.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-pink-900/50 bg-starlight-card/60 backdrop-blur-md text-xs font-cyber font-bold tracking-widest text-starlight-pink hover:bg-starlight-pink hover:text-black transition shadow-lg">
+        ← VOLVER AL INICIO
+      </a>
+    </div>
+
+    <!-- CONTENEDOR PRINCIPAL: AVATAR Y SOBRE MÍ -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- COLUMNA IZQUIERDA: TARJETA DE AVATAR -->
+      <div class="reveal lg:col-span-5 bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-6 shadow-2xl flex flex-col items-center justify-center text-center relative overflow-hidden">
+        <div class="w-full aspect-square rounded-2xl overflow-hidden flex items-center justify-center relative mb-4 bg-slate-900/50">
+          <img src="me/togi.png" alt="Togi Kirei VTuber" class="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(255,105,180,0.4)]" loading="lazy" decoding="async">
         </div>
-        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">☰</button>
-    </header>
+        <div class="font-cyber text-xs md:text-sm font-bold tracking-widest text-starlight-star uppercase">
+          ★ TOGI KIREI · VTUBER ★
+        </div>
+      </div>
 
-    <!-- MENÚ MÓVIL -->
-    <div class="mobile-menu" id="mobileMenu">
-        <a href="index.html#inicio">Inicio</a>
-        <a href="sobre-mi.html">Sobre Mí</a>
-        <a href="index.html#horario">Horario</a>
-        <a href="index.html#contacto">Contacto</a>
+      <!-- COLUMNA DERECHA: SOBRE MÍ Y VALORANT STATS -->
+      <div class="reveal lg:col-span-7 bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-8 shadow-2xl space-y-6 relative overflow-hidden">
+        
+        <div class="space-y-3">
+          <div class="inline-block px-4 py-1.5 rounded-full bg-purple-950/60 border border-purple-500/30 text-starlight-purple font-cyber text-xs tracking-wider font-semibold">
+            🦋 INMORTAL CON ACTITUD
+          </div>
+          <h1 class="font-cyber text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-starlight-pink via-purple-300 to-starlight-cyan tracking-wide">
+            SOBRE MÍ
+          </h1>
+        </div>
+
+        <div class="space-y-4 text-slate-300 text-sm md:text-base leading-relaxed">
+          <p>
+            ¡Hola! Soy <strong class="text-white font-cyber">Togi Kirei</strong>, VTuber y creadora de contenido.
+          </p>
+          <p>
+            Me gusta hacer un poco de todo: streams, TikToks, gameplays y proyectos random que probablemente empezaron como una buena idea y terminaron en caos.
+          </p>
+          <p>
+            Si te gusta el contenido tranquilo, los momentos random y de vez en cuando un poco de caos, quédate. 🖱️✨
+          </p>
+        </div>
+
+        <!-- VALORANT STATS -->
+        <div class="bg-starlight-black/80 border border-slate-800 rounded-2xl p-4 flex items-center justify-between gap-4 shadow-inner mt-6">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-pink-950/40 border border-pink-500/30 flex items-center justify-center text-xl shrink-0">
+              🎯
+            </div>
+            <div>
+              <div class="font-cyber text-xs md:text-sm font-bold text-white tracking-wider">VALORANT STATS</div>
+              <div class="text-xs text-slate-400 mt-0.5">
+                Main: <span class="text-starlight-pink font-semibold">Clove 🦋</span> | Rango: <span class="text-slate-200 font-semibold">Plata 2 🥈</span>
+              </div>
+            </div>
+          </div>
+          <span class="px-3 py-1 rounded-full bg-purple-950/60 border border-purple-500/40 text-purple-300 font-cyber text-xs font-bold tracking-widest uppercase">
+            RANKED
+          </span>
+        </div>
+
+      </div>
+
     </div>
 
-    <!-- CONTENIDO PRINCIPAL -->
-    <main class="main-container">
-        <a href="index.html" class="back-link">← Volver al inicio</a>
+    <!-- SECCIÓN: FICHA TÉCNICA -->
+    <div class="space-y-6 pt-6">
+      <div class="reveal text-center space-y-2">
+        <div class="inline-block px-4 py-1.5 rounded-full border border-pink-900/50 bg-starlight-card/60 backdrop-blur-md text-xs font-cyber font-bold tracking-widest text-starlight-pink shadow-md">
+          💫 FICHA TÉCNICA
+        </div>
+        <h2 class="font-cyber text-3xl md:text-4xl font-black text-white tracking-wide">
+          CONOCE A <span class="text-transparent bg-clip-text bg-gradient-to-r from-starlight-pink to-starlight-cyan">TOGI KIREI</span>
+        </h2>
+        <p class="text-sm text-slate-400">Un vistazo a mi identidad, gustos y el ambiente de la comunidad 💫</p>
+      </div>
 
-        <!-- HERO -->
-        <section class="hero-card">
-            <div class="hero-image">
-                <img src="img/Neri.png" alt="Neri Aiko">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+        
+        <!-- PERFIL & IDENTIDAD -->
+        <div class="reveal bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-6 shadow-2xl flex flex-col justify-between space-y-6">
+          <div class="space-y-4">
+            <div class="flex items-center gap-2 font-cyber text-starlight-pink text-sm font-bold tracking-widest uppercase border-b border-pink-900/30 pb-3">
+              <span>🎯</span> PERFIL & IDENTIDAD
             </div>
-            <div class="hero-info">
-                <h1 class="hero-name">Neri Aiko</h1>
-                <p class="hero-desc">VTuber & Streamer</p>
-                <p class="hero-lore">
-                    Creció bajo la ciudad, entre cables, latas y cartuchos. Su ojo rojo arde como una llama que no se apaga; su ojo dorado guarda el eco de un alma inquieta. No busca problemas… pero si hay queso de por medio, se apunta. Ahora streamea caos controlado desde su madriguera.
-                </p>
+            <ul class="space-y-3 text-sm text-slate-300">
+              <li class="flex justify-between items-center bg-starlight-black/40 px-3 py-2 rounded-xl border border-slate-800/60">
+                <span class="text-slate-400 font-medium">Nombre:</span>
+                <span class="text-white font-semibold">Togi Kirei</span>
+              </li>
+              <li class="flex justify-between items-center bg-starlight-black/40 px-3 py-2 rounded-xl border border-slate-800/60">
+                <span class="text-slate-400 font-medium">Género:</span>
+                <span class="px-2.5 py-1 rounded-full bg-pink-950/60 border border-pink-500/40 text-starlight-pink text-xs font-semibold flex items-center gap-1.5">Chica Trans 🏳️‍⚧️</span>
+              </li>
+              <li class="flex justify-between items-center bg-starlight-black/40 px-3 py-2 rounded-xl border border-slate-800/60">
+                <span class="text-slate-400 font-medium">Ubicación:</span>
+                <span class="text-white font-semibold">El Salvador 🇸🇻</span>
+              </li>
+              <li class="flex justify-between items-center bg-starlight-black/40 px-3 py-2 rounded-xl border border-slate-800/60">
+                <span class="text-slate-400 font-medium">Rol:</span>
+                <span class="text-starlight-cyan font-semibold text-xs font-cyber">VTuber & Creator</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- MIS INTERESES -->
+        <div class="reveal bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-6 shadow-2xl flex flex-col justify-between space-y-6">
+           <div class="space-y-4">
+            <div class="flex items-center gap-2 font-cyber text-starlight-cyan text-sm font-bold tracking-widest uppercase border-b border-cyan-900/30 pb-3">
+              <span>✨</span> MIS INTERESES
             </div>
-        </section>
-
-        <!-- LO QUE AMO / LO QUE ODIO -->
-        <section class="chips-section">
-            <div class="chips-box love">
-                <h3>🧀 Lo que amo</h3>
-                <div class="chip-list">
-                    <span class="chip">Queso</span>
-                    <span class="chip">Videojuegos</span>
-                    <span class="chip">Ropa oversize</span>
-                    <span class="chip">Grafiti</span>
-                    <span class="chip">Música urbana</span>
-                    <span class="chip">Callejear</span>
-                </div>
+            <div class="flex flex-wrap gap-2 pt-1">
+              <span class="px-3 py-2 bg-starlight-black/60 border border-slate-800 rounded-xl text-xs text-slate-200">Valorant 🎯</span>
+              <span class="px-3 py-2 bg-starlight-black/60 border border-slate-800 rounded-xl text-xs text-slate-200">Hytale & Mods ⚔️</span>
+              <span class="px-3 py-2 bg-starlight-black/60 border border-slate-800 rounded-xl text-xs text-slate-200">R.E.P.O. & Co-Op 📦</span>
+              <span class="px-3 py-2 bg-starlight-black/60 border border-slate-800 rounded-xl text-xs text-slate-200">Anime & Manga 📖</span>
+              <span class="px-3 py-2 bg-starlight-black/60 border border-slate-800 rounded-xl text-xs text-slate-200">Música (Enjambre) 🎶</span>
+              <span class="px-3 py-2 bg-starlight-black/60 border border-slate-800 rounded-xl text-xs text-slate-200">Café de Moka ☕</span>
             </div>
-            <div class="chips-box hate">
-                <h3>🤢 Lo que odio</h3>
-                <div class="chip-list">
-                    <span class="chip">Trampas para ratones</span>
-                    <span class="chip">Madrugar</span>
-                    <span class="chip">Queso azul</span>
-                    <span class="chip">Silencio incómodo</span>
-                </div>
+          </div>
+        </div>
+
+        <!-- VIBRA DEL CANAL -->
+        <div class="reveal bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-6 shadow-2xl flex flex-col justify-between space-y-6">
+          <div class="space-y-4">
+            <div class="flex items-center gap-2 font-cyber text-starlight-star text-sm font-bold tracking-widest uppercase border-b border-yellow-900/30 pb-3">
+              <span>🌟</span> VIBRA DEL CANAL
             </div>
-        </section>
-
-        <!-- FICHA TÉCNICA -->
-        <section class="ficha-tecnica">
-            <div class="ficha-title">
-                <h2>Ficha Técnica</h2>
-                <p>Expediente callejero de Neri</p>
+            <p class="text-sm text-slate-300 italic leading-relaxed pt-1">
+              "Un espacio amigable, auténtico y de alta energía. Nos apasionan la edición técnica de video, la personalización gráfica, los gameplays interactivos y pasar un rato lleno de risas junto a la comunidad. 💫"
+            </p>
+          </div>
+          <div class="pt-2">
+            <div class="w-full py-2.5 px-4 rounded-xl bg-starlight-black/60 border border-purple-500/30 text-center font-cyber text-xs font-bold text-purple-300 tracking-wider shadow-inner">
+              COMUNIDAD ACTIVA<br><span class="text-starlight-pink">★ LIVE STREAMING ★</span>
             </div>
+          </div>
+        </div>
 
-            <div class="ficha-grid">
-                <div class="ficha-card">
-                    <div class="ficha-header"><span>🎯</span> PERFIL & IDENTIDAD</div>
-                    <ul class="ficha-list">
-                        <li><span class="label">Nombre</span><span class="value">Neri Aiko</span></li>
-                        <li><span class="label">Género</span><span class="value badge-trans">Chica Trans 🏳️‍⚧️</span></li>
-                        <li><span class="label">Especie</span><span class="value">Chica ratón callejera</span></li>
-                        <li><span class="label">Altura</span><span class="value">1.60 m</span></li>
-                        <li><span class="label">Ubicación</span><span class="value">Ciudad subterránea</span></li>
-                        <li><span class="label">Rol</span><span class="value">VTuber & Streamer</span></li>
-                    </ul>
-                </div>
-
-                <div class="ficha-card">
-                    <div class="ficha-header"><span>✨</span> MIS INTERESES</div>
-                    <div class="interest-chips">
-                        <span class="chip">Queso 🧀</span>
-                        <span class="chip">Videojuegos 🎮</span>
-                        <span class="chip">Ropa oversize 👕</span>
-                        <span class="chip">Grafiti 🎨</span>
-                        <span class="chip">Música urbana 🎵</span>
-                        <span class="chip">Callejear 🌆</span>
-                    </div>
-                </div>
-
-                <div class="ficha-card">
-                    <div class="ficha-header"><span>🌟</span> VIBRA DEL CANAL</div>
-                    <p class="vibra-quote">
-                        "Un rincón underground, auténtico y lleno de actitud. Aquí se celebra la creatividad, el caos controlado y los buenos momentos con la comunidad."
-                    </p>
-                    <div class="community-box">
-                        COMUNIDAD ACTIVA
-                        <span>★ LIVE STREAMING ★</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- REPRODUCTOR -->
-    <div id="music-player">
-        <div class="music-title"><span>Bakusou Yumeuta - Diggy-MO</span></div>
-        <button id="music-toggle" title="Reproducir/Pausar">▶</button>
-        <input type="range" id="volume-control" min="0" max="100" value="50" aria-label="Control de volumen">
+      </div>
     </div>
 
-    <footer>
-        © 2025 Neri Aiko 💜 Todos los derechos reservados.
-    </footer>
+    <!-- SECCIÓN: GACHAPÓN ESTELAR Y GANADORES -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <section class="reveal bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 rounded-3xl p-8 shadow-2xl text-center space-y-6">
+          <h2 class="font-cyber text-3xl font-black text-white">GACHAPÓN ESTELAR</h2>
+          <p class="text-sm text-slate-300">¡Prueba tu suerte y obtén un emote de Togi Kirei!</p>
+          
+          <div class="flex justify-center mb-4">
+            <input type="text" id="nombreUsuario" placeholder="Ingresa tu nombre aquí..." class="w-full max-w-sm px-4 py-3 rounded-lg bg-starlight-black border border-starlight-cyan text-white focus:outline-none focus:border-starlight-pink transition-colors text-center shadow-inner">
+          </div>
 
-    <script defer>
-        // ===== CURSOR PERSONALIZADO =====
-        const cursorSkull = document.getElementById('cursor-skull');
-        document.addEventListener('mousemove', (e) => {
-            cursorSkull.style.left = e.clientX + 'px';
-            cursorSkull.style.top = e.clientY + 'px';
-        });
+          <div class="flex justify-center gap-4 my-6">
+            <div id="slot1" class="w-24 h-24 bg-starlight-black border-2 border-starlight-pink rounded-2xl flex items-center justify-center text-3xl overflow-hidden p-2 text-starlight-pink">?</div>
+            <div id="slot2" class="w-24 h-24 bg-starlight-black border-2 border-starlight-cyan rounded-2xl flex items-center justify-center text-3xl overflow-hidden p-2 text-starlight-cyan">?</div>
+            <div id="slot3" class="w-24 h-24 bg-starlight-black border-2 border-starlight-star rounded-2xl flex items-center justify-center text-3xl overflow-hidden p-2 text-starlight-star">?</div>
+          </div>
+          
+          <button onclick="girarRuleta()" id="btnGirar" class="px-10 py-4 rounded-xl bg-starlight-pink hover:bg-pink-400 text-black font-cyber font-bold text-lg transition-all hover:scale-105 shadow-[0_0_15px_rgba(255,105,180,0.5)] disabled:opacity-50 disabled:hover:scale-100">
+            ¡PROBAR SUERTE!
+          </button>
+          
+          <p id="resultado" class="font-cyber text-starlight-cyan mt-4 text-xl min-h-[30px]"></p>
+        </section>
 
-        document.addEventListener('mousedown', () => {
-            cursorSkull.classList.add('click-effect');
-        });
-        document.addEventListener('mouseup', () => {
-            cursorSkull.classList.remove('click-effect');
-        });
+        <!-- ÚLTIMOS GANADORES / RANKING -->
+        <div class="reveal bg-starlight-card/80 backdrop-blur-xl border border-starlight-cyan/40 rounded-3xl p-8 shadow-2xl">
+          <h3 class="font-cyber text-xl font-bold text-starlight-cyan text-center mb-6">🏆 LÍDERES DEL GACHAPÓN</h3>
+          <ul id="listaGanadores" class="space-y-3">
+            <li class="text-center text-sm text-slate-400 italic py-4">Cargando ganadores...</li>
+          </ul>
+        </div>
+    </div>
 
-        // ===== ESTELA DE PARTÍCULAS =====
-        let lastParticleTime = 0;
-        document.addEventListener('mousemove', (e) => {
-            const now = Date.now();
-            if (now - lastParticleTime < 50) return;
-            lastParticleTime = now;
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = (e.clientX - 2) + 'px';
-            particle.style.top = (e.clientY - 2) + 'px';
-            document.body.appendChild(particle);
-            setTimeout(() => particle.remove(), 600);
-            const particles = document.querySelectorAll('.particle');
-            if (particles.length > 30) particles[0].remove();
-        });
+    <!-- SECCIÓN: SETUP -->
+    <div class="space-y-6 pt-6">
+      <div class="reveal text-center space-y-2">
+        <div class="inline-block px-4 py-1.5 rounded-full border border-purple-900/50 bg-starlight-card/60 backdrop-blur-md text-xs font-cyber font-bold tracking-widest text-starlight-purple shadow-md">
+          🖥️ SETUP
+        </div>
+        <h2 class="font-cyber text-2xl font-bold text-white">Especificaciones de mi equipo</h2>
+      </div>
 
-        // ===== MENÚ MÓVIL =====
-        const menuToggle = document.getElementById('menuToggle');
-        const mobileMenu = document.getElementById('mobileMenu');
-        menuToggle.addEventListener('click', () => mobileMenu.classList.toggle('show'));
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => mobileMenu.classList.remove('show'));
-        });
+      <div class="reveal max-w-xl mx-auto bg-starlight-card/80 backdrop-blur-xl border border-purple-900/40 rounded-3xl p-8 shadow-2xl hover:border-purple-500/50 transition duration-500">
+        <div class="text-starlight-purple font-cyber text-lg font-bold mb-4 flex items-center gap-2">🖥️ PC Rig</div>
+        <ul class="text-sm text-slate-300 space-y-3">
+          <li>• <b>CPU:</b> AMD Ryzen™ 7 5800XT</li>
+          <li>• <b>Motherboard:</b> MSI MAG B550 TOMAHAWK</li>
+          <li>• <b>Almacenamiento:</b> M.2 NVMe SSD High-Speed</li>
+          <li>• Optimización para Streaming & Render 4K</li>
+        </ul>
+      </div>
+    </div>
 
-        // ===== INDICADOR EN VIVO =====
-        const WORKER_URL = 'https://nameless-resonance-e957togi-kirei-stats.togivt.workers.dev/api/stats';
-        async function checkLive() {
-            try {
-                const response = await fetch(WORKER_URL);
-                const data = await response.json();
-                const isLive = data.isLive || false;
-                const liveDot = document.getElementById('liveDot');
-                const liveText = document.getElementById('liveText');
-                if (isLive) {
-                    liveDot.classList.add('active');
-                    liveText.textContent = '🔴 EN DIRECTO AHORA';
-                } else {
-                    liveDot.classList.remove('active');
-                    liveText.textContent = '⚫ No está en directo';
+    <!-- SECCIÓN: REDES SOCIALES Y ENLACES -->
+    <div class="space-y-6 pt-6">
+      <div class="reveal text-center space-y-2">
+        <div class="inline-block px-4 py-1.5 rounded-full border border-pink-900/50 bg-starlight-card/60 backdrop-blur-md text-xs font-cyber font-bold tracking-widest text-starlight-cyan shadow-md">
+          🌐 CONECTEMOS
+        </div>
+        <h2 class="font-cyber text-2xl font-bold text-white">Encuéntrame en mis redes</h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- TikTok -->
+        <a href="https://www.tiktok.com/@_togivt_" target="_blank" rel="noopener noreferrer" class="reveal bg-starlight-card/80 backdrop-blur-xl border border-cyan-900/40 hover:border-starlight-cyan rounded-3xl p-6 shadow-2xl flex items-center gap-4 transition group">
+          <div class="w-12 h-12 rounded-2xl bg-cyan-950/60 border border-cyan-500/30 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition">
+            <i class="fa-brands fa-tiktok text-cyan-400"></i>
+          </div>
+          <div>
+            <div class="text-[10px] font-cyber text-slate-400 tracking-widest uppercase">TIKTOK</div>
+            <div class="font-cyber text-sm font-bold text-starlight-cyan">@_togivt_</div>
+          </div>
+        </a>
+
+        <!-- YouTube -->
+        <a href="https://www.youtube.com/channel/UCVksKxlWndm3k-MufaVns9A" target="_blank" rel="noopener noreferrer" class="reveal bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 hover:border-starlight-pink rounded-3xl p-6 shadow-2xl flex items-center gap-4 transition group">
+          <div class="w-12 h-12 rounded-2xl bg-pink-950/60 border border-pink-500/30 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition">
+            <i class="fa-brands fa-youtube text-pink-400"></i>
+          </div>
+          <div>
+            <div class="text-[10px] font-cyber text-slate-400 tracking-widest uppercase">YOUTUBE</div>
+            <div class="font-cyber text-sm font-bold text-starlight-pink">Togi Kirei</div>
+          </div>
+        </a>
+
+        <!-- Twitch -->
+        <a href="https://www.twitch.tv/_togivt_" target="_blank" rel="noopener noreferrer" class="reveal bg-starlight-card/80 backdrop-blur-xl border border-purple-900/40 hover:border-purple-500 rounded-3xl p-6 shadow-2xl flex items-center gap-4 transition group">
+          <div class="w-12 h-12 rounded-2xl bg-purple-950/60 border border-purple-500/30 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition">
+            <i class="fa-brands fa-twitch text-purple-400"></i>
+          </div>
+          <div>
+            <div class="text-[10px] font-cyber text-slate-400 tracking-widest uppercase">STREAMS</div>
+            <div class="font-cyber text-sm font-bold text-purple-300">@_togivt_</div>
+          </div>
+        </a>
+
+        <!-- Discord -->
+        <a href="https://discord.com/invite/GybAXP2HXn" target="_blank" rel="noopener noreferrer" class="reveal bg-starlight-card/80 backdrop-blur-xl border border-indigo-900/40 hover:border-indigo-500 rounded-3xl p-6 shadow-2xl flex items-center gap-4 transition group">
+          <div class="w-12 h-12 rounded-2xl bg-indigo-950/60 border border-indigo-500/30 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition">
+            <i class="fa-brands fa-discord text-indigo-400"></i>
+          </div>
+          <div>
+            <div class="text-[10px] font-cyber text-slate-400 tracking-widest uppercase">SERVIDOR</div>
+            <div class="font-cyber text-sm font-bold text-indigo-300">Discord Server</div>
+          </div>
+        </a>
+
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/_togivt_" target="_blank" rel="noopener noreferrer" class="reveal bg-starlight-card/80 backdrop-blur-xl border border-pink-900/40 hover:border-pink-500 rounded-3xl p-6 shadow-2xl flex items-center gap-4 transition group">
+          <div class="w-12 h-12 rounded-2xl bg-pink-950/60 border border-pink-500/30 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition">
+            <i class="fa-brands fa-instagram text-pink-400"></i>
+          </div>
+          <div>
+            <div class="text-[10px] font-cyber text-slate-400 tracking-widest uppercase">INSTAGRAM</div>
+            <div class="font-cyber text-sm font-bold text-pink-300">@_togivt_</div>
+          </div>
+        </a>
+
+        <!-- X / Twitter -->
+        <a href="https://x.com/_togivt_" target="_blank" rel="noopener noreferrer" class="reveal bg-starlight-card/80 backdrop-blur-xl border border-slate-700 hover:border-slate-400 rounded-3xl p-6 shadow-2xl flex items-center gap-4 transition group">
+          <div class="w-12 h-12 rounded-2xl bg-slate-900/80 border border-slate-700 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition">
+            <i class="fa-brands fa-x-twitter text-slate-200"></i>
+          </div>
+          <div>
+            <div class="text-[10px] font-cyber text-slate-400 tracking-widest uppercase">TWITTER / X</div>
+            <div class="font-cyber text-sm font-bold text-slate-200">@_togivt_</div>
+          </div>
+        </a>
+
+        <!-- Roblox -->
+        <a href="https://www.roblox.com/es/users/8137332335/profile" target="_blank" rel="noopener noreferrer" class="reveal bg-starlight-card/80 backdrop-blur-xl border border-red-900/40 hover:border-red-500 rounded-3xl p-6 shadow-2xl flex items-center gap-4 transition group">
+          <div class="w-12 h-12 rounded-2xl bg-red-950/60 border border-red-500/30 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition">
+            <i class="fa-solid fa-gamepad text-red-400"></i>
+          </div>
+          <div>
+            <div class="text-[10px] font-cyber text-slate-400 tracking-widest uppercase">ROBLOX</div>
+            <div class="font-cyber text-sm font-bold text-red-300">Perfil de Roblox</div>
+          </div>
+        </a>
+
+        <!-- PayPal -->
+        <a href="https://www.paypal.com/ncp/payment/2HKXXXHCMJGQW" target="_blank" rel="noopener noreferrer" class="reveal bg-starlight-card/80 backdrop-blur-xl border border-blue-900/40 hover:border-blue-500 rounded-3xl p-6 shadow-2xl flex items-center gap-4 transition group">
+          <div class="w-12 h-12 rounded-2xl bg-blue-950/60 border border-blue-500/30 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition">
+            <i class="fa-brands fa-paypal text-blue-400"></i>
+          </div>
+          <div>
+            <div class="text-[10px] font-cyber text-slate-400 tracking-widest uppercase">APOYO</div>
+            <div class="font-cyber text-sm font-bold text-blue-300">PayPal</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BOTÓN VOLVER ARRIBA -->
+  <button id="btn-top" class="fixed bottom-6 right-6 z-50 p-3 rounded-full bg-starlight-pink/80 hover:bg-starlight-pink text-black font-cyber font-bold shadow-lg hidden transition" aria-label="Volver arriba">
+    ↑
+  </button>
+
+  <footer class="mt-16 py-8 border-t border-slate-800/80 text-center text-xs text-slate-500 space-y-2">
+    <div class="flex justify-center space-x-6 text-slate-300 font-cyber flex-wrap gap-y-2">
+      <a href="index.html" class="hover:text-starlight-cyan transition">Inicio</a>
+      <a href="https://www.tiktok.com/@_togivt_" target="_blank" rel="noopener noreferrer" class="hover:text-starlight-cyan transition">TikTok</a>
+      <a href="https://www.youtube.com/channel/UCVksKxlWndm3k-MufaVns9A" target="_blank" rel="noopener noreferrer" class="hover:text-starlight-pink transition">YouTube</a>
+      <a href="https://discord.com/invite/GybAXP2HXn" target="_blank" rel="noopener noreferrer" class="hover:text-starlight-purple transition">Discord</a>
+    </div>
+    <p>© 2026 TOGI KIREI 💫. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- SCRIPT DE ESTRELLAS Y GACHAPÓN -->
+  <script>
+    // Fondo de estrellas con pausa si la pestaña no está visible
+    const canvas = document.getElementById('starfield');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    const numStars = 180;
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    for (let i = 0; i < numStars; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2 + 0.5,
+        speed: Math.random() * 0.4 + 0.1,
+        color: ['#ffffff', '#ff69b4', '#00f0ff', '#ffd700'][Math.floor(Math.random() * 4)],
+        alpha: Math.random()
+      });
+    }
+    let isPageVisible = true;
+    document.addEventListener('visibilitychange', () => {
+      isPageVisible = !document.hidden;
+    });
+    function animateStars() {
+      if (isPageVisible) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        stars.forEach(star => {
+          ctx.fillStyle = star.color;
+          ctx.globalAlpha = star.alpha;
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+          ctx.fill();
+          star.y += star.speed;
+          if (star.y > canvas.height) {
+            star.y = 0;
+            star.x = Math.random() * canvas.width;
+          }
+        });
+      }
+      requestAnimationFrame(animateStars);
+    }
+    animateStars();
+
+    // Lógica Gachapón Estelar (Modo Suerte)
+    const emotes = [
+      "emotes/ASUSTADO.png", "emotes/ban.png", "emotes/Barritas.png", 
+      "emotes/CUMPLEEE.png", "emotes/Emotes.png", "emotes/JEJEJEJ.png", 
+      "emotes/Lengu.png", "emotes/Limon.png", "emotes/muslos.png", "emotes/Tiburon.png"
+    ];
+    
+    function girarRuleta() {
+      const nombreInput = document.getElementById('nombreUsuario').value.trim();
+      const nombre = nombreInput !== "" ? nombreInput : "Anónimo";
+      const btn = document.getElementById('btnGirar');
+      const resultado = document.getElementById('resultado');
+      
+      btn.disabled = true;
+      resultado.innerText = "Girando...";
+      resultado.classList.remove("text-starlight-pink", "text-starlight-cyan");
+      resultado.classList.add("text-starlight-cyan"); 
+      
+      let contador = 0;
+      
+      const intervalo = setInterval(() => {
+        const rand = () => emotes[Math.floor(Math.random() * emotes.length)];
+        
+        document.getElementById('slot1').innerHTML = `<img src="${rand()}" class="w-full h-full object-contain p-1">`;
+        document.getElementById('slot2').innerHTML = `<img src="${rand()}" class="w-full h-full object-contain p-1">`;
+        document.getElementById('slot3').innerHTML = `<img src="${rand()}" class="w-full h-full object-contain p-1">`;
+        
+        contador++;
+        
+        if (contador > 15) { 
+            clearInterval(intervalo);
+            
+            const probabilidadGanar = 0.15; 
+            const esGanador = Math.random() < probabilidadGanar;
+            
+            let res1, res2, res3;
+            
+            if (esGanador) {
+                const premio = emotes[Math.floor(Math.random() * emotes.length)];
+                res1 = premio;
+                res2 = premio;
+                res3 = premio;
+            } else {
+                do {
+                    res1 = emotes[Math.floor(Math.random() * emotes.length)];
+                    res2 = emotes[Math.floor(Math.random() * emotes.length)];
+                    res3 = emotes[Math.floor(Math.random() * emotes.length)];
+                } while (res1 === res2 && res2 === res3);
+            }
+            
+            document.getElementById('slot1').innerHTML = `<img src="${res1}" class="w-full h-full object-contain p-1">`;
+            document.getElementById('slot2').innerHTML = `<img src="${res2}" class="w-full h-full object-contain p-1">`;
+            document.getElementById('slot3').innerHTML = `<img src="${res3}" class="w-full h-full object-contain p-1">`;
+            
+            if (res1 === res2 && res2 === res3) {
+                resultado.innerText = `¡Felicidades ${nombre}! Te tocó un premio.`;
+                resultado.classList.add("text-starlight-cyan");
+                
+                if (typeof window.guardarGacha === 'function') {
+                  window.guardarGacha(nombre, res1);
                 }
-            } catch (error) {
-                document.getElementById('liveText').textContent = 'Estado desconocido';
-            }
-        }
-        checkLive();
-        setInterval(checkLive, 60000);
-
-        // ===== MÚSICA DE FONDO =====
-        const music = new Audio('audio/neri-music.mp3');
-        music.loop = true;
-        music.volume = 0.5;
-
-        const musicToggle = document.getElementById('music-toggle');
-        const volumeControl = document.getElementById('volume-control');
-
-        function updateButtonIcon() {
-            if (music.paused) {
-                musicToggle.textContent = '▶';
             } else {
-                musicToggle.textContent = '⏸';
+                resultado.innerText = `¡Lástima ${nombre}! No hubo suerte esta vez.`;
+                resultado.classList.add("text-starlight-pink");
             }
+            
+            btn.disabled = false;
         }
+      }, 100);
+    }
+  </script>
 
-        window.addEventListener('load', () => {
-            music.play().then(() => {
-                updateButtonIcon();
-            }).catch(err => {
-                console.warn('Autoplay bloqueado. Se iniciará con el primer clic en la página.');
-            });
-        });
+  <!-- INTEGRACIÓN FIREBASE (Suma de victorias y ordenado por ranking) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getFirestore, collection, doc, getDoc, setDoc, updateDoc, increment, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        let autoplayTried = false;
-        document.addEventListener('click', () => {
-            if (!autoplayTried && music.paused) {
-                music.play().then(() => {
-                    autoplayTried = true;
-                    updateButtonIcon();
-                }).catch(err => console.warn('Error al reproducir.'));
-            }
-        }, { once: true });
+    const firebaseConfig = {
+      apiKey: "AIzaSyAEpnG4LrNgLfvqx8Jtes4hoxj9qwzGq4c",
+      authDomain: "togikirei.firebaseapp.com",
+      projectId: "togikirei",
+      storageBucket: "togikirei.firebasestorage.app",
+      messagingSenderId: "125764799178",
+      appId: "1:125764799178:web:14651582df57666b41c233"
+    };
 
-        musicToggle.addEventListener('click', () => {
-            if (music.paused) {
-                music.play().then(() => updateButtonIcon()).catch(err => console.warn('No se pudo reproducir.'));
-            } else {
-                music.pause();
-                updateButtonIcon();
-            }
-        });
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
-        volumeControl.addEventListener('input', (e) => {
-            music.volume = e.target.value / 100;
-        });
+    window.guardarGacha = async (usuario, emote) => {
+      try {
+        const userRef = doc(db, "gachapon_results", usuario);
+        const userSnap = await getDoc(userRef);
 
-        music.addEventListener('ended', updateButtonIcon);
-    </script>
+        if (userSnap.exists()) {
+          await updateDoc(userRef, {
+            victorias: increment(1),
+            emote: emote,
+            fecha: new Date().toISOString()
+          });
+        } else {
+          await setDoc(userRef, {
+            usuario: usuario,
+            victorias: 1,
+            emote: emote,
+            fecha: new Date().toISOString()
+          });
+        }
+      } catch (e) {
+        console.error("Error al guardar:", e);
+      }
+    };
+
+    const q = query(collection(db, "gachapon_results"), orderBy("victorias", "desc"));
+    onSnapshot(q, (snapshot) => {
+      const lista = document.getElementById('listaGanadores');
+      if (!lista) return;
+      lista.innerHTML = '';
+      
+      if (snapshot.empty) {
+        lista.innerHTML = '<li class="text-center text-sm text-slate-400 italic py-2">Aún no hay ganadores. ¡Sé el primero!</li>';
+        return;
+      }
+
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+        const li = document.createElement('li');
+        li.className = "flex items-center justify-between bg-starlight-black/60 p-3 rounded-xl border border-slate-800/60 shadow-inner mb-2";
+        li.innerHTML = `
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-starlight-card border border-starlight-cyan/30 flex items-center justify-center p-1">
+              <img src="${data.emote}" alt="Emote" class="w-full h-full object-contain">
+            </div>
+            <div>
+                <span class="text-white font-cyber text-sm font-bold block">${data.usuario}</span>
+                <span class="text-starlight-pink text-[10px] font-bold">Victorias: ${data.victorias}</span>
+            </div>
+          </div>
+        `;
+        lista.appendChild(li);
+      });
+    });
+  </script>
+
+  <!-- SCRIPT PARA ANIMACIONES DE SCROLL -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+  <!-- SCRIPT PARA BOTÓN VOLVER ARRIBA -->
+  <script>
+    const btnTop = document.getElementById('btn-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) {
+        btnTop.classList.remove('hidden');
+      } else {
+        btnTop.classList.add('hidden');
+      }
+    });
+    btnTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+
 </body>
 </html>
