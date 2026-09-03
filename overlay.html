@@ -32,19 +32,15 @@
     body.pos-middle { align-items: center; }
     body.pos-bottom { align-items: flex-end; padding-bottom: 48px; }
 
-    /* ============================================================
-       🟢 CONTENEDOR PRINCIPAL (se ajusta al texto y lo envuelve)
-       ============================================================ */
     .subtitle-container {
-      max-width: 92%;            /* Ocupa casi todo el ancho de la pantalla */
-      width: auto;              /* Se ajusta al contenido */
-      min-width: 300px;         /* Tamaño mínimo para no quedar muy pequeño */
+      max-width: 92%;
+      width: auto;
+      min-width: 300px;
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 6px;
-      
       background: rgba(0, 0, 0, 0.50);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
@@ -52,7 +48,6 @@
       border-radius: 20px;
       border: 1px solid rgba(255, 255, 255, 0.15);
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
-      
       opacity: 0;
       transform: translateY(20px) scale(0.96);
       transition: opacity 0.4s ease, transform 0.4s ease;
@@ -63,9 +58,6 @@
       transform: translateY(0) scale(1);
     }
 
-    /* ============================================================
-       📝 ESTILOS DEL TEXTO (con "word-break" para que NO se desborde)
-       ============================================================ */
     .subtitle-original {
       font-weight: 400;
       font-size: 28px;
@@ -76,8 +68,6 @@
       border-bottom: 1px dashed rgba(255,255,255,0.1);
       padding-bottom: 6px;
       margin-bottom: 4px;
-      
-      /* 🌟 NUEVO: Fuerza el salto de línea si el texto es largo */
       word-wrap: break-word;
       overflow-wrap: break-word;
       word-break: break-word;
@@ -97,8 +87,6 @@
         2px -2px 0 #000,
         -2px 2px 0 #000;
       padding: 0 10px;
-      
-      /* 🌟 NUEVO: Fuerza el salto de línea si el texto es largo */
       word-wrap: break-word;
       overflow-wrap: break-word;
       word-break: break-word;
@@ -115,8 +103,6 @@
       margin-top: 2px;
       border-top: 1px solid rgba(255,255,255,0.05);
       padding-top: 6px;
-      
-      /* 🌟 NUEVO: Fuerza el salto de línea si el texto es largo */
       word-wrap: break-word;
       overflow-wrap: break-word;
       word-break: break-word;
@@ -158,40 +144,38 @@
 
   <script>
     // ================================================================
-    // 📌 TUS PARÁMETROS REALES (YA PUESTOS)
+    // 📌 TUS PARÁMETROS REALES
     // ================================================================
     const roomId = 'd5306a7b-mtm3b6qu';
     const overlayTok = '86c3dc27aa89ac202d0a6db6de881d34363f7f641c34eb8a348831083174c163';
     const position = 'bottom';
     const fontSize = 36;
-    const transOnly = false; // false = muestra original + traducción
-    const origColor = 'ffffff'; // blanco para el texto original
-    const transColor = '00ffcc'; // cian neón para la traducción
+    const transOnly = false;
+    const origColor = 'ffffff';
+    const transColor = '00ffcc';
 
     console.log('🔑 Conectando a sala:', roomId);
     console.log('🔐 Token:', overlayTok);
 
-    // Aplicar posición
     document.body.className = `pos-${position}`;
 
-    // Referencias a elementos
     const origEl   = document.getElementById('subtitleOriginal');
     const transEl  = document.getElementById('subtitleTranslated');
     const trans2El = document.getElementById('subtitleTranslated2');
 
-    // Configuración inicial de estilos
     origEl.style.fontSize   = Math.round(fontSize * 0.63) + 'px';
     transEl.style.fontSize  = fontSize + 'px';
     trans2El.style.fontSize = fontSize + 'px';
     origEl.style.color      = '#' + origColor;
     transEl.style.color     = '#' + transColor;
-    trans2El.style.color    = '#a5b4fc'; // color fijo para segunda traducción
+    trans2El.style.color    = '#a5b4fc';
     if (transOnly) origEl.style.display = 'none';
 
     // ================================================================
-    // 🌐 CONEXIÓN AL SERVIDOR
+    // 🌐 CONEXIÓN AL SERVIDOR (SOLO WEBSOCKET, SIN POLLING)
     // ================================================================
     const socket = io('https://streamtranslate.live', {
+      transports: ['websocket'],   // <--- CLAVE: evita polling con CORS
       reconnection: true,
       reconnectionAttempts: Infinity,
       reconnectionDelay: 1000,
@@ -199,7 +183,6 @@
     });
 
     const connDot = document.getElementById('connDot');
-    // Si quieres ver el punto de conexión, añade ?debug=1 a la URL
     if (new URLSearchParams(window.location.search).get('debug') === '1') {
       connDot.classList.add('debug-visible');
     }
@@ -241,11 +224,9 @@
     function showSubtitle(data, interim = false) {
       console.log('📝 Subtítulo:', data.original, '->', data.translated);
 
-      // Texto original
       origEl.textContent = data.original + (interim ? '...' : '');
       origEl.style.color = '#' + origColor;
 
-      // Texto traducido (principal)
       let transText;
       if (data.translated) {
         transText = data.translated;
@@ -261,7 +242,6 @@
       applyLangFont(transEl, data.lang);
       transEl.style.opacity = interim ? '0.75' : '1';
 
-      // Segunda traducción (si existe)
       let trans2Text;
       if (data.translated2) {
         trans2Text = data.translated2;
@@ -281,7 +261,6 @@
         trans2El.style.display = 'none';
       }
 
-      // Ajuste de tamaño si hay 3 líneas
       const threeLines = trans2Text && !transOnly;
       if (threeLines) {
         const scaled = Math.round(fontSize * 0.80);
@@ -294,7 +273,6 @@
         origEl.style.fontSize   = Math.round(fontSize * 0.63) + 'px';
       }
 
-      // Mostrar contenedor
       container.classList.add('visible');
       clearTimeout(clearTimer);
       if (!interim) {
@@ -311,7 +289,6 @@
       showSubtitle(data, true);
     });
 
-    // GESTIÓN DE LÍMITES (trial, horas)
     let overlayDisabled = false;
     socket.on('trial-expired', () => {
       console.warn('⛔ Prueba expirada');
@@ -324,7 +301,6 @@
       container.classList.remove('visible');
     });
 
-    // Mantener conexión viva
     setInterval(() => {
       if (socket.connected) socket.emit('overlay-ping');
     }, 45000);
