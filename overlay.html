@@ -33,25 +33,23 @@
     body.pos-bottom { align-items: flex-end; padding-bottom: 0; }
 
     /* ============================================================
-       📦  CONTENEDOR CON MEDIDAS FIJAS
+       📦  CONTENEDOR CON ALTURA FIJA Y CENTRADO VERTICAL
        ============================================================ */
     .subtitle-container {
-      width: 652px;              /* Ancho fijo */
-      max-height: 169px;         /* Alto máximo */
-      height: auto;             /* Se ajusta al contenido */
-      min-height: 60px;          /* Altura mínima para no quedar muy pequeño */
+      width: 652px;
+      height: 169px;             /* 👈 Altura fija, no máxima */
       
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;   /* Centra verticalmente el texto */
-      gap: 2px;
+      justify-content: center;   /* 👈 Centrado vertical */
+      gap: 0;
       
       background: rgba(0, 0, 0, 0.55);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      padding: 8px 12px;         /* Padding reducido al mínimo */
+      padding: 8px 12px;         /* Padding lateral, sin vertical */
       border-radius: 14px;
       border: 1px solid rgba(255, 255, 255, 0.12);
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
@@ -60,8 +58,7 @@
       transform: translateY(10px) scale(0.96);
       transition: opacity 0.3s ease, transform 0.3s ease;
       pointer-events: none;
-      
-      overflow: hidden;          /* Por si acaso, no se desborda */
+      overflow: hidden;          /* Nunca se desborda */
     }
     .subtitle-container.visible {
       opacity: 1;
@@ -69,23 +66,10 @@
     }
 
     /* ============================================================
-       📝  TEXTOS (tamaño de fuente lo controla JavaScript)
+       📝  SOLO TEXTO TRADUCIDO (original oculto)
        ============================================================ */
     .subtitle-original {
-      font-weight: 400;
-      line-height: 1.2;
-      color: rgba(255, 255, 255, 0.7);
-      text-shadow: 0 1px 6px rgba(0,0,0,0.9);
-      padding: 0 4px;
-      border-bottom: 1px dashed rgba(255,255,255,0.08);
-      padding-bottom: 2px;
-      margin-bottom: 1px;
-      
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-      word-break: break-word;
-      white-space: normal;
-      max-width: 100%;
+      display: none !important;
     }
 
     .subtitle-translated {
@@ -113,7 +97,7 @@
       color: #a5b4fc;
       text-shadow: 0 1px 8px rgba(0,0,0,0.9);
       padding: 0 4px;
-      margin-top: 1px;
+      margin-top: 2px;
       border-top: 1px solid rgba(255,255,255,0.05);
       padding-top: 2px;
       
@@ -164,66 +148,49 @@
     const roomId = 'd5306a7b-mtm3b6qu';
     const overlayTok = '86c3dc27aa89ac202d0a6db6de881d34363f7f641c34eb8a348831083174c163';
     const position = 'bottom';
-    const origColor = 'ffffff';
     const transColor = '00ffcc';
+    const trans2Color = 'a5b4fc';
 
     // ================================================================
     // 📐  MEDIDAS FIJAS DEL CONTENEDOR
     // ================================================================
     const CONTAINER_WIDTH = 652;
     const CONTAINER_HEIGHT = 169;
-    const PADDING_VERTICAL = 16; // 8+8 (padding del contenedor)
-    const AVAILABLE_HEIGHT = CONTAINER_HEIGHT - PADDING_VERTICAL;
+    const PADDING_LATERAL = 24; // 12+12 (padding lateral)
+    const AVAILABLE_WIDTH = CONTAINER_WIDTH - PADDING_LATERAL;
     const LINE_HEIGHT = 1.2;
 
     // ================================================================
-    // 🔧  FUNCIÓN DE AJUSTE DE TAMAÑO
+    // 🔧  FUNCIÓN DE AJUSTE DE TAMAÑO (centrado vertical)
     // ================================================================
-    function adjustFontSize(text, element, isOriginal = false) {
+    function adjustFontSize(text, element) {
       if (!text || text.length === 0) return;
 
-      // Factor de ancho por carácter (aproximado para fuentes sans-serif)
       const CHAR_WIDTH_FACTOR = 0.55;
+      let baseSize = 48;
       
-      // Tamaño base según si es original o traducción
-      let baseSize = isOriginal ? 24 : 42;
-      
-      // Calculamos cuántas líneas ocuparía el texto con el tamaño base
       let newSize = baseSize;
       let lines = 1;
       let neededHeight = 0;
       
-      // Iteramos reduciendo el tamaño hasta que quepa en el alto disponible
-      for (let size = baseSize; size > 12; size -= 1) {
-        const charsPerLine = CONTAINER_WIDTH / (size * CHAR_WIDTH_FACTOR);
+      for (let size = baseSize; size > 14; size -= 1) {
+        const charsPerLine = AVAILABLE_WIDTH / (size * CHAR_WIDTH_FACTOR);
         lines = Math.ceil(text.length / charsPerLine);
-        // Si el texto tiene espacios, podemos estimar mejor, pero es conservador
         neededHeight = lines * size * LINE_HEIGHT;
         
-        if (neededHeight <= AVAILABLE_HEIGHT) {
+        if (neededHeight <= CONTAINER_HEIGHT) {
           newSize = size;
           break;
         }
       }
       
-      // Si aún no cabe (texto extremadamente largo), forzamos un mínimo
-      if (neededHeight > AVAILABLE_HEIGHT) {
-        newSize = Math.max(14, newSize * (AVAILABLE_HEIGHT / neededHeight));
+      // Si aún no cabe, reducimos proporcionalmente
+      if (neededHeight > CONTAINER_HEIGHT) {
+        newSize = Math.max(16, newSize * (CONTAINER_HEIGHT / neededHeight));
       }
       
-      // Limitar el tamaño mínimo
-      newSize = Math.max(isOriginal ? 12 : 16, newSize);
-      
-      // Aplicar el tamaño
+      newSize = Math.max(16, newSize);
       element.style.fontSize = newSize + 'px';
-      
-      // También ajustamos el otro elemento si es el principal
-      if (!isOriginal) {
-        // Ajustar el original proporcionalmente
-        const origSize = Math.min(newSize * 0.6, 22);
-        origEl.style.fontSize = origSize + 'px';
-      }
-      
       return newSize;
     }
 
@@ -239,7 +206,6 @@
     });
 
     console.log('🔑 Conectando a sala:', roomId);
-    console.log('🔐 Token:', overlayTok);
 
     document.body.className = `pos-${position}`;
 
@@ -253,10 +219,10 @@
       connDot.classList.add('debug-visible');
     }
 
-    // Configuración inicial de colores
-    origEl.style.color = '#' + origColor;
+    // Ocultar el original
+    origEl.style.display = 'none';
     transEl.style.color = '#' + transColor;
-    trans2El.style.color = '#a5b4fc';
+    trans2El.style.color = '#' + trans2Color;
 
     socket.on('connect', () => {
       console.log('✅ Conectado vía WebSocket');
@@ -275,7 +241,7 @@
     });
 
     // ================================================================
-    // 📩  RECEPCIÓN Y MOSTRADO DE SUBTÍTULOS
+    // 📩  RECEPCIÓN Y MOSTRADO DE SUBTÍTULOS (SOLO TRADUCCIÓN)
     // ================================================================
     let clearTimer = null;
     let _lastTranslation = null;
@@ -293,13 +259,9 @@
     }
 
     function showSubtitle(data, interim = false) {
-      console.log('📝 Subtítulo:', data.original, '->', data.translated);
+      console.log('📝 Traducción:', data.translated);
 
-      // --- Texto original ---
-      origEl.textContent = data.original + (interim ? '...' : '');
-      origEl.style.color = '#' + origColor;
-      
-      // --- Texto traducido ---
+      // --- Traducción principal ---
       let transText;
       if (data.translated) {
         transText = data.translated;
@@ -315,8 +277,8 @@
       applyLangFont(transEl, data.lang);
       transEl.style.opacity = interim ? '0.75' : '1';
 
-      // 🔥  AJUSTE DE TAMAÑO SEGÚN EL ESPACIO DISPONIBLE
-      adjustFontSize(transText, transEl, false);
+      // 🔥  AJUSTE DE TAMAÑO
+      adjustFontSize(transText, transEl);
 
       // --- Segunda traducción (si existe) ---
       let trans2Text;
@@ -333,10 +295,11 @@
         trans2El.textContent = trans2Text + (interim ? '...' : '');
         trans2El.classList.toggle('rtl', RTL_LANGS.includes(data.lang2));
         trans2El.style.opacity = interim ? '0.75' : '1';
-        trans2El.style.color = '#a5b4fc';
+        trans2El.style.color = '#' + trans2Color;
         applyLangFont(trans2El, data.lang2);
-        // Ajuste para la segunda línea (más pequeña)
-        adjustFontSize(trans2Text, trans2El, true);
+        // Segunda línea con tamaño más pequeño
+        const base2 = Math.round(parseFloat(transEl.style.fontSize) * 0.7);
+        trans2El.style.fontSize = Math.max(14, base2) + 'px';
       } else {
         trans2El.style.display = 'none';
       }
@@ -376,7 +339,7 @@
       if (socket.connected) socket.emit('overlay-ping');
     }, 45000);
 
-    console.log('🚀 Overlay listo (652x169). Esperando voz...');
+    console.log('🚀 Overlay listo (centrado, 652x169). Esperando voz...');
   </script>
 </body>
 </html>
