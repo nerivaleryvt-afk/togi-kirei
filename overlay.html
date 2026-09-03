@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Subtítulos Traducidos - Togi Kirei</title>
 
-  <!-- Cargamos socket.io desde el CDN -->
-  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  <!-- ⚠️  IMPORTANTE: Cargamos socket.io desde el servidor de ellos (NO desde CDN) -->
+  <script src="https://streamtranslate.live/socket.io/socket.io.js"></script>
 
   <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,22 +32,27 @@
     body.pos-middle { align-items: center; }
     body.pos-bottom { align-items: flex-end; padding-bottom: 48px; }
 
+    /* ============================================================
+       🟢 CONTENEDOR PRINCIPAL (se ajusta al texto y lo envuelve)
+       ============================================================ */
     .subtitle-container {
-      max-width: 92%;
+      max-width: 85%;            /* 👈 Más estrecho para forzar saltos de línea */
       width: auto;
-      min-width: 300px;
+      min-width: 280px;
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 6px;
-      background: rgba(0, 0, 0, 0.50);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      padding: 18px 28px;
+      
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      padding: 16px 24px;
       border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+      
       opacity: 0;
       transform: translateY(20px) scale(0.96);
       transition: opacity 0.4s ease, transform 0.4s ease;
@@ -58,16 +63,21 @@
       transform: translateY(0) scale(1);
     }
 
+    /* ============================================================
+       📝 ESTILOS DEL TEXTO (con ajuste automático de tamaño)
+       ============================================================ */
     .subtitle-original {
       font-weight: 400;
       font-size: 28px;
       line-height: 1.4;
       color: rgba(255, 255, 255, 0.75);
       text-shadow: 0 2px 10px rgba(0,0,0,0.9);
-      padding: 0 10px;
-      border-bottom: 1px dashed rgba(255,255,255,0.1);
-      padding-bottom: 6px;
-      margin-bottom: 4px;
+      padding: 0 6px;
+      border-bottom: 1px dashed rgba(255,255,255,0.08);
+      padding-bottom: 4px;
+      margin-bottom: 2px;
+      
+      /* Fuerza el salto de línea */
       word-wrap: break-word;
       overflow-wrap: break-word;
       word-break: break-word;
@@ -78,7 +88,7 @@
     .subtitle-translated {
       font-weight: 700;
       font-size: 54px;
-      line-height: 1.3;
+      line-height: 1.2;          /* 👈 Más compacto */
       color: #ffffff;
       text-shadow: 
         0 0 20px rgba(0,0,0,0.95),
@@ -86,7 +96,8 @@
         -2px -2px 0 #000,
         2px -2px 0 #000,
         -2px 2px 0 #000;
-      padding: 0 10px;
+      padding: 0 6px;
+      
       word-wrap: break-word;
       overflow-wrap: break-word;
       word-break: break-word;
@@ -97,12 +108,14 @@
     #subtitleTranslated2 {
       font-weight: 500;
       font-size: 32px;
+      line-height: 1.2;
       color: #a5b4fc;
       text-shadow: 0 2px 12px rgba(0,0,0,0.9);
-      padding: 0 10px;
+      padding: 0 6px;
       margin-top: 2px;
       border-top: 1px solid rgba(255,255,255,0.05);
-      padding-top: 6px;
+      padding-top: 4px;
+      
       word-wrap: break-word;
       overflow-wrap: break-word;
       word-break: break-word;
@@ -144,38 +157,40 @@
 
   <script>
     // ================================================================
-    // 📌 TUS PARÁMETROS REALES
+    // 📌 TUS PARÁMETROS REALES (YA PUESTOS)
     // ================================================================
     const roomId = 'd5306a7b-mtm3b6qu';
     const overlayTok = '86c3dc27aa89ac202d0a6db6de881d34363f7f641c34eb8a348831083174c163';
     const position = 'bottom';
-    const fontSize = 36;
-    const transOnly = false;
+    let fontSize = 54;           // Tamaño base para la traducción principal
     const origColor = 'ffffff';
     const transColor = '00ffcc';
 
     console.log('🔑 Conectando a sala:', roomId);
     console.log('🔐 Token:', overlayTok);
 
+    // Aplicar posición
     document.body.className = `pos-${position}`;
 
+    // Referencias a elementos
     const origEl   = document.getElementById('subtitleOriginal');
     const transEl  = document.getElementById('subtitleTranslated');
     const trans2El = document.getElementById('subtitleTranslated2');
 
-    origEl.style.fontSize   = Math.round(fontSize * 0.63) + 'px';
+    // Configuración inicial de estilos
+    origEl.style.fontSize   = Math.round(fontSize * 0.6) + 'px';
     transEl.style.fontSize  = fontSize + 'px';
-    trans2El.style.fontSize = fontSize + 'px';
+    trans2El.style.fontSize = Math.round(fontSize * 0.7) + 'px';
     origEl.style.color      = '#' + origColor;
     transEl.style.color     = '#' + transColor;
     trans2El.style.color    = '#a5b4fc';
-    if (transOnly) origEl.style.display = 'none';
 
     // ================================================================
-    // 🌐 CONEXIÓN AL SERVIDOR (SOLO WEBSOCKET, SIN POLLING)
+    // 🌐 CONEXIÓN AL SERVIDOR (FORZANDO WEBSOCKET PARA EVITAR CORS)
     // ================================================================
+    // ⚡  CLAVE: forzamos transporte 'websocket' y usamos la ruta por defecto
     const socket = io('https://streamtranslate.live', {
-      transports: ['websocket'],   // <--- CLAVE: evita polling con CORS
+      transports: ['websocket'],   // 👈 ESTO ES LO QUE CORRIGE EL CORS
       reconnection: true,
       reconnectionAttempts: Infinity,
       reconnectionDelay: 1000,
@@ -188,7 +203,7 @@
     }
 
     socket.on('connect', () => {
-      console.log('✅ Conectado al servidor de StreamTranslate');
+      console.log('✅ Conectado al servidor de StreamTranslate vía WebSocket');
       connDot.classList.add('connected');
       socket.emit('join-room', roomId, { overlay: true, tok: overlayTok, preview: false });
       console.log(`📡 Unido a sala: ${roomId}`);
@@ -204,7 +219,7 @@
     });
 
     // ================================================================
-    // 📩 RECEPCIÓN DE SUBTÍTULOS
+    // 📩 RECEPCIÓN DE SUBTÍTULOS CON AJUSTE INTELIGENTE DE TAMAÑO
     // ================================================================
     const container = document.getElementById('subtitleContainer');
     let clearTimer = null;
@@ -221,12 +236,34 @@
       else if (lang === 'ar') el.style.fontFamily = AR_FONT;
     }
 
+    // 🔧  FUNCIÓN QUE AJUSTA EL TAMAÑO DE FUENTE SEGÚN LA LONGITUD DEL TEXTO
+    function adjustFontSize(text, element, baseSize) {
+      const len = text ? text.length : 0;
+      let newSize = baseSize;
+      
+      if (len > 120) newSize = baseSize * 0.55;
+      else if (len > 80) newSize = baseSize * 0.70;
+      else if (len > 50) newSize = baseSize * 0.85;
+      else newSize = baseSize;
+      
+      // Aseguramos un mínimo para que no sea ilegible
+      newSize = Math.max(newSize, 22);
+      element.style.fontSize = newSize + 'px';
+      
+      // También ajustamos el original proporcionalmente
+      origEl.style.fontSize = Math.round(newSize * 0.6) + 'px';
+      
+      return newSize;
+    }
+
     function showSubtitle(data, interim = false) {
       console.log('📝 Subtítulo:', data.original, '->', data.translated);
 
+      // --- Texto original ---
       origEl.textContent = data.original + (interim ? '...' : '');
       origEl.style.color = '#' + origColor;
 
+      // --- Texto traducido (principal) ---
       let transText;
       if (data.translated) {
         transText = data.translated;
@@ -242,6 +279,10 @@
       applyLangFont(transEl, data.lang);
       transEl.style.opacity = interim ? '0.75' : '1';
 
+      // 🔥  AJUSTE DINÁMICO DEL TAMAÑO SEGÚN LA LONGITUD
+      adjustFontSize(transText, transEl, fontSize);
+
+      // --- Segunda traducción (si existe) ---
       let trans2Text;
       if (data.translated2) {
         trans2Text = data.translated2;
@@ -257,22 +298,14 @@
         trans2El.classList.toggle('rtl', RTL_LANGS.includes(data.lang2));
         trans2El.style.opacity = interim ? '0.75' : '1';
         trans2El.style.color = '#a5b4fc';
+        // Ajuste de tamaño para la segunda línea (siempre un poco más pequeña)
+        const base2 = fontSize * 0.7;
+        adjustFontSize(trans2Text, trans2El, base2);
       } else {
         trans2El.style.display = 'none';
       }
 
-      const threeLines = trans2Text && !transOnly;
-      if (threeLines) {
-        const scaled = Math.round(fontSize * 0.80);
-        transEl.style.fontSize  = scaled + 'px';
-        trans2El.style.fontSize = scaled + 'px';
-        origEl.style.fontSize   = Math.round(scaled * 0.63) + 'px';
-      } else {
-        transEl.style.fontSize  = fontSize + 'px';
-        trans2El.style.fontSize = fontSize + 'px';
-        origEl.style.fontSize   = Math.round(fontSize * 0.63) + 'px';
-      }
-
+      // Mostrar contenedor
       container.classList.add('visible');
       clearTimeout(clearTimer);
       if (!interim) {
@@ -289,6 +322,7 @@
       showSubtitle(data, true);
     });
 
+    // GESTIÓN DE LÍMITES (trial, horas)
     let overlayDisabled = false;
     socket.on('trial-expired', () => {
       console.warn('⛔ Prueba expirada');
@@ -301,6 +335,7 @@
       container.classList.remove('visible');
     });
 
+    // Mantener conexión viva
     setInterval(() => {
       if (socket.connected) socket.emit('overlay-ping');
     }, 45000);
