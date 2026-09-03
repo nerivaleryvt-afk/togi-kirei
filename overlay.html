@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Subtítulos - Togi Kirei</title>
 
-  <!-- Cargamos socket.io desde el servidor de ellos -->
+  <!-- Cargamos socket.io desde el servidor de ellos (evita CORS) -->
   <script src="https://streamtranslate.live/socket.io/socket.io.js"></script>
 
   <!-- Fuentes -->
@@ -92,19 +92,26 @@
 
   <script>
     // ================================================================
-    // 📌  TUS PARÁMETROS REALES
+    // 📌  LECTURA DE PARÁMETROS DESDE LA URL
     // ================================================================
-    const roomId = 'd5306a7b-mtm3b6qu';
-    const overlayTok = '86c3dc27aa89ac202d0a6db6de881d34363f7f641c34eb8a348831083174c163';
-    const position = 'bottom';
-    const transColor = '00ffcc';
-    const trans2Color = 'a5b4fc';
+    const params = new URLSearchParams(window.location.search);
+    
+    // Parámetros obligatorios (si no están, usamos valores por defecto)
+    const roomId = params.get('room') || 'd5306a7b-mtm3b6qu';
+    const overlayTok = params.get('tok') || '4de2d96990371e5f9c16fe01306d62e5ca66ce6169e5f48a076177d7e6fc6c3d';
+    
+    // Parámetros opcionales con valores por defecto
+    const position = params.get('position') || 'bottom';
+    const fontSize = parseInt(params.get('fontSize')) || 48; // Tamaño base
+    const transColor = params.get('transColor') || '00ffcc';
+    const trans2Color = params.get('trans2Color') || 'a5b4fc';
+    const displayTime = parseInt(params.get('displayTime')) || 5000; // 5 segundos por defecto
+    const showOriginal = params.get('showOriginal') === '1'; // Por defecto oculto
 
-    // 📌  TIEMPO DE PERMANENCIA (por defecto 5 segundos, ajustable con ?displayTime=XXXX)
-    const DISPLAY_TIME_MS = parseInt(new URLSearchParams(window.location.search).get('displayTime')) || 5000;
-
-    // 📌  OCULTAR ORIGINAL (por defecto true, se puede mostrar con ?showOriginal=1)
-    const showOriginal = new URLSearchParams(window.location.search).get('showOriginal') === '1';
+    console.log('🔑 Conectando a sala:', roomId);
+    console.log('🔐 Token:', overlayTok);
+    console.log(`⏱️  Tiempo de permanencia: ${displayTime/1000} segundos`);
+    console.log(`👁️  Mostrar original: ${showOriginal ? 'SÍ' : 'NO'}`);
 
     // ================================================================
     // 📐  MEDIDAS FIJAS
@@ -120,7 +127,7 @@
     function adjustFontSize(text, element) {
       if (!text || text.length === 0) return;
       const CHAR_WIDTH_FACTOR = 0.55;
-      let baseSize = 48;
+      let baseSize = fontSize; // Usamos el tamaño definido en la URL
       let newSize = baseSize;
       let lines = 1;
       let neededHeight = 0;
@@ -142,7 +149,7 @@
     }
 
     // ================================================================
-    // 🌐  CONEXIÓN
+    // 🌐  CONEXIÓN AL SERVIDOR (SOLO WEBSOCKET)
     // ================================================================
     const socket = io('https://streamtranslate.live', {
       transports: ['websocket'],
@@ -152,8 +159,6 @@
       reconnectionDelayMax: 5000,
     });
 
-    console.log('🔑 Conectando a sala:', roomId);
-
     document.body.className = `pos-${position}`;
 
     const origEl   = document.getElementById('subtitleOriginal');
@@ -162,7 +167,7 @@
     const container = document.getElementById('subtitleContainer');
     const connDot = document.getElementById('connDot');
 
-    if (new URLSearchParams(window.location.search).get('debug') === '1') {
+    if (params.get('debug') === '1') {
       connDot.classList.add('debug-visible');
     }
 
@@ -185,12 +190,10 @@
       connDot.classList.add('connected');
       socket.emit('join-room', roomId, { overlay: true, tok: overlayTok, preview: false });
       console.log(`📡 Unido a sala: ${roomId}`);
-      console.log(`⏱️  Tiempo de permanencia: ${DISPLAY_TIME_MS/1000} segundos`);
-      console.log(`👁️  Mostrar original: ${showOriginal ? 'SÍ' : 'NO'}`);
     });
 
     socket.on('connect_error', (err) => {
-      console.error('❌ Error:', err.message);
+      console.error('❌ Error de conexión:', err.message);
     });
 
     socket.on('disconnect', () => {
@@ -219,7 +222,7 @@
     function showSubtitle(data, interim = false) {
       console.log('📝 Traducción:', data.translated);
 
-      // --- Original (solo se actualiza si showOriginal está activo) ---
+      // --- Original (solo si showOriginal está activo) ---
       if (showOriginal) {
         origEl.textContent = data.original + (interim ? '...' : '');
       }
@@ -268,7 +271,7 @@
       container.classList.add('visible');
       clearTimeout(clearTimer);
       if (!interim) {
-        clearTimer = setTimeout(() => container.classList.remove('visible'), DISPLAY_TIME_MS);
+        clearTimer = setTimeout(() => container.classList.remove('visible'), displayTime);
       }
     }
 
