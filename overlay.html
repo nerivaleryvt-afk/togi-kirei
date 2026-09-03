@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Subtítulos - Togi Kirei</title>
 
-  <!-- Cargamos socket.io desde el servidor de ellos (evita CORS) -->
+  <!-- Cargamos socket.io desde el servidor de ellos -->
   <script src="https://streamtranslate.live/socket.io/socket.io.js"></script>
 
   <!-- Fuentes -->
@@ -18,96 +18,57 @@
        🎯  AJUSTE ESTRICTO A 652px ANCHO Y 169px ALTO
        ============================================================ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body {
-      width: 100%; height: 100%;
-      background: transparent !important;
-      overflow: hidden;
-    }
-    body {
-      display: flex;
-      justify-content: center;
-      font-family: 'Inter', system-ui, sans-serif;
-    }
+    html, body { width: 100%; height: 100%; background: transparent !important; overflow: hidden; }
+    body { display: flex; justify-content: center; font-family: 'Inter', system-ui, sans-serif; }
     body.pos-top    { align-items: flex-start; padding-top: 0; }
     body.pos-middle { align-items: center; }
     body.pos-bottom { align-items: flex-end; padding-bottom: 0; }
 
-    /* ============================================================
-       📦  CONTENEDOR CON ALTURA FIJA Y CENTRADO VERTICAL
-       ============================================================ */
     .subtitle-container {
-      width: 652px;
-      height: 169px;             /* 👈 Altura fija, no máxima */
-      
+      width: 652px; height: 169px;
       text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;   /* 👈 Centrado vertical */
-      gap: 0;
-      
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0;
       background: rgba(0, 0, 0, 0.55);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      padding: 8px 12px;         /* Padding lateral, sin vertical */
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      padding: 8px 12px;
       border-radius: 14px;
       border: 1px solid rgba(255, 255, 255, 0.12);
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
-      
-      opacity: 0;
-      transform: translateY(10px) scale(0.96);
+      opacity: 0; transform: translateY(10px) scale(0.96);
       transition: opacity 0.3s ease, transform 0.3s ease;
-      pointer-events: none;
-      overflow: hidden;          /* Nunca se desborda */
+      pointer-events: none; overflow: hidden;
     }
-    .subtitle-container.visible {
-      opacity: 1;
-      transform: translateY(0) scale(1);
+    .subtitle-container.visible { opacity: 1; transform: translateY(0) scale(1); }
+
+    /* ============================================================
+       🚫  OCULTAR EL TEXTO ORIGINAL (español) DE FORMA ABSOLUTA
+       ============================================================ */
+    #subtitleOriginal {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      width: 0 !important;
+      height: 0 !important;
+      overflow: hidden !important;
+      position: absolute !important;
+      pointer-events: none !important;
     }
 
     /* ============================================================
-       📝  SOLO TEXTO TRADUCIDO (original oculto)
+       📝  SOLO TEXTO TRADUCIDO
        ============================================================ */
-    .subtitle-original {
-      display: none !important;
-    }
-
     .subtitle-translated {
-      font-weight: 700;
-      line-height: 1.2;
-      color: #ffffff;
-      text-shadow: 
-        0 0 12px rgba(0,0,0,0.95),
-        1px 1px 0 #000,
-        -1px -1px 0 #000,
-        1px -1px 0 #000,
-        -1px 1px 0 #000;
+      font-weight: 700; line-height: 1.2; color: #ffffff;
+      text-shadow: 0 0 12px rgba(0,0,0,0.95), 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
       padding: 0 4px;
-      
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-      word-break: break-word;
-      white-space: normal;
-      max-width: 100%;
+      word-wrap: break-word; overflow-wrap: break-word; word-break: break-word; white-space: normal; max-width: 100%;
     }
-
     #subtitleTranslated2 {
-      font-weight: 500;
-      line-height: 1.2;
-      color: #a5b4fc;
+      font-weight: 500; line-height: 1.2; color: #a5b4fc;
       text-shadow: 0 1px 8px rgba(0,0,0,0.9);
-      padding: 0 4px;
-      margin-top: 2px;
-      border-top: 1px solid rgba(255,255,255,0.05);
-      padding-top: 2px;
-      
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-      word-break: break-word;
-      white-space: normal;
-      max-width: 100%;
+      padding: 0 4px; margin-top: 2px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 2px;
+      word-wrap: break-word; overflow-wrap: break-word; word-break: break-word; white-space: normal; max-width: 100%;
     }
-
     .rtl { direction: rtl; unicode-bidi: embed; }
 
     /* Punto de conexión (solo visible con ?debug=1) */
@@ -115,19 +76,7 @@
     .conn-dot.debug-visible { display: block; position: fixed; top: 6px; right: 6px; width: 8px; height: 8px; border-radius: 50%; background: #ef4444; transition: background 400ms; z-index: 999; }
     .conn-dot.connected { background: #22c55e; }
 
-    #watermark {
-      position: fixed; bottom: 4px; right: 8px;
-      font-family: 'Inter', sans-serif;
-      font-size: 9px;
-      font-weight: 500;
-      color: rgba(255,255,255,0.3);
-      pointer-events: none; z-index: 999;
-      display: none;
-      background: rgba(0,0,0,0.2);
-      padding: 2px 8px;
-      border-radius: 12px;
-      backdrop-filter: blur(4px);
-    }
+    #watermark { position: fixed; bottom: 4px; right: 8px; font-family: 'Inter', sans-serif; font-size: 9px; font-weight: 500; color: rgba(255,255,255,0.3); pointer-events: none; z-index: 999; display: none; background: rgba(0,0,0,0.2); padding: 2px 8px; border-radius: 12px; backdrop-filter: blur(4px); }
   </style>
 </head>
 <body class="pos-bottom">
@@ -151,51 +100,49 @@
     const transColor = '00ffcc';
     const trans2Color = 'a5b4fc';
 
+    // 📌  TIEMPO DE PERMANENCIA (por defecto 5 segundos, ajustable con ?displayTime=XXXX)
+    const DISPLAY_TIME_MS = parseInt(new URLSearchParams(window.location.search).get('displayTime')) || 5000;
+
+    // 📌  OCULTAR ORIGINAL (por defecto true, se puede mostrar con ?showOriginal=1)
+    const showOriginal = new URLSearchParams(window.location.search).get('showOriginal') === '1';
+
     // ================================================================
-    // 📐  MEDIDAS FIJAS DEL CONTENEDOR
+    // 📐  MEDIDAS FIJAS
     // ================================================================
     const CONTAINER_WIDTH = 652;
     const CONTAINER_HEIGHT = 169;
-    const PADDING_LATERAL = 24; // 12+12 (padding lateral)
-    const AVAILABLE_WIDTH = CONTAINER_WIDTH - PADDING_LATERAL;
+    const AVAILABLE_WIDTH = CONTAINER_WIDTH - 24;
     const LINE_HEIGHT = 1.2;
 
     // ================================================================
-    // 🔧  FUNCIÓN DE AJUSTE DE TAMAÑO (centrado vertical)
+    // 🔧  AJUSTE DE TAMAÑO
     // ================================================================
     function adjustFontSize(text, element) {
       if (!text || text.length === 0) return;
-
       const CHAR_WIDTH_FACTOR = 0.55;
       let baseSize = 48;
-      
       let newSize = baseSize;
       let lines = 1;
       let neededHeight = 0;
-      
       for (let size = baseSize; size > 14; size -= 1) {
         const charsPerLine = AVAILABLE_WIDTH / (size * CHAR_WIDTH_FACTOR);
         lines = Math.ceil(text.length / charsPerLine);
         neededHeight = lines * size * LINE_HEIGHT;
-        
         if (neededHeight <= CONTAINER_HEIGHT) {
           newSize = size;
           break;
         }
       }
-      
-      // Si aún no cabe, reducimos proporcionalmente
       if (neededHeight > CONTAINER_HEIGHT) {
         newSize = Math.max(16, newSize * (CONTAINER_HEIGHT / neededHeight));
       }
-      
       newSize = Math.max(16, newSize);
       element.style.fontSize = newSize + 'px';
       return newSize;
     }
 
     // ================================================================
-    // 🌐  CONEXIÓN AL SERVIDOR (SOLO WEBSOCKET)
+    // 🌐  CONEXIÓN
     // ================================================================
     const socket = io('https://streamtranslate.live', {
       transports: ['websocket'],
@@ -219,8 +166,17 @@
       connDot.classList.add('debug-visible');
     }
 
-    // Ocultar el original
-    origEl.style.display = 'none';
+    // 🔥  OCULTAR ORIGINAL (a menos que showOriginal=1)
+    if (!showOriginal) {
+      origEl.style.display = 'none';
+      origEl.style.visibility = 'hidden';
+      origEl.style.opacity = '0';
+      origEl.style.width = '0';
+      origEl.style.height = '0';
+      origEl.style.position = 'absolute';
+      origEl.style.pointerEvents = 'none';
+    }
+
     transEl.style.color = '#' + transColor;
     trans2El.style.color = '#' + trans2Color;
 
@@ -229,6 +185,8 @@
       connDot.classList.add('connected');
       socket.emit('join-room', roomId, { overlay: true, tok: overlayTok, preview: false });
       console.log(`📡 Unido a sala: ${roomId}`);
+      console.log(`⏱️  Tiempo de permanencia: ${DISPLAY_TIME_MS/1000} segundos`);
+      console.log(`👁️  Mostrar original: ${showOriginal ? 'SÍ' : 'NO'}`);
     });
 
     socket.on('connect_error', (err) => {
@@ -241,7 +199,7 @@
     });
 
     // ================================================================
-    // 📩  RECEPCIÓN Y MOSTRADO DE SUBTÍTULOS (SOLO TRADUCCIÓN)
+    // 📩  SUBTÍTULOS
     // ================================================================
     let clearTimer = null;
     let _lastTranslation = null;
@@ -261,6 +219,11 @@
     function showSubtitle(data, interim = false) {
       console.log('📝 Traducción:', data.translated);
 
+      // --- Original (solo se actualiza si showOriginal está activo) ---
+      if (showOriginal) {
+        origEl.textContent = data.original + (interim ? '...' : '');
+      }
+
       // --- Traducción principal ---
       let transText;
       if (data.translated) {
@@ -277,10 +240,9 @@
       applyLangFont(transEl, data.lang);
       transEl.style.opacity = interim ? '0.75' : '1';
 
-      // 🔥  AJUSTE DE TAMAÑO
       adjustFontSize(transText, transEl);
 
-      // --- Segunda traducción (si existe) ---
+      // --- Segunda traducción ---
       let trans2Text;
       if (data.translated2) {
         trans2Text = data.translated2;
@@ -297,18 +259,16 @@
         trans2El.style.opacity = interim ? '0.75' : '1';
         trans2El.style.color = '#' + trans2Color;
         applyLangFont(trans2El, data.lang2);
-        // Segunda línea con tamaño más pequeño
         const base2 = Math.round(parseFloat(transEl.style.fontSize) * 0.7);
         trans2El.style.fontSize = Math.max(14, base2) + 'px';
       } else {
         trans2El.style.display = 'none';
       }
 
-      // Mostrar contenedor
       container.classList.add('visible');
       clearTimeout(clearTimer);
       if (!interim) {
-        clearTimer = setTimeout(() => container.classList.remove('visible'), 4000);
+        clearTimer = setTimeout(() => container.classList.remove('visible'), DISPLAY_TIME_MS);
       }
     }
 
@@ -339,7 +299,7 @@
       if (socket.connected) socket.emit('overlay-ping');
     }, 45000);
 
-    console.log('🚀 Overlay listo (centrado, 652x169). Esperando voz...');
+    console.log('🚀 Overlay listo. Solo traducción visible.');
   </script>
 </body>
 </html>
